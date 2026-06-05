@@ -383,7 +383,7 @@
             h,
             {
               autoAlpha: 0,
-              yPercent: 100 * d,
+              yPercent: 200 * d,
             },
             {
               autoAlpha: 1,
@@ -402,7 +402,7 @@
             sub,
             {
               autoAlpha: 0,
-              yPercent: 60 * d,
+              yPercent: 200 * d,
             },
             {
               autoAlpha: 1,

@@ -2,12 +2,36 @@
 @use "../../_base/base"as *;
 
 .title-common-primary {
+  position: relative;
   text-transform: uppercase;
   font-family: $font-montser;
+  color: $color-yellow;
+
+  &.is-center {
+    text-align: center;
+  }
+
+  .title-large {
+    display: block;
+  }
+
+  &.is-small {
+    font-weight: 600;
+    letter-spacing: -.05em;
+  }
 
   @include desktop {
-    margin-bottom: 0.37rem;
+    margin-bottom: 0.12rem;
     font-size: 0.5rem;
     line-height: calc(6 / 5);
+
+    &.is-small {
+      font-size: 0.4rem;
+    }
+
+    .title-large {
+      margin-top: 0.08rem;
+      font-size: 0.9rem;
+    }
   }
 }

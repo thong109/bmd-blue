@@ -2,7 +2,13 @@
 @use "../../_base/base" as *;
 
 .paragraph-common {
-  color: rgba($color: $color-default, $alpha: .9);
+  color: $color-white;
+
+  p {
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 
   @include desktop {
     font-size: 0.18rem;
