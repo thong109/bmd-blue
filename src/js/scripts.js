@@ -99,8 +99,8 @@
     const outers = panels.map((p) => p.querySelector(".group-central"));
     const inners = panels.map((p) => p.querySelector(".inner"));
     const images = panels.map((p) => p.querySelector(".group-bg"));
-    const headings = panels.map((p) => p.querySelector(".hero-title"));
-    const subs = panels.map((p) => p.querySelector(".hero-sub"));
+    const headings = panels.map((p) => Array.from(p.querySelectorAll(".hero-title")).filter(Boolean));
+    const subs = panels.map((p) => Array.from(p.querySelectorAll(".hero-sub")).filter(Boolean));
     const stage = document.querySelector(".slider-stage");
     const navEl = document.getElementById("nav");
     const navItems = navEl.querySelectorAll(".nav-item");
@@ -257,7 +257,7 @@
       if (isTablet()) return;
 
       if (i >= panels.length) {
-        setTimeout(() => release(), 900);
+        s.animating = false;
         cb?.();
         return;
       }
@@ -281,16 +281,14 @@
             clearProps: "transform",
           });
 
-        if (headings[i])
-          gsap.set(headings[i], {
-            autoAlpha: 1,
-            yPercent: 0,
-          });
-        if (subs[i])
-          gsap.set(subs[i], {
-            autoAlpha: 1,
-            yPercent: 0,
-          });
+        if (headings[i]?.length)
+          headings[i].forEach((h) =>
+            gsap.set(h, { autoAlpha: 1, yPercent: 0 }),
+          );
+        if (subs[i]?.length)
+          subs[i].forEach((sub) =>
+            gsap.set(sub, { autoAlpha: 1, yPercent: 0 }),
+          );
 
         panels.forEach((p, idx) => p.classList.toggle("is-active", idx === i));
         s.animating = false;
@@ -379,40 +377,42 @@
         );
       }
 
-      if (headings[i]) {
-        tl.fromTo(
-          headings[i],
-          {
-            autoAlpha: 0,
-            yPercent: 100 * d,
-          },
-          {
-            autoAlpha: 1,
-            yPercent: 0,
-            duration: 0.9,
-            delay: 0.1,
-            ease: "power2.out",
-          },
-          0.18,
-        );
+      if (headings[i]?.length) {
+        headings[i].forEach((h, j) => {
+          tl.fromTo(
+            h,
+            {
+              autoAlpha: 0,
+              yPercent: 100 * d,
+            },
+            {
+              autoAlpha: 1,
+              yPercent: 0,
+              duration: 0.9,
+              ease: "power2.out",
+            },
+            0.18,
+          );
+        });
       }
 
-      if (subs[i]) {
-        tl.fromTo(
-          subs[i],
-          {
-            autoAlpha: 0,
-            yPercent: 40 * d,
-          },
-          {
-            autoAlpha: 1,
-            yPercent: 0,
-            duration: 0.8,
-            delay: 0.5,
-            ease: "power2.out",
-          },
-          0.28,
-        );
+      if (subs[i]?.length) {
+        subs[i].forEach((sub, j) => {
+          tl.fromTo(
+            sub,
+            {
+              autoAlpha: 0,
+              yPercent: 60 * d,
+            },
+            {
+              autoAlpha: 1,
+              yPercent: 0,
+              duration: 0.8,
+              ease: "power2.out",
+            },
+            0.28,
+          );
+        });
       }
 
       s.cur = i;
@@ -533,25 +533,6 @@
       window.__APP_STATE__.observer = observer;
     };
 
-    /* ---------------- WHEEL RELEASE ---------------- */
-    window.addEventListener(
-      "wheel",
-      (e) => {
-        if (isTablet()) return;
-        if (s.active || s.switching || s.wheelLock) return;
-
-        if (window.scrollY <= 0 && e.deltaY < -30) {
-          e.preventDefault();
-          s.wheelLock = true;
-          setTimeout(() => (s.wheelLock = false), 300);
-
-          relock(panels.length - 1);
-        }
-      },
-      {
-        passive: false,
-      },
-    );
 
     /* ---------------- START ---------------- */
     if (!isTablet()) {

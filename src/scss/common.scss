@@ -8,6 +8,7 @@
 @use "_parts/_modules/breadcrumb";
 @use "_parts/_modules/intro";
 @use "_parts/_modules/title";
+@use "_parts/_modules/paragraph";
 
 section .title-main {
   position: relative;
@@ -531,4 +532,9 @@ html.wf-active .fade-in-up {
   background-size: cover;
   background-position: center;
   z-index: -1;
+}
+
+.hero-title,
+.hero-sub {
+  will-change: transform, opacity;
 }
