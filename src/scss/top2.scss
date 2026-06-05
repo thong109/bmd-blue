@@ -90,4 +90,10 @@
   .group-bg {
     background: url(../resources/images/top/vision_img_01.jpg) center center / cover no-repeat;
   }
+
+  @include desktop {
+    .vision-content {
+      display: flex;
+    }
+  }
 }

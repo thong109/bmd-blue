@@ -350,7 +350,7 @@ html.is-touchable .trans:hover {
 @media print, (min-width: 768px) {
   .wrapper {
     width: calc(100% - 0.4rem);
-    max-width: 17.6rem;
+    max-width: 16.8rem;
   }
 }
 @media only screen and (max-width: 767.98px) {
@@ -1683,6 +1683,17 @@ html.is-touchable .trans:hover {
 
 .intro-logo path:nth-child(4) {
   animation-delay: 0.3s;
+}
+
+.title-common-primary {
+  text-transform: uppercase;
+  font-family: "Montserrat", sans-serif;
+}
+@media print, (min-width: 768px) {
+  .title-common-primary {
+    font-size: 0.5rem;
+    line-height: 1.2;
+  }
 }
 
 section .title-main {

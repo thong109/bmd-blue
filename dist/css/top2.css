@@ -70,3 +70,8 @@
 .section-section-top-vision .group-bg {
   background: url(../resources/images/top/vision_img_01.jpg) center center/cover no-repeat;
 }
+@media print, (min-width: 768px) {
+  .section-section-top-vision .vision-content {
+    display: flex;
+  }
+}
