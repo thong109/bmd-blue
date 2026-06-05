@@ -1,0 +1,22 @@
+#contactPopup.media-popup
+  .popup-overlay
+  .popup-box
+    button.popup-close.trans
+    .popup-body
+      .footer-common-contact
+        p.contact-title ĐĂNG KÝ TƯ VẤN
+        form.contact-form
+          .form-group
+            .group-input
+              input.input-common(type="text" placeholder="HỌ TÊN *" required)
+            .group-input
+              input.input-common(type="text" placeholder="ĐIỆN THOẠI *" required)
+          .form-group
+            input.input-common(type="email" placeholder="EMAIL")
+          .form-group
+            textarea.textarea-common(placeholder="LỜI NHẮN")
+          .form-controller
+            button(type="submit").button-contact GỬI ĐĂNG KÝ
+a(href="#").button-chat
+  .button-wrapper
+    img.object-common(src=imgCommonPC+"message_icon.svg" width="56" height="56" loading="eager" alt="Message")

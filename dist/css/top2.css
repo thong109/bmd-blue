@@ -1,0 +1,24 @@
+.section-top-keyvisual .keyvisual-title {
+  color: #F5F1E8;
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+}
+.section-top-keyvisual .group-bg {
+  background: #0b1f3a;
+}
+.section-top-keyvisual .keyvisual-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+.section-top-keyvisual .keyvisual-intro {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}

@@ -1,0 +1,166 @@
+extends ../_base/_layout.pug
+
+block vars
+  - var metaTitle = 'News'
+  - var path = '..'
+  - var page = 'new'
+  - var imgPC = path + '/resources/images/new/'
+  - var imgSP = path + '/resources/images/new/sp/'
+  - var imgCommonPC = path + '/resources/images/common/'
+  - var imgCommonSP = path + '/resources/images/common/sp/'
+
+block content
+  section.section-news
+    .wrapper
+      h2.hero-title.is-center.js-fadein
+        span.title-sub
+          span.sub-small TIN Tức
+      .list-top-news.js-fadein
+        ul.list-wrapper
+          li.list-item
+            a(href=path+"/news/detail/").item-wrapper
+              .item-image
+                img.object-common(src=imgCommonPC+"news_img_01.jpg" width="754" height="410" loading="lazy" alt="Lộ diện dự án cao cấp của Tập đoàn Lê Phong")
+              .item-content
+                time.content-time
+                  span.time-date 18
+                  span.time-year 04.2026
+                h3.content-title Lộ diện dự án cao cấp của Tập đoàn Lê Phong
+          li.list-item
+            a(href=path+"/news/detail/").item-wrapper
+              .item-image
+                img.object-common(src=imgCommonPC+"news_img_02.jpg" width="450" height="244" loading="lazy" alt="Mặt tiền QL 13 có thêm dự án cao cấp The Emerald Boule-vard")
+              .item-content
+                time.content-time
+                  span.time-date 13
+                  span.time-year 04.2026
+                h3.content-title Mặt tiền QL 13 có thêm dự án cao cấp The Emerald Boule-vard
+          li.list-item
+            a(href=path+"/news/detail/").item-wrapper
+              .item-image
+                img.object-common(src=imgCommonPC+"news_img_03.jpg" width="450" height="244" loading="lazy" alt="Khởi công dự án The Emerald Boulevard tại mặt tiền Quốc lộ 13")
+              .item-content
+                time.content-time
+                  span.time-date 12
+                  span.time-year 04.2026
+                h3.content-title Khởi công dự án The Emerald Boulevard tại mặt tiền Quốc lộ 13
+          li.list-item
+            a(href=path+"/news/detail/").item-wrapper
+              .item-image
+                img.object-common(src=imgCommonPC+"news_img_01.jpg" width="754" height="410" loading="lazy" alt="Lộ diện dự án cao cấp của Tập đoàn Lê Phong")
+              .item-content
+                time.content-time
+                  span.time-date 18
+                  span.time-year 04.2026
+                h3.content-title Lộ diện dự án cao cấp của Tập đoàn Lê Phong
+          li.list-item
+            a(href=path+"/news/detail/").item-wrapper
+              .item-image
+                img.object-common(src=imgCommonPC+"news_img_02.jpg" width="450" height="244" loading="lazy" alt="Mặt tiền QL 13 có thêm dự án cao cấp The Emerald Boule-vard")
+              .item-content
+                time.content-time
+                  span.time-date 13
+                  span.time-year 04.2026
+                h3.content-title Mặt tiền QL 13 có thêm dự án cao cấp The Emerald Boule-vard
+          li.list-item
+            a(href=path+"/news/detail/").item-wrapper
+              .item-image
+                img.object-common(src=imgCommonPC+"news_img_03.jpg" width="450" height="244" loading="lazy" alt="Khởi công dự án The Emerald Boulevard tại mặt tiền Quốc lộ 13")
+              .item-content
+                time.content-time
+                  span.time-date 12
+                  span.time-year 04.2026
+                h3.content-title Khởi công dự án The Emerald Boulevard tại mặt tiền Quốc lộ 13
+          li.list-item
+            a(href=path+"/news/detail/").item-wrapper
+              .item-image
+                img.object-common(src=imgCommonPC+"news_img_01.jpg" width="754" height="410" loading="lazy" alt="Lộ diện dự án cao cấp của Tập đoàn Lê Phong")
+              .item-content
+                time.content-time
+                  span.time-date 18
+                  span.time-year 04.2026
+                h3.content-title Lộ diện dự án cao cấp của Tập đoàn Lê Phong
+          li.list-item
+            a(href=path+"/news/detail/").item-wrapper
+              .item-image
+                img.object-common(src=imgCommonPC+"news_img_02.jpg" width="450" height="244" loading="lazy" alt="Mặt tiền QL 13 có thêm dự án cao cấp The Emerald Boule-vard")
+              .item-content
+                time.content-time
+                  span.time-date 13
+                  span.time-year 04.2026
+                h3.content-title Mặt tiền QL 13 có thêm dự án cao cấp The Emerald Boule-vard
+          li.list-item
+            a(href=path+"/news/detail/").item-wrapper
+              .item-image
+                img.object-common(src=imgCommonPC+"news_img_03.jpg" width="450" height="244" loading="lazy" alt="Khởi công dự án The Emerald Boulevard tại mặt tiền Quốc lộ 13")
+              .item-content
+                time.content-time
+                  span.time-date 12
+                  span.time-year 04.2026
+                h3.content-title Khởi công dự án The Emerald Boulevard tại mặt tiền Quốc lộ 13
+      .news-controller
+        .pagination-common
+          .pagination-arrow
+            a.pagination-arrow-wrapper.is-prev(href="#")
+          ol.pagination-wrapper
+            li.pagination-entry
+              span.pagination-entry-wrapper.is-active(href="#") 01
+            li.pagination-entry
+              a.pagination-entry-wrapper(href="#") 02
+            li.pagination-entry
+              a.pagination-entry-wrapper(href="#") 03
+            li.pagination-entry
+              a.pagination-entry-wrapper(href="#") 04
+            li.pagination-entry
+              a.pagination-entry-wrapper(href="#") 05
+          .pagination-arrow
+            span.pagination-arrow-wrapper.is-next.is-disabled
+  footer.footer-common#footer-contact
+    .wrapper
+      .footer-wrapper.js-title
+        .footer-common-information
+          a(href=path+"/").footer-logo.trans
+            img.image-common(src=imgCommonPC+"logo_primary.svg" width="133" height="76" alt="The emerald boulevard" loading="lazy")
+          ul.information-list
+            li.list-item
+              p.item-title Sales Office:
+              address Số 68 Đại lộ Bình Dương – Khu phố Tây – P. Lái Thiêu – TP. Hồ Chí Minh
+            li.list-item
+              p.item-title SaleS Gallary:
+              address Số 68 Đại lộ Bình Dương – Khu phố Tây – P. Lái Thiêu – TP. Hồ Chí Minh
+            li.list-item
+              p.item-title HOTLINE:
+              a(href="tel:+19002663").item-phone.trans 19002663
+            li.list-item
+              p.item-title EMAIL: 
+                a(href="mailto:theemeraldboulevardofficial@gmail.com").trans theemeraldboulevardofficial@gmail.com
+          ul.socials-list
+            li.list-item
+              a.item-wrapper.trans(href="#" target="_blank" rel="noopener")
+                img.object-common(src=imgCommonPC+"social_icon_03.svg" width="67" height="67" loading="lazy" alt="Facebook")
+            li.list-item
+              a.item-wrapper.trans(href="#" target="_blank" rel="noopener")
+                img.object-common(src=imgCommonPC+"social_icon_02.svg" width="67" height="67" loading="lazy" alt="Youtube")
+            li.list-item
+              a.item-wrapper.trans(href="#" target="_blank" rel="noopener")
+                img.object-common(src=imgCommonPC+"social_icon_01.svg" width="67" height="67" loading="lazy" alt="Tiktok")
+        .footer-common-contact
+          p.contact-title ĐĂNG KÝ TƯ VẤN
+          form.contact-form
+            .form-group
+              .group-input
+                input.input-common(type="text" placeholder="HỌ TÊN *" required)
+              .group-input
+                input.input-common(type="text" placeholder="ĐIỆN THOẠI *" required)
+            .form-group
+              input.input-common(type="text" placeholder="EMAIL")
+            .form-group
+              textarea.textarea-common(placeholder="LỜI NHẮN")
+            .form-controller
+              button(type="submit").button-contact GỬI ĐĂNG KÝ
+      .footer-navigation
+        small 2026 &copy; THE EMERALD BOULEVARD. <span>ALL RIGHTS RESERVED</span>
+        .navigation-list
+          a.list-item.trans(href="#") Chính sách bảo mật
+          a.list-item.trans(href="#") điều khoản chung
+      p.footer-note <span>Lưu ý:</span> Hình ảnh mang tính chất minh họa. Chủ đầu tư có quyền thay đổi những thông tin,<br> hình ảnh liên quan đến dự án ở tài liệu này hoặc bất kỳ những phát sinh nào theo yêu cầu của cơ quan nhà nước có thẩm quyền.
