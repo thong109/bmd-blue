@@ -2,6 +2,8 @@
   color: #F5F1E8;
   text-align: center;
   font-family: "Montserrat", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
 }
 .section-top-keyvisual .group-bg {
   background: #0b1f3a;
@@ -13,6 +15,9 @@
   width: 100%;
   height: 100%;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .section-top-keyvisual .keyvisual-intro {
   position: absolute;
@@ -21,4 +26,47 @@
   width: 100%;
   height: 100%;
   z-index: 0;
+}
+.section-top-keyvisual .keyvisual-link {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: #F5F1E8;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: -0.05em;
+}
+.section-top-keyvisual .keyvisual-link::before, .section-top-keyvisual .keyvisual-link::after {
+  position: absolute;
+  content: "";
+  width: 50%;
+  background: #F5F1E8;
+  height: 1px;
+  bottom: 0;
+  transition: width 0.3s ease;
+}
+.section-top-keyvisual .keyvisual-link::before {
+  left: 0;
+}
+.section-top-keyvisual .keyvisual-link::after {
+  right: 0;
+}
+.section-top-keyvisual .keyvisual-link:hover::before, .section-top-keyvisual .keyvisual-link:hover::after {
+  width: 0;
+}
+@media print, (min-width: 768px) {
+  .section-top-keyvisual .keyvisual-title {
+    font-size: 0.7rem;
+    line-height: 1.2857142857;
+  }
+  .section-top-keyvisual .keyvisual-link {
+    margin-bottom: 0.76rem;
+    font-size: 0.17rem;
+  }
+}
+
+.section-section-top-vision .group-bg {
+  background: url(../resources/images/top/vision_img_01.jpg) center center/cover no-repeat;
 }

@@ -2158,4 +2158,5 @@ html.wf-active .fade-in-up {
   inset: 0;
   background-size: cover;
   background-position: center;
+  z-index: -1;
 }
