@@ -835,39 +835,3 @@
     padding-left: 0;
   }
 }
-
-.button-chat {
-  position: fixed;
-  z-index: 999;
-  cursor: pointer;
-  display: block;
-
-  .button-wrapper {
-    transition: transform 0.3s ease;
-  }
-
-  &:hover {
-    .button-wrapper {
-      transform: scale(1.1);
-    }
-  }
-}
-
-@media print,
-(min-width: 768px) {
-  .button-chat {
-    width: 0.56rem;
-    height: 0.56rem;
-    bottom: 0.2rem;
-    right: 0.2rem;
-  }
-}
-
-@media only screen and (max-width: 767.98px) {
-  .button-chat {
-    width: 0.4rem;
-    height: 0.4rem;
-    bottom: 0.2rem;
-    right: 0.2rem;
-  }
-}

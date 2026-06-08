@@ -34,4 +34,10 @@
       font-size: 0.9rem;
     }
   }
+
+  @include tablet {
+    .title-large {
+      font-size: .6rem;
+    }
+  }
 }

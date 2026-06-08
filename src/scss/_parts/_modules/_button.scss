@@ -1,0 +1,43 @@
+@charset "utf-8";
+@use "../../_base/base"as *;
+
+.button-common-secondary {
+  position: relative;
+  flex: 0 0 auto;
+  display: inline-block;
+  border-radius: 50%;
+  border: 1px solid $color-yellow;
+  transition: border-color .35s ease;
+
+  &::before {
+    position: absolute;
+    content: "";
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(../resources/images/common/arrow_icon_01.svg) center center / contain no-repeat;
+    transition: transform 0.3s ease, background 0.3s ease;
+  }
+
+  &.is-light {
+    border-color: $color-light;
+
+    &::before {
+      background: url(../resources/images/common/arrow_icon_02.svg) center center / contain no-repeat;
+    }
+  }
+
+  &:hover {
+    border-color: $color-light;
+
+    &::before {
+      transform: translate(0.05rem, -0.05rem);
+    }
+  }
+
+  @include desktop {
+    width: 0.52rem;
+    height: 0.52rem;
+  }
+}

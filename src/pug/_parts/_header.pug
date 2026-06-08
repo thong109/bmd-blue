@@ -1,23 +1,22 @@
-header.header-common.hidden
+header.header-common
   .wrapper
     .header-inner
-      a#logo-primary.header-logo(href='https://emeraldboulevard.com')
-        img.image-common.is-normal(src='https://emeraldboulevard.com/wp-content/themes/theemeraldboulevard/resources/images/common/logo-emeraldboulevard.svg' width='133' height='76' loading='eager' alt='THE EMERALD BOULEVARD')
-        img.image-common.is-light(src='https://emeraldboulevard.com/wp-content/themes/theemeraldboulevard/resources/images/common/logo-emeraldboulevard-light.svg' width='133' height='76' loading='eager' alt='THE EMERALD BOULEVARD')
-      .header-navigation-wrapper
-        .header-right
-          a.header-phone(href='tel:1900 2663')
-            span.header-icon.is-phone
-            span 1900 2663
-          // <div class="header-cta js-contact-btn"><span class="header-icon is-cta"></span><span>NHẬN TƯ VẤN</span></div>
-        .header-left
-          .header-lang(data-url='https://emeraldboulevard.com/en/homepage/')
-            span VN
-            svg(xmlns='http://www.w3.org/2000/svg' xlink='http://www.w3.org/1999/xlink' width='14' height='8')
-              path(fill-rule='evenodd' opacity='0.702' d='M13.932,1.157 L7.154,7.906 C7.060,8.001 6.933,8.001 6.870,7.906 L0.093,1.157 C-0.002,1.064 -0.002,0.969 0.093,0.875 L0.944,-0.004 L6.870,5.897 C6.933,5.960 7.060,5.960 7.154,5.897 L13.049,-0.004 L13.932,0.875 C13.995,0.969 13.995,1.064 13.932,1.157 L13.932,1.157 Z')
-          button.header-menu-btn.js-click(fdprocessedid='mq055h')
+      .header-left
+        .header-hamburger
+          span MENU
+          button.header-menu-btn.js-click
             span
             span
+            span
+        .header-lang(data-url='#')
+          span VN
+          svg(width="10" height="6" viewBox="0 0 10 6" fill="none")
+            path(d="M0.5 0.5L4.52915 4.66201L8.69116 0.632855" stroke="#C6A45A" stroke-linecap="round" stroke-linejoin="round")
+      a#logo-primary.header-logo(href='#')
+        img.image-common.is-normal(src=imgCommonPC+'header_logo.svg' width='198' height='48' loading='eager' alt='BLUEMARQ DEVELOPMENT')
+      .header-right
+        a.header-phone(href="#")
+          span.header-icon.is-cta
     .header-common-navigation
       .navigation-wrapper
         nav.navigation-menu

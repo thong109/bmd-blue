@@ -1972,8 +1972,11 @@
       new Swiper(slider, {
         loop: true,
         speed: 500,
-        slidesPerView: 2,
-        spaceBetween: 74,
+        slidesPerView: 'auto',
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
       });
     });
   };

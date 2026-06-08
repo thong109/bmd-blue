@@ -31,9 +31,9 @@
   .header-lang {
     display: flex;
     align-items: center;
-    color: #ffffff;
+    color: $color-yellow;
     cursor: pointer;
-    font-family: $font-montser;
+    font-weight: 300;
   }
 
   .header-logo {
@@ -62,6 +62,7 @@
   .header-right {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
   }
 
   .header-phone {
@@ -108,8 +109,6 @@
     flex: 0 0 auto;
     position: relative;
     overflow: hidden;
-    border: 1px solid #fff;
-    border-radius: 50%;
     transition: border-color 0.3s ease;
 
     &::after,
@@ -157,15 +156,15 @@
   }
 
   @include desktop {
-    padding: .22rem 0;
+    padding: .1rem 0;
 
     .wrapper {
-      max-width: 18.36rem;
+      max-width: 16.8rem;
     }
 
     .header-icon {
-      width: .56rem;
-      height: .56rem;
+      width: .22rem;
+      height: .22rem;
     }
 
     .header-phone {
@@ -181,24 +180,21 @@
     }
 
     .header-right {
-      gap: .48rem;
-      margin-top: -0.26rem;
+      width: 2.2rem;
     }
 
     .header-left {
-      padding-top: .18rem;
-      gap: .32rem;
-      width: 4.29rem;
+      gap: .68rem;
     }
 
     .header-lang {
-      font-size: .16rem;
-      line-height: 1.2;
-      gap: .12rem;
+      font-size: .18rem;
+      line-height: calc(25 / 18);
+      gap: .08rem;
     }
 
     .header-logo {
-      width: 1.33rem;
+      width: 1.98rem;
     }
   }
 
@@ -250,8 +246,6 @@
 }
 
 .header-menu-btn {
-  border-radius: 50%;
-  background: #0f3a32;
   border: none;
   display: flex;
   flex-direction: column;
@@ -261,26 +255,11 @@
   transition: all 0.3s ease;
   position: relative;
 
-  &::before {
-    position: absolute;
-    content: "";
-    background: url(../resources/images/common/logo_bg.svg) center center/ cover no-repeat;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: -1;
-    pointer-events: none;
-  }
-
   span {
-    width: .18rem;
+    width: .29rem;
     height: .01rem;
-    background: #fff;
+    background: $color-yellow;
     transition: all 0.3s ease;
-
-    &:last-child {
-      width: .28rem;
-    }
   }
 
   // &:hover {
@@ -313,11 +292,6 @@
     margin-left: -0.02rem;
     gap: .08rem;
     padding: .16rem;
-
-    &::before {
-      width: .8rem;
-      height: .8rem;
-    }
   }
 
   @include mobile {
@@ -326,11 +300,17 @@
     margin-left: -0.02rem;
     gap: .08rem;
     padding: .11rem;
+  }
+}
 
-    &::before {
-      width: .7rem;
-      height: .7rem;
-    }
+.header-hamburger {
+  display: flex;
+  align-items: center;
+  color: $color-yellow;
+
+  @include desktop {
+    font-size: .17rem;
+    line-height: calc(25 / 17);
   }
 }
 
@@ -363,6 +343,7 @@
 
   @include desktop {
     padding: 1.75rem 0 .3rem;
+    max-width: 4.52rem;
   }
 
   @include height {
