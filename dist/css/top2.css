@@ -296,3 +296,19 @@
     height: 0.52rem;
   }
 }
+
+.section-top-projects .central-bg {
+  background: #0b1f3a url(../resources/images/top/projects_bg.png) center center/cover no-repeat;
+}
+@media print, (min-width: 768px) {
+  .section-top-projects .projects-wrapper {
+    display: flex;
+    align-items: flex-end;
+  }
+  .section-top-projects .project-content {
+    width: 50%;
+  }
+  .section-top-projects .projects-image {
+    width: 50%;
+  }
+}

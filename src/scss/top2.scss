@@ -378,3 +378,26 @@
     }
   }
 }
+
+.section-top-projects {
+  .central-bg {
+    background: $color-default url(../resources/images/top/projects_bg.png) center center / cover no-repeat;
+  }
+
+  @include desktop {
+    .projects-wrapper {
+      display: flex;
+      align-items: flex-end;
+    }
+
+    .project-content {
+      width: 50%;
+    }
+
+    .projects-image {
+      width: 50%;
+    }
+  }
+}
+
+.list-top-projects {}

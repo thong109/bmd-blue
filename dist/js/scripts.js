@@ -1962,6 +1962,22 @@
     );
   };
 
+  const sliderProjects = () => {
+    const sliders = document.querySelectorAll(".js-top-projects");
+    if (!sliders.length) return;
+
+    sliders.forEach((container) => {
+      const slider = container.querySelectorAll(".swiper")[0];
+
+      new Swiper(slider, {
+        loop: true,
+        speed: 500,
+        slidesPerView: 2,
+        spaceBetween: 74,
+      });
+    });
+  };
+
   window.WebFontConfig = {
     custom: {
       families: [
@@ -2015,4 +2031,5 @@
     initMarqueeBottom();
   });
   window.addEventListener("scroll", handleDarkBg, { passive: true });
+  sliderProjects();
 })();
