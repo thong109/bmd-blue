@@ -14,4 +14,9 @@
     font-size: 0.18rem;
     line-height: calc(29 / 18);
   }
+
+  @include mobile {
+    font-size: 0.16rem;
+    line-height: calc(24 / 16);
+  }
 }

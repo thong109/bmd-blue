@@ -576,6 +576,18 @@ html.wf-active .fade-in-up {
       height: calc(100% - 1.54rem);
     }
   }
+
+  @include mobile {
+    background: url(../resources/images/top/decor_icon_01.svg) top 0.55rem left / contain no-repeat;
+
+    &::before {
+      height: .5rem;
+    }
+
+    &::after {
+      height: calc(100% - 0.8rem);
+    }
+  }
 }
 
 .decor-common-secondary {
@@ -624,6 +636,33 @@ html.wf-active .fade-in-up {
       }
     }
   }
+
+  @include tablet {
+    &.is-left {
+      background-position: top left 1.7rem;
+    }
+  }
+
+  @include mobile {
+    background: url(../resources/images/top/decor_icon_01.svg) top center / 0.18rem 0.18rem no-repeat;
+
+    &::before,
+    &::after {
+      width: calc(50% - 0.2rem);
+    }
+
+    &.is-left {
+      background: url(../resources/images/top/decor_icon_01.svg) top left 0.54rem / 0.18rem 0.18rem no-repeat;
+
+      &::before {
+        width: calc(20% - 0.34rem);
+      }
+
+      &::after {
+        width: calc(80% + 0.02rem);
+      }
+    }
+  }
 }
 
 .central-bg {
@@ -633,4 +672,50 @@ html.wf-active .fade-in-up {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.char-wrap {
+  display: inline-block;
+}
+
+.space {
+  display: inline-block;
+}
+
+.js-title-fade {
+  display: block;
+  direction: ltr;
+}
+
+.char {
+  display: inline-block;
+  transform: translateY(120%);
+  opacity: 0;
+  will-change: transform, opacity;
+  animation: charUp 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  animation-play-state: paused;
+}
+
+.section-top-keyvisual {
+  @include desktop {
+    .char {
+      margin-right: -0.1rem;
+    }
+  }
+
+  @include mobile {
+    .char {
+      margin-right: -0.06rem;
+    }
+  }
+}
+
+@keyframes line {
+  0% {
+    clip-path: inset(0 0 100% 0);
+  }
+
+  100% {
+    clip-path: inset(0 0 0 0);
+  }
 }

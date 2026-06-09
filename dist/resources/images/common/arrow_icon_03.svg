@@ -1,13 +1,1 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 81 81" width="80" height="80">
-  <g fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-    <line stroke="#ffbdd6" x1="27" y1="40.5" x2="54" y2="40.5"/>
-    <polyline stroke="#ffbdd6" points="46.75 47.75 54 40.5 46.75 33.25"/>
-    <rect 
-      x="0.5" 
-      y="0.5" 
-      width="80" 
-      height="80" 
-      fill="none"
-    />
-  </g>
-</svg>
+<svg viewBox="0 0 31 18" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2"><path d="M1047.036 4055.512c-4.602-1.456-5.96-2.609-7.645-6.497-.29-.668-1.08-.983-1.773-.7a1.308 1.308 0 0 0-.716 1.728c1.244 2.869 2.504 4.608 4.567 5.924h-22.566c-.58 0-1.051.463-1.051 1.034s.471 1.034 1.051 1.034h22.566c-2.063 1.316-3.323 3.055-4.567 5.923a1.309 1.309 0 0 0 .716 1.729c.174.071.353.103.528.103.526 0 1.027-.301 1.245-.804 1.685-3.888 3.043-5.042 7.643-6.496.672-.215 1.126-.813 1.126-1.489 0-.676-.454-1.274-1.124-1.489Z" style="fill:#f5f1e7;fill-opacity:.6;fill-rule:nonzero" transform="translate(-1017.852 -4048.211)"/></svg>

@@ -7,6 +7,17 @@
   const tabletBreak = 1280;
   const mobileBreak = 767.98;
   const mobileXSBreak = 414;
+  const Mask = document.querySelector('.mask'),
+    WindBody = document.body,
+    HTML = document.documentElement;
+  history.scrollRestoration = 'manual';
+  window.scrollTo(0, 0);
+
+  window.addEventListener('beforeunload', () => {
+    window.scrollTo(0, 0);
+  });
+
+  const delay = (time, callback) => setTimeout(callback, time);
 
   window.__APP_STATE__ = {
     observer: null,
@@ -886,6 +897,37 @@
       );
     });
   };
+
+  const Done = () => {
+    const titles = document.querySelectorAll('.js-title-fade');
+    if (!titles.length) return;
+
+    let globalIndex = 0;
+
+    titles.forEach((title) => {
+      if (title.classList.contains('splitted')) return;
+      title.classList.add('splitted');
+      const text = title.textContent;
+      const chars = text.split('');
+
+      let html = '';
+      chars.forEach((ch) => {
+        if (ch === ' ') {
+          html += `<span class="space"></span>`;
+        } else {
+          html += `
+          <span class="char-wrap">
+            <span class="char" style="line-height: 1; transform: translateY(120%); opacity: 0;">
+              ${ch}
+            </span>
+          </span>
+        `;
+        }
+      });
+
+      title.innerHTML = html;
+    });
+  };
   // End helper
 
   const initUtilitiesPairs = () => {
@@ -1223,27 +1265,59 @@
   };
 
   const initIntro = () => {
-    const intro = document.querySelector(".intro");
-    if (!intro) return;
-    
+    Done();
     const isTablet = () => window.innerWidth < 1024.98;
-    
+
     if (!isTablet()) {
       document.body.style.overflow = "hidden";
     }
-    
+
+    delay(1000, () => {
+      Mask?.classList.add('showed');
+    });
+    delay(3000, () => {
+      Mask?.classList.add('hide');
+    });
+    delay(3800, () => {
+      Mask?.remove();
+      setTimeout(() => {
+        WindBody.classList.add('showed');
+        const allChars = document.querySelectorAll('.char');
+        const titles = document.querySelectorAll('.js-title-fade');
+        allChars.forEach((el) => {
+          el.style.animation = 'none';
+          el.style.transition =
+            'transform 0.7s cubic-bezier(.22, 1, .36, 1), opacity 0.7s cubic-bezier(.22, 1, .36, 1)';
+        });
+        let accumulatedDelay = 0;
+        let lastShowDelay = 0;
+        titles.forEach((title) => {
+          const chars = title.querySelectorAll('.char');
+          void chars[0]?.offsetHeight;
+          chars.forEach((el, i) => {
+            const d = accumulatedDelay + i * 50 + 16;
+            lastShowDelay = Math.max(lastShowDelay, d);
+            setTimeout(() => {
+              el.style.transform = 'translateY(0%)';
+              el.style.opacity = '1';
+            }, d);
+          });
+          accumulatedDelay += chars.length * 50 + 200;
+        });
+      }, 50);
+    });
+
     setTimeout(() => {
-      intro.classList.add("is-hidden");
       setTimeout(() => {
         if (!isTablet()) {
           document.body.style.overflow = "hidden";
         }
+        app();
         const video = document.getElementById('video-element');
         if (video) {
           const playPromise = video.play();
           playPromise?.catch(() => console.warn('Autoplay blocked.'));
         }
-        app();
         initMobileAnimations();
       }, 600);
     }, 1200);
@@ -1477,35 +1551,121 @@
   };
 
   const triggerClick = () => {
-    const classClickActive = "is-click-active";
-    const navigation = document.querySelector(".header-common-navigation");
+    const classClickActive = 'is-click-active';
 
-    if (!navigation) return;
+    const classClosing = 'is-closing';
 
-    document.querySelectorAll(".js-click").forEach((element) => {
-      element.addEventListener("click", (e) => {
+    const header = document.querySelector('.header-common');
+
+    const overlayMenu = document.querySelector('.overlay-menu');
+
+    const navigationWrapper = document.querySelector('.navigation-wrapper');
+
+    const clickElements = document.querySelectorAll('.js-click');
+
+    const buttonClose = document.querySelector('.js-button-close');
+
+    if (
+      !header ||
+      !overlayMenu ||
+      !navigationWrapper ||
+      !clickElements.length ||
+      !buttonClose
+    ) {
+      return;
+    }
+
+    let isOpen = false;
+
+    // OPEN
+    const openMenu = (element) => {
+      // RESET
+      overlayMenu.classList.remove(classClosing);
+
+      navigationWrapper.classList.remove(classClosing);
+
+      clickElements.forEach((el) => {
+        el.classList.remove(classClosing);
+        el.classList.remove(classClickActive);
+      });
+
+      // Remove is-menu-closing → CSS transitions width 0 → 100%
+      header.classList.remove('is-menu-closing');
+
+      // ACTIVE
+      header.classList.add('is-menu-open');
+      element.classList.add(classClickActive);
+      overlayMenu.classList.add(classClickActive);
+      navigationWrapper.classList.add(classClickActive);
+
+      // LOCK SCROLL
+      document.body.style.overflow = 'hidden';
+      // WinScroll.stop();
+      freezeWindow(true);
+      window.__APP_STATE__?.observer?.disable();
+
+      isOpen = true;
+    };
+
+    // CLOSE
+    const closeMenu = () => {
+      isOpen = false;
+
+      header.classList.add('is-menu-closing');
+
+      overlayMenu.classList.remove(classClickActive);
+      navigationWrapper.classList.remove(classClickActive);
+
+      clickElements.forEach((el) => {
+        el.classList.remove(classClickActive);
+      });
+
+      navigationWrapper.classList.add(classClosing);
+      overlayMenu.classList.add(classClosing);
+
+      clickElements.forEach((el) => {
+        el.classList.add(classClosing);
+      });
+
+      setTimeout(() => {
+        header.classList.remove('is-menu-open');
+
+        header.classList.remove('is-menu-closing');
+
+        overlayMenu.classList.remove(classClickActive, classClosing);
+
+        navigationWrapper.classList.remove(classClickActive, classClosing);
+
+        clickElements.forEach((el) => {
+          el.classList.remove(classClickActive, classClosing);
+        });
+
+        document.body.style.overflow = '';
+        freezeWindow(false);
+        if (window.__APP_STATE__?.sliderState?.active) {
+          window.__APP_STATE__?.observer?.enable();
+        }
+      }, 500);
+    };
+
+    // TOGGLE
+    clickElements.forEach((element) => {
+      element.addEventListener('click', (e) => {
         e.stopPropagation();
 
-        const isActive = element.classList.contains(classClickActive);
-
-        document
-          .querySelectorAll(".js-click")
-          .forEach((el) => el.classList.remove(classClickActive));
-        navigation.classList.remove(classClickActive);
-
-        if (!isActive) {
-          element.classList.add(classClickActive);
-          navigation.classList.add(classClickActive);
-          freezeWindow(true);
-          window.__APP_STATE__?.observer?.disable();
+        if (isOpen) {
+          closeMenu();
         } else {
-          freezeWindow(false);
-          if (window.__APP_STATE__?.sliderState?.active) {
-            window.__APP_STATE__?.observer?.enable();
-          }
+          openMenu(element);
         }
       });
     });
+
+    // OVERLAY CLOSE
+    overlayMenu.addEventListener('click', closeMenu);
+
+    // BUTTON CLOSE
+    buttonClose.addEventListener('click', closeMenu);
   };
 
   const fadeInAnimation = () => {
