@@ -513,11 +513,11 @@
   content: "";
   top: 0;
   left: 0;
-  margin-top: 0.02rem;
+  margin-top: 0.03rem;
   display: block;
-  width: 0.18rem;
-  height: 0.18rem;
-  background: url(../resources/images/top/decor_icon_02.svg) center center/contain no-repeat;
+  width: 0.23rem;
+  height: 0.23rem;
+  background: url(../resources/images/top/decor_icon_01.svg) center center/contain no-repeat;
 }
 
 .section-top-projects .content-inner {

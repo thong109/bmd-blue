@@ -541,7 +541,7 @@ html.wf-active .fade-in-up {
 
 .decor-common {
   position: absolute;
-  width: 0.18rem;
+  width: 0.23rem;
   height: 100%;
   top: 0;
   left: 0;
@@ -576,7 +576,7 @@ html.wf-active .fade-in-up {
   }
 
   .decor-common::after {
-    height: calc(100% - 1.54rem);
+    height: calc(100% - 1.62rem);
   }
 }
 
@@ -597,7 +597,7 @@ html.wf-active .fade-in-up {
 .decor-common-secondary {
   position: absolute;
   width: 100%;
-  height: 0.18rem;
+  height: 0.23rem;
   left: 50%;
   bottom: 0;
   transform: translateX(-50%);
@@ -624,7 +624,7 @@ html.wf-active .fade-in-up {
 @media print,
 (min-width: 768px) {
   .decor-common-secondary {
-    background: url(../resources/images/top/decor_icon_01.svg) top center/0.18rem 0.18rem no-repeat;
+    background: url(../resources/images/top/decor_icon_01.svg) top center/0.23rem 0.23rem no-repeat;
   }
 
   .decor-common-secondary::before,
@@ -633,7 +633,7 @@ html.wf-active .fade-in-up {
   }
 
   .decor-common-secondary.is-left {
-    background: url(../resources/images/top/decor_icon_01.svg) top left 1.22rem/0.18rem 0.18rem no-repeat;
+    background: url(../resources/images/top/decor_icon_01.svg) top left 1.22rem/0.23rem 0.23rem no-repeat;
   }
 
   .decor-common-secondary.is-left::before {
@@ -641,7 +641,7 @@ html.wf-active .fade-in-up {
   }
 
   .decor-common-secondary.is-left::after {
-    width: calc(80% + 0.02rem);
+    width: calc(80% - 0.06rem);
   }
 }
 
