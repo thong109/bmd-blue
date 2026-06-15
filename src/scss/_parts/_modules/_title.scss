@@ -4,55 +4,64 @@
 .title-common-primary {
   position: relative;
   text-transform: uppercase;
-  font-family: $font-montser;
-  color: $color-yellow;
+  font-family: "Montserrat", sans-serif;
+  color: #C6A45A;
+}
 
-  &.is-center {
-    text-align: center;
-  }
+.title-common-primary.is-center {
+  text-align: center;
+}
 
-  .title-large {
-    display: block;
-  }
+.title-common-primary.is-dark {
+  color: #0b1f3a;
+}
 
-  &.is-small {
-    font-weight: 600;
-    letter-spacing: -.05em;
-  }
+.title-common-primary .title-large {
+  display: block;
+}
 
-  @include desktop {
+.title-common-primary.is-small {
+  font-weight: 600;
+  letter-spacing: -0.05em;
+}
+
+@media print,
+(min-width: 768px) {
+  .title-common-primary {
     margin-bottom: 0.12rem;
     font-size: 0.5rem;
-    line-height: calc(6 / 5);
-
-    &.is-small {
-      font-size: 0.4rem;
-    }
-
-    .title-large {
-      margin-top: 0.08rem;
-      font-size: 0.9rem;
-    }
+    line-height: 1.2;
   }
 
-  @include tablet {
-    .title-large {
-      font-size: .6rem;
-    }
+  .title-common-primary.is-small {
+    font-size: 0.4rem;
   }
 
-  @include mobile {
+  .title-common-primary .title-large {
+    margin-top: 0.08rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024.98px) {
+  .title-common-primary .title-large {
+    font-size: 0.6rem;
+  }
+}
+
+@media only screen and (max-width: 767.98px) {
+  .title-common-primary {
     margin-bottom: 0.1rem;
     font-size: 0.3rem;
-    line-height: calc(6 / 5);
+    line-height: 1.2;
+  }
 
-    &.is-small {
-      font-size: 0.2rem;
-    }
+  .title-common-primary.is-small {
+    font-size: 0.2rem;
+  }
 
-    .title-large {
-      margin-top: 0.08rem;
-      font-size: 0.44rem;
-    }
+  .title-common-primary .title-large {
+    margin-top: 0.08rem;
+    font-size: 0.44rem;
   }
 }

@@ -240,26 +240,29 @@
       link.addEventListener("click", (e) => {
         e.preventDefault();
 
-        const navigation = document.querySelector(".header-common-navigation");
-        document
-          .querySelectorAll(".js-click")
-          .forEach((el) => el.classList.remove("is-click-active"));
-        navigation?.classList.remove("is-click-active");
-        freezeWindow(false);
-
         const hash = (link.getAttribute("href") || "").split("#")[1];
+        const panelIndex = panels.findIndex((panel) => panel.id === hash);
         const navItem = Array.from(navItems).find(
           (item) => item.dataset.target === hash,
         );
-        if (!navItem) return;
+        if (!navItem && panelIndex < 0) return;
+
+        window.dispatchEvent(new CustomEvent("header:close-menu"));
 
         setTimeout(() => {
           if (s.active) {
             observer?.enable();
           }
 
-          navItem.click();
-        }, 300);
+          if (panelIndex >= 0 && !s.active) {
+            s.navLock = true;
+            relock(panelIndex, () => (s.navLock = false));
+          } else if (panelIndex >= 0 && !s.animating) {
+            goto(panelIndex, panelIndex > s.cur ? 1 : -1);
+          } else if (navItem) {
+            navItem.click();
+          }
+        }, 550);
       });
     });
 
@@ -554,12 +557,15 @@
 
         history.replaceState(null, "", window.location.pathname);
 
+        const matchedPanelIndex = panels.findIndex((panel) => panel.id === hash);
         const matchedNavItem = Array.from(navItems).find(
           (item) => item.dataset.target === hash,
         );
 
         setTimeout(() => {
-          if (matchedNavItem) {
+          if (matchedPanelIndex >= 0) {
+            goto(matchedPanelIndex, matchedPanelIndex > s.cur ? 1 : -1);
+          } else if (matchedNavItem) {
             matchedNavItem.click();
           } else {
             const target = document.getElementById(hash);
@@ -697,122 +703,6 @@
     });
   }
 
-  const sliderGallery = () => {
-    const sliders = document.querySelectorAll(".js-slider-gallery");
-    if (!sliders.length) return;
-
-    sliders.forEach((container) => {
-      const slider = container.querySelector(".swiper");
-      const wrapper = slider.querySelector(".swiper-wrapper");
-
-      const count = wrapper.querySelectorAll(".swiper-slide").length;
-      const isMobile = window.matchMedia("(max-width: 767px)").matches;
-      const perView = isMobile ? 1 : 2 + 356 / 712;
-      const shouldLoop = count > Math.ceil(perView);
-
-      new Swiper(slider, {
-        loop: shouldLoop,
-        speed: 500,
-        slidesPerView: perView,
-        spaceBetween: isMobile ? 10 : 30,
-        centeredSlides: false,
-        initialSlide: 0,
-        autoplay: {
-          delay: 3000,
-        },
-        pagination: {
-          el: container.querySelector(".swiper-pagination"),
-          clickable: true,
-        },
-      });
-    });
-  };
-
-  const tabsGallery = (scope = document) => {
-    const tabs = scope.querySelectorAll(".js-tabs");
-    if (!tabs.length) return;
-
-    tabs.forEach((tab) => {
-      const buttons = tab.querySelectorAll(".tab-btn");
-
-      buttons.forEach((btn) => {
-        if (btn.dataset.tabsBound === "true") return;
-        btn.dataset.tabsBound = "true";
-
-        btn.addEventListener("click", () => {
-          const target = btn.dataset.tab;
-          const nextPanel = tab.querySelector(`#${target}`);
-
-          if (!nextPanel || btn.classList.contains("active")) return;
-
-          buttons.forEach((b) => b.classList.remove("active"));
-          btn.classList.add("active");
-
-          const currentPanel = tab.querySelector(".tab-panel.active");
-          if (currentPanel) {
-            gsap.to(currentPanel, {
-              autoAlpha: 0,
-              duration: 0.2,
-              ease: "power1.inOut",
-              onComplete: () => {
-                currentPanel.classList.remove("active");
-                nextPanel.classList.add("active");
-                gsap.fromTo(
-                  nextPanel,
-                  {
-                    autoAlpha: 0,
-                  },
-                  {
-                    autoAlpha: 1,
-                    duration: 0.25,
-                    ease: "power1.out",
-                  },
-                );
-              },
-            });
-          } else {
-            nextPanel.classList.add("active");
-            gsap.fromTo(
-              nextPanel,
-              {
-                autoAlpha: 0,
-              },
-              {
-                autoAlpha: 1,
-                duration: 0.25,
-                ease: "power1.out",
-              },
-            );
-          }
-        });
-      });
-    });
-  };
-
-  const createPopup = ({ id, className = "", hasTitle = true }) => {
-    if (document.getElementById(id)) return;
-
-    const popup = document.createElement("div");
-    popup.id = id;
-    popup.className = `media-popup ${className}`;
-
-    popup.innerHTML = `
-      <div class="popup-overlay"></div>
-      <div class="popup-box">
-        <button class="popup-close trans"></button>
-        <div class="popup-body" id="${id}-body"></div>
-        ${hasTitle
-        ? `<div class="wrapper">
-                <h3 class="popup-title" id="${id}-title"></h3>
-              </div>`
-        : ""
-      }
-      </div>
-    `;
-
-    document.body.appendChild(popup);
-  };
-
   // Helper
 
   const freezeWindow = (lock) => {
@@ -930,340 +820,6 @@
   };
   // End helper
 
-  const initUtilitiesPairs = () => {
-    const popup = document.getElementById("utilitiesPopup");
-    if (!popup) return;
-    const pairItems = popup.querySelectorAll("[data-pair]");
-    if (!pairItems.length) return;
-
-    const toggle = document.createElement("div");
-    toggle.className = "utilities-map-toggle";
-    toggle.innerHTML = `
-    <figure class="toggle-image">
-      <img class="toggle-img object-common" src="" alt="" loading="lazy">
-    </figure>
-    <span class="toggle-text"></span>
-  `;
-
-    const getActiveContainer = (panel) => {
-      const md = panel?.querySelector(".md");
-      const sm = panel?.querySelector(".sm");
-      if (md && getComputedStyle(md).display !== "none") return md;
-      if (sm && getComputedStyle(sm).display !== "none") return sm;
-      return md || sm;
-    };
-
-    const getPairContent = (pair, source) => {
-      const panel =
-        source?.closest(".tab-panel") ||
-        popup.querySelector(".tab-panel.active");
-      const item =
-        source?.closest(".utilities-list .list-item") ||
-        panel?.querySelector(
-          `.utilities-list .list-item[data-pair="${pair}"]`,
-        ) ||
-        popup.querySelector(`.utilities-list .list-item[data-pair="${pair}"]`);
-      return {
-        image: item?.dataset.image || source?.dataset.image || "",
-        text: item?.querySelector(".content-text")?.textContent?.trim() || "",
-      };
-    };
-
-    const positionToggle = (source, pair) => {
-      const panel =
-        source?.closest(".tab-panel") ||
-        popup.querySelector(".tab-panel.active");
-      const popupImage =
-        panel?.querySelector(".popup-image") ||
-        popup.querySelector(".popup-image");
-
-      const activeContainer = getActiveContainer(
-        panel || popupImage?.closest(".tab-panel"),
-      );
-
-      const isFromSvg = source?.closest(".popup-path");
-      const svgContainer = isFromSvg
-        ? source?.closest(".md, .sm")
-        : activeContainer;
-
-      const target = isFromSvg
-        ? source
-        : svgContainer?.querySelector(`.popup-path [data-pair="${pair}"]`) ||
-        activeContainer?.querySelector(`.popup-path [data-pair="${pair}"]`);
-
-      const imageWrapper = svgContainer?.closest(".popup-image") || popupImage;
-      if (!imageWrapper || !target) return;
-      if (toggle.parentNode !== imageWrapper) imageWrapper.appendChild(toggle);
-
-      const imageRect = imageWrapper.getBoundingClientRect();
-      const targetRect = target.getBoundingClientRect();
-      toggle.style.left = `${targetRect.left - imageRect.left + targetRect.width / 2}px`;
-      toggle.style.top = `${targetRect.top - imageRect.top + targetRect.height / 2}px`;
-    };
-
-    const setActivePair = (pair, source) => {
-      pairItems.forEach((item) => {
-        item.classList.toggle("is-active", item.dataset.pair === pair);
-      });
-      toggle.classList.toggle("is-active", Boolean(pair));
-
-      if (pair) {
-        const content = getPairContent(pair, source);
-        const toggleFigure = toggle.querySelector(".toggle-image"); // Chọn thẻ khung figure
-        const toggleImage = toggle.querySelector(".toggle-img");
-        const toggleText = toggle.querySelector(".toggle-text");
-
-        if (content.image) {
-          // Nếu có hình ảnh (thumb != false)
-          toggleFigure.style.display = ""; // Hiển thị lại khung
-          toggleImage.src = content.image;
-          toggleImage.alt = content.text;
-        } else {
-          // Nếu không có hình ảnh
-          toggleFigure.style.display = "none"; // Ẩn hoàn toàn khung
-          toggleImage.src = "";
-        }
-
-        if (toggleText) toggleText.textContent = content.text;
-        positionToggle(source, pair);
-      }
-    };
-
-    pairItems.forEach((item) => {
-      item.addEventListener("mouseenter", () =>
-        setActivePair(item.dataset.pair, item),
-      );
-      item.addEventListener("mouseleave", () => setActivePair(""));
-    });
-
-    popup.querySelectorAll(".tab-btn").forEach((button) => {
-      button.addEventListener("click", () => setActivePair(""));
-    });
-  };
-
-  const initPopup = () => {
-    const media = getPopupElements("mediaPopup");
-    const premises = getPopupElements("premisesPopup");
-    const premisesDetail = getPopupElements("premisesDetailPopup");
-    const contact = getPopupElements("contactPopup");
-    const utilities = getPopupElements("utilitiesPopup");
-    const header = document.querySelector("header.header-common");
-
-    if (
-      !media ||
-      !premises ||
-      !premisesDetail ||
-      !contact ||
-      !utilities ||
-      !header
-    )
-      return;
-
-    const openPopup = (instance, { lock = true } = {}) => {
-      instance.popup.classList.add("active");
-
-      window.__APP_STATE__.forceHideHeader = true;
-
-      if (!isDesktop()) {
-        header.classList.add("is-hide");
-      }
-
-      if (lock) {
-        freezeWindow(true);
-        window.__APP_STATE__?.observer?.disable();
-      }
-    };
-
-    const closePopup = (
-      instance,
-      { clearBody = true, releaseLock = true } = {},
-    ) => {
-      instance.popup.classList.remove("active");
-
-      if (clearBody && instance.body) instance.body.innerHTML = "";
-      if (instance.title) instance.title.textContent = "";
-
-      if (!releaseLock) return;
-
-      freezeWindow(false);
-
-      window.__APP_STATE__.forceHideHeader = false;
-
-      if (window.__APP_STATE__?.sliderState?.active) {
-        window.__APP_STATE__?.observer?.enable();
-      }
-
-      setTimeout(() => {
-        window.dispatchEvent(new Event("scroll"));
-      }, 50);
-    };
-
-    document.addEventListener("click", async (e) => {
-      const slide = e.target.closest(".js-slide-image");
-      const video = e.target.closest(".js-gallery-video");
-      const premisesItem = e.target.closest(".js-premises-item");
-      const premisesDetailItem = e.target.closest(".js-premises-detail-item");
-      const contactBtn = e.target.closest(".js-contact-btn");
-      const utilitiesBtn = e.target.closest(".js-utilities-btn");
-
-      if (contactBtn && contact) {
-        openPopup(contact);
-        return;
-      }
-      if (utilitiesBtn && utilities) {
-        openPopup(utilities);
-        return;
-      }
-
-      if (slide && media) {
-        const { body, title } = media;
-
-        title.textContent = slide.dataset.title || "";
-
-        const images = JSON.parse(slide.dataset.gallery || "[]");
-        if (!images.length) return;
-
-        const slideItems = images
-          .map(
-            (img) => `
-          <div class="swiper-slide">
-            <div class="slide-wrapper">
-              <div class="slide-image">
-                <img class="object-common" src="${img.url}" alt="${img.alt}"
-                  loading="eager" width="${img.w}" height="${img.h}" />
-              </div>
-            </div>
-          </div>`,
-          )
-          .join("");
-
-        body.innerHTML = `
-          <section class="section-gallery">
-            <div class="wrapper">
-              <div class="list-top-gallery-detail js-slider-gallery-detail">
-                <div class="swiper">
-                  <div class="swiper-wrapper">${slideItems}</div>
-                  <div class="swiper-button-prev trans"></div>
-                  <div class="swiper-button-next trans"></div>
-                  <div class="swiper-pagination"></div>
-                </div>
-              </div>
-            </div>
-          </section>`;
-
-        openPopup(media);
-        if (window.Swiper) sliderGalleryDetail(body);
-        return;
-      }
-
-      if (video && media) {
-        const { body, title } = media;
-        const url = video.dataset.url;
-        title.textContent = video.dataset.title || "";
-        openPopup(media);
-
-        const finalUrl = url.includes("?")
-          ? url + "&autoplay=1&mute=1"
-          : url + "?autoplay=1&mute=1";
-
-        body.innerHTML = `
-            <section class="section-gallery">
-              <div class="wrapper">
-                <div class="list-top-gallery-detail">
-                  <div class="slide-video yt-iframe-wrap">
-                    <iframe class="object-common"
-                      src="${finalUrl}"
-                      allow="autoplay; encrypted-media"
-                      allowfullscreen>
-                    </iframe>
-                  </div>
-                </div>
-              </div>
-            </section>
-          `;
-        return;
-      }
-
-      if (premisesItem && premises) {
-        const { body } = premises;
-
-        openPopup(premises);
-        body.innerHTML = "Loading...";
-
-        try {
-          const html = applyPremisesI18n(
-            await (await fetch(premisesItem.dataset.url)).text(),
-          );
-          body.innerHTML = html;
-          hoverApartment(body);
-        } catch {
-          body.innerHTML = "Load failed";
-        }
-      }
-
-      if (premisesDetailItem && premisesDetail) {
-        const url = premisesDetailItem.dataset.url;
-        if (!url) return;
-
-        const { body } = premisesDetail;
-
-        openPopup(premisesDetail, {
-          lock: false,
-        });
-        body.innerHTML = "Loading...";
-
-        try {
-          body.innerHTML = await (await fetch(url)).text();
-        } catch {
-          body.innerHTML = "Load failed";
-        }
-      }
-    });
-
-    const bindClose = (instance, options = {}) => {
-      if (!instance) return;
-      const close = () => closePopup(instance, options);
-      instance.closeBtn.onclick = close;
-      instance.overlay.onclick = close;
-    };
-
-    bindClose(media);
-    bindClose(premises);
-    bindClose(premisesDetail, {
-      releaseLock: false,
-    });
-    bindClose(contact, {
-      clearBody: false,
-    });
-    bindClose(utilities, {
-      clearBody: false,
-    });
-  };
-
-  const sliderGalleryDetail = (scope = document) => {
-    const sliders = scope.querySelectorAll(".js-slider-gallery-detail");
-    if (!sliders.length) return;
-
-    sliders.forEach((container) => {
-      const slider = container.querySelector(".swiper");
-      if (!slider || slider.swiper) return;
-
-      new Swiper(slider, {
-        loop: true,
-        speed: 500,
-        slidesPerView: 1,
-        navigation: {
-          nextEl: slider.querySelector(".swiper-button-next"),
-          prevEl: slider.querySelector(".swiper-button-prev"),
-        },
-        pagination: {
-          el: slider.querySelector(".swiper-pagination"),
-          type: "fraction",
-        },
-      });
-    });
-  };
-
   const initIntro = () => {
     Done();
     const isTablet = () => window.innerWidth < 1024.98;
@@ -1303,6 +859,22 @@
             }, d);
           });
           accumulatedDelay += chars.length * 50 + 200;
+
+          const hideAfterMs = lastShowDelay + 700 + 3000;
+          setTimeout(() => {
+            let hideDelay = 0;
+            [...titles].reverse().forEach((title) => {
+              const chars = [...title.querySelectorAll('.char')].reverse();
+              chars.forEach((el, i) => {
+                const d = hideDelay + i * 50 + 16;
+                setTimeout(() => {
+                  el.style.transform = 'translateY(120%)';
+                  el.style.opacity = '0';
+                }, d);
+              });
+              hideDelay += chars.length * 50 + 200;
+            });
+          }, hideAfterMs);
         });
       }, 50);
     });
@@ -1392,128 +964,6 @@
         sliderThumbnails.slideToLoop(sliderMain.realIndex);
       });
     });
-  };
-
-  const toggleLocation = () => {
-    const btn = document.querySelectorAll(".js-toggle-location");
-    const locations = document.querySelectorAll(".js-location");
-
-    if (!btn.length || !locations.length) return;
-
-    let expanded = false;
-
-    btn.forEach((button) => {
-      button.addEventListener("click", () => {
-        expanded = !expanded;
-        locations.forEach((el) => {
-          el.classList.toggle("expanded", expanded);
-        });
-      });
-    });
-  };
-
-  const initMapZoom = () => {
-    const mapWrapper = document.querySelector(".js-map");
-    const zoomInBtn = document.querySelector(".map-controller .button-plus");
-    const zoomOutBtn = document.querySelector(
-      ".map-controller .button-negative",
-    );
-
-    if (!mapWrapper || !zoomInBtn || !zoomOutBtn) return;
-
-    const MIN_ZOOM = 1.2;
-    const MAX_ZOOM = 2;
-
-    let currentZoom = 1.2;
-    let translateX = 0;
-    let translateY = 0;
-
-    let isDragging = false;
-    let startX = 0;
-    let startY = 0;
-
-    let rafId = null;
-
-    const updateUI = () => {
-      if (rafId) return;
-
-      rafId = requestAnimationFrame(() => {
-        if (currentZoom === 1.2) {
-          translateX = 0;
-          translateY = 0;
-        }
-
-        mapWrapper.style.transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
-
-        mapWrapper.classList.toggle("is-draggable", currentZoom > 1.2);
-
-        zoomInBtn.classList.toggle("is-disabled", currentZoom >= MAX_ZOOM);
-        zoomOutBtn.classList.toggle("is-disabled", currentZoom <= MIN_ZOOM);
-
-        rafId = null;
-      });
-    };
-
-    zoomInBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      currentZoom = Math.min(currentZoom + 0.5, MAX_ZOOM);
-      updateUI();
-    });
-
-    zoomOutBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      currentZoom = Math.max(currentZoom - 0.5, MIN_ZOOM);
-      updateUI();
-    });
-
-    mapWrapper.addEventListener("mousedown", (e) => {
-      if (currentZoom === 1.2) return;
-      isDragging = true;
-      startX = e.clientX / currentZoom - translateX;
-      startY = e.clientY / currentZoom - translateY;
-      mapWrapper.style.cursor = "grabbing";
-    });
-
-    window.addEventListener("mousemove", (e) => {
-      if (!isDragging || currentZoom === 1.2) return;
-      translateX = e.clientX / currentZoom - startX;
-      translateY = e.clientY / currentZoom - startY;
-      updateUI();
-    });
-
-    window.addEventListener("mouseup", () => {
-      isDragging = false;
-      mapWrapper.style.cursor = currentZoom > 1.2 ? "grab" : "default";
-    });
-
-    mapWrapper.addEventListener("touchstart", (e) => {
-      if (currentZoom === 1.2) return;
-      const touch = e.touches[0];
-      isDragging = true;
-      startX = touch.clientX / currentZoom - translateX;
-      startY = touch.clientY / currentZoom - translateY;
-    });
-
-    window.addEventListener(
-      "touchmove",
-      (e) => {
-        if (!isDragging || currentZoom === 1.2) return;
-        e.preventDefault();
-        const touch = e.touches[0];
-        translateX = touch.clientX / currentZoom - startX;
-        translateY = touch.clientY / currentZoom - startY;
-        updateUI();
-      },
-      {
-        passive: false,
-      },
-    );
-
-    window.addEventListener("touchend", () => {
-      isDragging = false;
-    });
-
-    updateUI();
   };
 
   const scrollPage = () => {
@@ -1648,6 +1098,8 @@
       }, 500);
     };
 
+    window.addEventListener('header:close-menu', closeMenu);
+
     // TOGGLE
     clickElements.forEach((element) => {
       element.addEventListener('click', (e) => {
@@ -1694,63 +1146,12 @@
     });
   };
 
-  const initMarqueeSwiperMobile = () => {
-    const isMobile = window.matchMedia("(max-width: 768px)").matches;
-    if (!isMobile) return;
-
-    const init = (selector, reverse = false) => {
-      const elements = document.querySelectorAll(selector);
-      if (!elements.length) return;
-
-      elements.forEach((el) => {
-        const wrapper = el.querySelector(".swiper-wrapper");
-        if (!wrapper) return;
-
-        const slides = wrapper.children;
-        const minSlides = 10;
-
-        if (slides.length < minSlides) {
-          const cloneCount = Math.ceil(minSlides / slides.length);
-          const html = wrapper.innerHTML;
-          let newHTML = "";
-          for (let i = 0; i < cloneCount; i++) {
-            newHTML += html;
-          }
-          wrapper.innerHTML = newHTML;
-        }
-
-        const speed = Number(el.dataset.speed) || 10000;
-
-        new Swiper(el, {
-          autoplay: {
-            delay: 1,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: false,
-            ...(reverse && {
-              reverseDirection: true,
-            }),
-          },
-          slidesPerView: "auto",
-          speed: speed,
-          resistance: true,
-          resistanceRatio: 0,
-          loop: true,
-          allowTouchMove: false,
-        });
-      });
-    };
-
-    init(".js-marquee-carousel");
-    init(".js-reverse-marquee-carousel", true);
-  };
-
   const initMobileNavLinks = () => {
     if (isDesktop()) return;
 
     const mobileLinks = document.querySelectorAll(
       ".navigation-menu .item-link",
     );
-    const navigation = document.querySelector(".header-common-navigation");
 
     const getTargetSection = (hash) => {
       if (!hash) return null;
@@ -1773,11 +1174,7 @@
 
         e.preventDefault();
 
-        document
-          .querySelectorAll(".js-click")
-          .forEach((el) => el.classList.remove("is-click-active"));
-        navigation?.classList.remove("is-click-active");
-        freezeWindow(false);
+        window.dispatchEvent(new CustomEvent("header:close-menu"));
 
         const target = getTargetSection(hash);
         if (target) {
@@ -1785,7 +1182,7 @@
             target.scrollIntoView({
               behavior: "smooth",
             });
-          }, 300);
+          }, 550);
         }
       });
     });
@@ -1803,201 +1200,6 @@
         history.replaceState(null, "", window.location.pathname);
       }, 500);
     }
-  };
-
-  const hoverApartment = (container) => {
-    const root = container || document;
-    const panels = root.querySelectorAll(".tab-panel.js-hover-svg");
-    if (!panels.length) return;
-
-    panels.forEach((panel) => {
-      if (panel.dataset.hoverBound) return;
-      panel.dataset.hoverBound = "true";
-
-      const premisesNotes = panel.querySelectorAll("svg.premises-note");
-      const svgMain = premisesNotes[1] || premisesNotes[0];
-      if (!svgMain) return;
-
-      const noteDetail = svgMain.querySelector(".note-detail");
-      const floorEl = svgMain.querySelector(".apartment-floor");
-      const details = svgMain.querySelectorAll(".detail");
-      const pendingMsg = svgMain.querySelector(".pending-msg");
-      const pendingHideTargets = svgMain.querySelectorAll(
-        ".note-detail .title, .note-detail .detail",
-      );
-      if (!noteDetail || !floorEl) return;
-
-      // =========================
-      // INIT
-      // =========================
-      noteDetail.style.pointerEvents = "none";
-      noteDetail.setAttribute("transform", "translate(0,0)");
-      noteDetail.classList.remove("showed");
-      noteDetail.classList.add("hidden");
-      if (pendingMsg) pendingMsg.setAttribute("visibility", "hidden");
-
-      svgMain.querySelectorAll("use").forEach((u) => {
-        u.style.pointerEvents = "none";
-      });
-
-      const paths = svgMain.querySelectorAll("path.pn, path.d, path.e, path.f");
-      paths.forEach((p) => {
-        p.style.pointerEvents = "all";
-        p.style.cursor = "pointer";
-      });
-
-      // =========================
-      // OUTLINE
-      // =========================
-      paths.forEach((base) => {
-        const outline = base.nextElementSibling;
-        if (outline && outline.classList.contains("outline")) {
-          base.addEventListener("pointerenter", () => {
-            outline.style.opacity = "1";
-          });
-          base.addEventListener("pointerleave", () => {
-            outline.style.opacity = "0";
-          });
-        }
-      });
-
-      // =========================
-      // STATE
-      // =========================
-      let currentPath = null;
-      let resetTimer = null;
-      let showFrame = null;
-      let showFrameNested = null;
-
-      const clearResetTimer = () => {
-        if (!resetTimer) return;
-        clearTimeout(resetTimer);
-        resetTimer = null;
-      };
-
-      const clearShowFrame = () => {
-        if (showFrame) {
-          cancelAnimationFrame(showFrame);
-          showFrame = null;
-        }
-
-        if (showFrameNested) {
-          cancelAnimationFrame(showFrameNested);
-          showFrameNested = null;
-        }
-      };
-
-      const scheduleShow = () => {
-        clearShowFrame();
-
-        showFrame = requestAnimationFrame(() => {
-          showFrame = null;
-          showFrameNested = requestAnimationFrame(() => {
-            showFrameNested = null;
-            noteDetail.classList.add("showed");
-            noteDetail.classList.remove("hidden");
-          });
-        });
-      };
-
-      const setPendingState = (isPending) => {
-        pendingHideTargets.forEach((target) => {
-          target.setAttribute("visibility", isPending ? "hidden" : "visible");
-        });
-        if (pendingMsg) {
-          pendingMsg.setAttribute(
-            "visibility",
-            isPending ? "visible" : "hidden",
-          );
-        }
-      };
-
-      // =========================
-      // HIDE
-      // =========================
-      const hideDetail = () => {
-        clearShowFrame();
-        clearResetTimer();
-        noteDetail.classList.remove("showed");
-        noteDetail.classList.add("hidden");
-        setPendingState(false);
-
-        resetTimer = setTimeout(() => {
-          if (!currentPath) {
-            noteDetail.setAttribute("transform", "translate(0,0)");
-          }
-          resetTimer = null;
-        }, 150);
-
-        currentPath = null;
-      };
-
-      // =========================
-      // SHOW
-      // =========================
-      const showDetail = (path) => {
-        clearResetTimer();
-
-        const pathChanged = currentPath !== path;
-
-        const { pn, dtw, dttt, pb, pt, status } = path.dataset;
-        if (!pn) return;
-        currentPath = path;
-        const isPending = status === "pending";
-        setPendingState(isPending);
-
-        floorEl.textContent = pn;
-        if (details[0])
-          details[0].textContent = !isPending && dtw ? dtw + " m²" : "—";
-        if (details[1])
-          details[1].textContent = !isPending && dttt ? dttt + " m²" : "—";
-        if (details[2]) details[2].textContent = !isPending && pt ? pt : "—";
-        if (details[3]) details[3].textContent = !isPending && pb ? pb : "—";
-        if (pathChanged) {
-          const bbox = path.getBBox();
-          const bboxDetail = noteDetail.getBBox();
-          const cx = bbox.x + bbox.width / 2;
-          const cy = bbox.y + bbox.height / 2;
-
-          const ORIGIN_X = 1100;
-          const ORIGIN_Y = 250;
-          const BW = bboxDetail.width;
-          const BH = bboxDetail.height;
-          const OFFSET = 12;
-
-          let bx = cx + bbox.width / 2 + OFFSET;
-          let by = cy - BH / 2;
-
-          if (bx + BW > 1920) bx = cx - bbox.width / 2 - BW - OFFSET;
-          if (bx < 0) bx = OFFSET;
-          if (by < 10) by = 10;
-          if (by + BH > 980) by = 980 - BH - 10;
-
-          noteDetail.setAttribute(
-            "transform",
-            `translate(${bx - ORIGIN_X}, ${by - ORIGIN_Y})`,
-          );
-
-          if (noteDetail.classList.contains("showed")) {
-            clearShowFrame();
-          } else {
-            scheduleShow();
-          }
-        } else {
-          clearShowFrame();
-          noteDetail.classList.add("showed");
-        }
-      };
-
-      // =========================
-      // EVENTS — paths
-      // =========================
-      paths.forEach((path) => {
-        path.addEventListener("pointerenter", () => showDetail(path));
-      });
-
-      svgMain.addEventListener("pointerleave", () => hideDetail());
-    });
   };
 
   const measureAndAnimate = (el, wrapper, originalCount, speed, reverse) => {
@@ -2030,80 +1232,6 @@
       wrapper.style.animation = `${keyframeName} ${speed}ms linear infinite`;
     });
   };
-
-  const initMarquee = (selector, reverse = false) => {
-    const elements = document.querySelectorAll(selector);
-    if (!elements.length) return;
-
-    elements.forEach((el) => {
-      if (el.classList.contains("marquee-js-init")) return;
-      el.classList.add("marquee-js-init");
-
-      const wrapper = el.querySelector(".swiper-wrapper");
-      if (!wrapper) return;
-
-      el.style.pointerEvents = "none";
-      el.style.overflow = "hidden";
-
-      const allSlidesNow = Array.from(
-        wrapper.querySelectorAll(".swiper-slide"),
-      );
-
-      const originalCount =
-        Number(el.dataset.originalCount) || Math.round(allSlidesNow.length / 4);
-
-      const originalSlides = allSlidesNow.slice(0, originalCount);
-      wrapper.innerHTML = "";
-      originalSlides.forEach((s) => {
-        wrapper.appendChild(s);
-      });
-
-      wrapper.style.animation = "none";
-      wrapper.style.transform = "";
-      wrapper.style.width = "";
-
-      const frag = document.createDocumentFragment();
-      for (let i = 0; i < 4; i++) {
-        originalSlides.forEach((s) => frag.appendChild(s.cloneNode(true)));
-      }
-      wrapper.appendChild(frag);
-
-      const speed = Number(el.dataset.speed) || 20000;
-
-      const images = Array.from(wrapper.querySelectorAll("img"));
-      const unloaded = images.filter((img) => !img.complete);
-
-      const run = () => {
-        requestAnimationFrame(() => {
-          requestAnimationFrame(() => {
-            measureAndAnimate(el, wrapper, originalCount, speed, reverse);
-          });
-        });
-      };
-
-      if (unloaded.length === 0) {
-        run();
-      } else {
-        let loaded = 0;
-        const onLoad = () => {
-          loaded++;
-          if (loaded >= unloaded.length) run();
-        };
-        unloaded.forEach((img) => {
-          img.addEventListener("load", onLoad, {
-            once: true,
-          });
-          img.addEventListener("error", onLoad, {
-            once: true,
-          });
-        });
-      }
-    });
-  };
-
-  const initMarqueeTop = () => initMarquee(".marquee-carousel", false);
-  const initMarqueeBottom = () =>
-    initMarquee(".reverse-marquee-carousel", true);
 
   const handleDarkBg = () => {
     if (window.innerWidth > mobileBreak) {
@@ -2141,6 +1269,81 @@
     });
   };
 
+  const dragProjectsImage = () => {
+    const wrappers = document.querySelectorAll(".section-top-projects .projects-wrapper");
+    if (!wrappers.length) return;
+
+    const minVisibleWidth = 50;
+    const maxVisibleWidth = 100;
+    const isDragDesktop = () => window.innerWidth >= 1024.98;
+    const clamp = (value) => Math.min(maxVisibleWidth, Math.max(minVisibleWidth, value));
+
+    wrappers.forEach((wrapper) => {
+      const image = wrapper.querySelector(".projects-image");
+      if (!image) return;
+
+      const setImageClip = (clientX) => {
+        const rect = wrapper.getBoundingClientRect();
+        const visibleWidth = clamp(((rect.right - clientX) / rect.width) * 100);
+        const clipLeft = 100 - visibleWidth;
+        wrapper.style.setProperty("--projects-image-clip-left", `${clipLeft}%`);
+        image.classList.toggle("is-active", visibleWidth > minVisibleWidth);
+      };
+
+      image.addEventListener("pointerdown", (event) => {
+        if (!isDragDesktop()) return;
+
+        const rect = wrapper.getBoundingClientRect();
+        const clipLeft = parseFloat(getComputedStyle(wrapper).getPropertyValue("--projects-image-clip-left")) || 50;
+        const handleX = rect.left + (rect.width * clipLeft) / 100;
+        const handleArea = Math.max(36, rect.width * 0.04);
+        const isHandle = Math.abs(event.clientX - handleX) <= handleArea;
+        if (!isHandle) return;
+
+        event.preventDefault();
+        image.classList.add("is-dragging");
+        image.setPointerCapture?.(event.pointerId);
+        setImageClip(event.clientX);
+
+        const onPointerMove = (moveEvent) => {
+          setImageClip(moveEvent.clientX);
+        };
+
+        const onPointerUp = () => {
+          image.classList.remove("is-dragging");
+          window.removeEventListener("pointermove", onPointerMove);
+          window.removeEventListener("pointerup", onPointerUp);
+          window.removeEventListener("pointercancel", onPointerUp);
+        };
+
+        window.addEventListener("pointermove", onPointerMove);
+        window.addEventListener("pointerup", onPointerUp);
+        window.addEventListener("pointercancel", onPointerUp);
+      });
+    });
+  };
+
+  const partnersSlider = () => {
+    const sliders = document.querySelectorAll('.js-relationship-slider');
+    if (!sliders.length) return;
+
+    sliders.forEach((slider) => {
+      new Swiper(slider, {
+        loop: true,
+        speed: 1500,
+        slidesPerView: 1,
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        pagination: {
+          el: '#bankPagination',
+          clickable: true
+        }
+      });
+    });
+  };
+
   window.WebFontConfig = {
     custom: {
       families: [
@@ -2163,36 +1366,13 @@
 
   detectDevice();
   initIntro();
-  sliderGallery();
-  tabsGallery();
-  createPopup({
-    id: "mediaPopup",
-  });
-  createPopup({
-    id: "premisesPopup",
-    hasTitle: false,
-  });
-  createPopup({
-    id: "premisesDetailPopup",
-    className: "premises-detail-popup",
-    hasTitle: false,
-  });
-  initPopup();
-  initUtilitiesPairs();
-  sliderIntroduction();
-  toggleLocation();
-  initMapZoom();
   triggerClick();
   fadeInAnimation();
   scrollPage();
-  initMarqueeSwiperMobile();
   initMobileNavLinks();
-  hoverApartment();
   slideKeyvisual();
-  window.addEventListener("load", () => {
-    initMarqueeTop();
-    initMarqueeBottom();
-  });
   window.addEventListener("scroll", handleDarkBg, { passive: true });
   sliderProjects();
+  dragProjectsImage();
+  partnersSlider();
 })();

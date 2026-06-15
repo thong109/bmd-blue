@@ -9,6 +9,7 @@
   src: url("./../resources/fonts/AcuminPro-Medium.ttf") format("truetype");
   font-display: swap;
 }
+
 @font-face {
   font-family: AcuminPro;
   font-style: normal;
@@ -16,6 +17,7 @@
   src: url("./../resources/fonts/AcuminPro-Regular.ttf") format("truetype");
   font-display: swap;
 }
+
 @font-face {
   font-family: AcuminPro;
   font-style: normal;
@@ -31,11 +33,11 @@ html {
 
   @include desktop {
     overflow: auto scroll;
-    font-size: calc(100vw / 19.2);
+    font-size: 5.2083333333vw;
   }
 
   @include tablet {
-    font-size: calc(100vw / 10.24);
+    font-size: 9.765625vw;
   }
 
   @include mobile {

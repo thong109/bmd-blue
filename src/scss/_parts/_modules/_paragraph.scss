@@ -1,22 +1,25 @@
 @charset "utf-8";
-@use "../../_base/base" as *;
+@use "../../_base/base"as *;
 
 .paragraph-common {
-  color: $color-white;
+  color: #fff;
+}
 
-  p {
-    &:last-child {
-      margin-bottom: 0;
-    }
-  }
+.paragraph-common p:last-child {
+  margin-bottom: 0;
+}
 
-  @include desktop {
+@media print,
+(min-width: 768px) {
+  .paragraph-common {
     font-size: 0.18rem;
-    line-height: calc(29 / 18);
+    line-height: 1.6111111111;
   }
+}
 
-  @include mobile {
+@media only screen and (max-width: 767.98px) {
+  .paragraph-common {
     font-size: 0.16rem;
-    line-height: calc(24 / 16);
+    line-height: 1.5;
   }
 }
