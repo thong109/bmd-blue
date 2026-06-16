@@ -1014,18 +1014,22 @@
 .list-top-relationship {
   position: relative;
   z-index: 1;
-  background-color: #F5F1E8;
   overflow: hidden;
 }
 
 .list-top-relationship .logo-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(9, 1fr);
 }
 
 .list-top-relationship .logo-cell {
   border: 1px solid #dbdad8;
-  border-radius: 0.12rem;
+  border-radius: 0.1rem;
+  transition: filter 0.3s ease-in-out;
+  filter: brightness(0) invert(1);
+}
+.list-top-relationship .logo-cell:hover {
+  filter: unset;
 }
 
 .list-top-relationship .swiper-pagination {
@@ -1047,17 +1051,11 @@
 }
 
 @media print, (min-width: 768px) {
-  .list-top-relationship {
-    padding: 0.67rem 0.57rem 0.16rem;
-    border-radius: 0.3rem;
-    max-width: 8.48rem;
-    margin-left: auto;
-  }
   .list-top-relationship .logo-grid {
-    gap: 0.27rem;
+    gap: 0.2rem;
   }
   .list-top-relationship .swiper-pagination {
-    margin-top: 0.5rem;
+    margin-top: 0.9rem;
   }
   .list-top-relationship .swiper-pagination-bullet {
     margin: 0 0.05rem !important;
@@ -1065,8 +1063,8 @@
     height: 0.12rem;
   }
   .list-top-relationship .logo-cell {
-    width: 2.25rem;
-    height: 1.16rem;
+    width: 1.69rem;
+    height: 0.87rem;
   }
 }
 @media (min-width: 768px) and (max-width: 1024.98px) {
@@ -1079,11 +1077,15 @@
     padding: 0.24rem 0.16rem 0.18rem;
     border-radius: 0.2rem;
   }
+  .list-top-relationship .logo-cell:nth-child(n+16) {
+    display: none;
+  }
   .list-top-relationship .logo-grid {
-    gap: 0.12rem;
+    gap: 0.1rem;
+    grid-template-columns: repeat(3, 1fr);
   }
   .list-top-relationship .swiper-pagination {
-    margin-top: 0.16rem;
+    margin-top: 0.2rem;
   }
   .list-top-relationship .swiper-pagination-bullet {
     margin: 0 0.02rem !important;
@@ -1091,13 +1093,16 @@
     height: 0.08rem;
   }
 }
-.section-top-relationship .central-bg {
-  background-image: url(../resources/images/top/relationship_bg_01.jpg);
+.section-top-relationship .title-common-primary {
+  text-align: center;
 }
 
 @media print, (min-width: 768px) {
+  .section-top-relationship .wrapper {
+    max-width: 16.82rem;
+  }
   .section-top-relationship .title-common-primary {
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.8rem;
   }
 }
 @media (min-width: 768px) and (max-width: 1024.98px) {
@@ -1106,6 +1111,9 @@
   }
 }
 @media only screen and (max-width: 767.98px) {
+  .section-top-relationship .title-common-primary {
+    margin-bottom: 0.3rem;
+  }
   .section-top-relationship .central-bg {
     padding: 0.4rem 0;
   }
