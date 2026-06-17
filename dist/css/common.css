@@ -247,6 +247,13 @@ input[type=search] {
   src: url("./../resources/fonts/AcuminPro-Bold.ttf") format("truetype");
   font-display: swap;
 }
+@font-face {
+  font-family: Akeila;
+  font-style: normal;
+  font-weight: 400;
+  src: url("./../resources/fonts/Akeila.otf") format("opentype");
+  font-display: swap;
+}
 html {
   line-height: 1;
 }
@@ -413,7 +420,7 @@ html.is-touchable .trans:hover {
 
 .header-common .header-lang span {
   position: relative;
-  top: 0.02rem;
+  top: -0.02rem;
 }
 
 .header-common .header-logo {
@@ -529,8 +536,8 @@ html.is-touchable .trans:hover {
     max-width: 16.8rem;
   }
   .header-common .header-icon {
-    width: 0.22rem;
-    height: 0.22rem;
+    width: 0.26rem;
+    height: 0.25rem;
   }
   .header-common .header-phone {
     gap: 0.15rem;
@@ -1854,7 +1861,7 @@ html.is-touchable .trans:hover {
 .mask {
   transition: opacity 0.8s ease;
   opacity: 1;
-  background: #0b1f3a;
+  background: url(../resources/images/top/intro_banner.png) center center/cover no-repeat;
 }
 
 .mask.hide {
