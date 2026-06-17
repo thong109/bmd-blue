@@ -82,6 +82,9 @@
   .section-top-keyvisual {
     height: 4.6rem !important;
   }
+  .section-top-keyvisual .group-bg {
+    z-index: 1;
+  }
   .section-top-keyvisual .keyvisual-title {
     font-size: 0.28rem;
     line-height: 1.5;

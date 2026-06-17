@@ -818,10 +818,47 @@
       title.innerHTML = html;
     });
   };
+
+  const isIOSZalo = () => {
+    const ua = navigator.userAgent;
+
+    const isIOS =
+      /iPad|iPhone|iPod/.test(ua) ||
+      (navigator.platform === "MacIntel" &&
+        navigator.maxTouchPoints > 1);
+
+    return isIOS && /Zalo/i.test(ua);
+  };
   // End helper
 
   const initIntro = () => {
     Done();
+
+    if (isIOSZalo()) {
+      Mask?.remove();
+
+      WindBody.classList.add("showed");
+      document.body.style.overflow = "";
+
+      app();
+      initMobileAnimations();
+
+      const video = document.getElementById("video-element");
+
+      const playVideo = () => video?.play().catch(() => { });
+
+      playVideo();
+
+      ["touchstart", "click"].forEach((eventName) => {
+        document.addEventListener(eventName, playVideo, {
+          once: true,
+          passive: true,
+        });
+      });
+
+      return;
+    }
+
     const isTablet = () => window.innerWidth < 1024.98;
 
     if (!isTablet()) {
@@ -829,49 +866,65 @@
     }
 
     delay(1000, () => {
-      Mask?.classList.add('showed');
+      Mask?.classList.add("showed");
     });
+
     delay(3000, () => {
-      Mask?.classList.add('hide');
+      Mask?.classList.add("hide");
     });
+
     delay(3800, () => {
       Mask?.remove();
+
       setTimeout(() => {
-        WindBody.classList.add('showed');
-        const allChars = document.querySelectorAll('.char');
-        const titles = document.querySelectorAll('.js-title-fade');
+        WindBody.classList.add("showed");
+
+        const allChars = document.querySelectorAll(".char");
+        const titles = document.querySelectorAll(".js-title-fade");
+
         allChars.forEach((el) => {
-          el.style.animation = 'none';
+          el.style.animation = "none";
           el.style.transition =
-            'transform 0.7s cubic-bezier(.22, 1, .36, 1), opacity 0.7s cubic-bezier(.22, 1, .36, 1)';
+            "transform 0.7s cubic-bezier(.22, 1, .36, 1), opacity 0.7s cubic-bezier(.22, 1, .36, 1)";
         });
+
         let accumulatedDelay = 0;
         let lastShowDelay = 0;
+
         titles.forEach((title) => {
-          const chars = title.querySelectorAll('.char');
+          const chars = title.querySelectorAll(".char");
+
           void chars[0]?.offsetHeight;
+
           chars.forEach((el, i) => {
             const d = accumulatedDelay + i * 50 + 16;
             lastShowDelay = Math.max(lastShowDelay, d);
+
             setTimeout(() => {
-              el.style.transform = 'translateY(0%)';
-              el.style.opacity = '1';
+              el.style.transform = "translateY(0%)";
+              el.style.opacity = "1";
             }, d);
           });
+
           accumulatedDelay += chars.length * 50 + 200;
 
           const hideAfterMs = lastShowDelay + 700 + 3000;
+
           setTimeout(() => {
             let hideDelay = 0;
+
             [...titles].reverse().forEach((title) => {
-              const chars = [...title.querySelectorAll('.char')].reverse();
+              const chars = [...title.querySelectorAll(".char")].reverse();
+
               chars.forEach((el, i) => {
                 const d = hideDelay + i * 50 + 16;
+
                 setTimeout(() => {
-                  el.style.transform = 'translateY(120%)';
-                  el.style.opacity = '0';
+                  el.style.transform = "translateY(120%)";
+                  el.style.opacity = "0";
                 }, d);
               });
+
               hideDelay += chars.length * 50 + 200;
             });
           }, hideAfterMs);
@@ -884,12 +937,17 @@
         if (!isTablet()) {
           document.body.style.overflow = "hidden";
         }
+
         app();
-        const video = document.getElementById('video-element');
+
+        const video = document.getElementById("video-element");
+
         if (video) {
-          const playPromise = video.play();
-          playPromise?.catch(() => console.warn('Autoplay blocked.'));
+          video.play().catch(() => {
+            console.warn("Autoplay blocked.");
+          });
         }
+
         initMobileAnimations();
       }, 600);
     }, 1200);
