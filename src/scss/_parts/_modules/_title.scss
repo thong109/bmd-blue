@@ -57,7 +57,8 @@
   }
 
   .title-common-primary.is-small {
-    font-size: 0.2rem;
+    font-size: 0.25rem;
+    line-height: calc(60 / 25);
   }
 
   .title-common-primary .title-large {
