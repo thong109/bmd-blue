@@ -1,0 +1,139 @@
+extends ../../_base/_layout.pug
+block vars
+  - var metaTitle = 'BLUEMARQ Development | News detail'
+  - var path = '../..'
+  - var page = 'news'
+  - var imgPC = path + '/resources/images/news/'
+  - var imgSP = path + '/resources/images/news/sp/'
+  - var imgCommonPC = path + '/resources/images/common/'
+  - var imgCommonSP = path + '/resources/images/common/sp/'
+  - var videoCommon = path + '/resources/video/'
+
+block content
+  main
+    section.section-news-article
+      .wrapper
+        .breadcrumb-common
+          ol.breadcrumb-list
+            li.breadcrumb-item
+              a(href=path+"/news/").item-wrapper Tin tức 
+            li.breadcrumb-item
+              a(href=path+"/news/#tab1").item-wrapper Tin công ty
+            li.breadcrumb-item
+              span.item-wrapper Dòng tiền vẫn ưu tiên bất động sản trung tâm, Cloud9 Tower thu hút sự quan tâm trong ngày mở bán
+        .article-wrapper
+          time.article-date(datetime="18/05/2026") 18.05.2026
+          h1.article-title Dòng tiền vẫn ưu tiên bất động sản trung tâm, Cloud9 Tower thu hút sự quan tâm trong ngày mở bán
+          .article-post
+            .post-content
+              h2 Trong bối cảnh thị trường bất động sản giữa năm 2026 xuất hiện ngày càng nhiều lựa chọn ở đa dạng phân khúc và khu vực, từ các đại đô thị vùng ven đến bất động sản nghỉ dưỡng, những dự án sở hữu vị trí trung tâm hoặc liền kề trung tâm vẫn tiếp tục thu hút sự quan tâm của người mua.
+              p Xu hướng này được phản ánh rõ nét tại sự kiện mở bán Cloud9 Tower thuộc khu căn hộ hạng sang The Privé do BLUEMARQ Development phát triển, diễn ra vào sáng ngày 13/6.
+              h3 Nguồn cung đa dạng, dòng tiền vẫn ưu tiên tài sản có giá trị bền vững
+              p Nửa đầu năm 2026 chứng kiến sự trở lại sôi động của thị trường bất động sản với hàng loạt dự án mới được giới thiệu trên nhiều địa bàn. Từ các khu đô thị quy mô lớn ở vùng ven, các dự án nhà ở tại những cực tăng trưởng mới cho đến bất động sản nghỉ dưỡng, người mua hiện có nhiều lựa chọn hơn so với giai đoạn trước.
+              .wp-caption.aligncenter
+                img(src=imgPC+"news_img_01.jpg" alt="Vị trí trung tâm, chất lượng bàn giao và pháp lý minh bạch là những yếu tố giúp The Privé luôn nhận được sự quan tâm lớn từ khách hàng và thị trường")
+                p.wp-caption-text Vị trí trung tâm, chất lượng bàn giao và pháp lý minh bạch là những yếu tố giúp The Privé luôn nhận được sự quan tâm lớn từ khách hàng và thị trường
+              p Tuy nhiên, bất động sản trung tâm vẫn duy trì sức hấp dẫn nhờ tính khan hiếm. Quỹ đất phát triển nhà ở tại khu vực lõi TP.HCM không còn nhiều, trong khi các yêu cầu về quy hoạch, pháp lý và chi phí đầu tư, xây dựng ngày càng gia tăng khiến nguồn cung mới trở nên hạn chế. Sự chênh lệch giữa nhu cầu và nguồn cung khan hiếm đang góp phần củng cố giá trị của các tài sản sở hữu vị trí trung tâm.
+              p Bên cạnh đó, áp lực lãi suất và chi phí vốn cũng khiến người mua thận trọng hơn trong việc lựa chọn sản phẩm. Theo báo cáo Quý I/2026 của Savills, thị trường căn hộ TP.HCM ghi nhận khoảng 1.900 căn hộ mở bán mới với tỷ lệ hấp thụ khoảng 40%. Các chuyên gia cho rằng người mua đang có xu hướng ưu tiên những sản phẩm có giá trị sử dụng thực, pháp lý rõ ràng và khả năng bảo toàn tài sản trong dài hạn.
+              p Trong bối cảnh đó, bất động sản trung tâm tiếp tục được đánh giá cao nhờ khả năng đáp ứng đồng thời nhu cầu ở thực, cho thuê và đầu tư. Chính vì vậy, dù thị trường xuất hiện ngày càng nhiều lựa chọn mới, dòng tiền vẫn có xu hướng tìm đến các dự án nằm tại khu vực trung tâm hoặc liền kề trung tâm, nơi hội tụ lợi thế về vị trí, tính thanh khoản và tiềm năng tăng trưởng bền vững.
+        .article-related
+          h2.title-common-primary
+            span.title-small Tin khác
+          .list-common-news
+            ul.list-wrapper
+              li.list-item
+                a.item-wrapper(href=path+"/news/detail/")
+                  .item-image
+                    img.object-common(src=imgPC+"news_img_02.jpg" width="432" height="288" loading="lazy" alt="The Emerald River Park phát triển mô hình đô thị nghỉ dưỡng ven sông")
+                  .item-content
+                    p.content-title Đất Xanh chuyển mình thành BLUEMARQ GROUP - Bước tái định vị chiến lược lớn nhất trong 23 năm
+                    time.content-time(datetime="20/05/2026") 20.05.2026
+              li.list-item
+                a.item-wrapper(href=path+"/news/detail/")
+                  .item-image
+                    img.object-common(src=imgPC+"news_img_03.jpg" width="432" height="288" loading="lazy" alt="The Emerald River Park – Hướng đi khác biệt của Tập đoàn Lê Phong")
+                  .item-content
+                    p.content-title Đất Xanh chuyển mình thành BLUEMARQ GROUP - Bước tái định vị chiến lược lớn nhất trong 23 năm
+                    time.content-time(datetime="20/05/2026") 20.05.2026
+              li.list-item
+                a.item-wrapper(href=path+"/news/detail/")
+                  .item-image
+                    img.object-common(src=imgPC+"news_img_04.jpg" width="432" height="288" loading="lazy" alt="The Emerald River Park – Hướng đi khác biệt của Tập đoàn Lê Phong")
+                  .item-content
+                    p.content-title Đất Xanh chuyển mình thành BLUEMARQ GROUP - Bước tái định vị chiến lược lớn nhất trong 23 năm
+                    time.content-time(datetime="20/05/2026") 20.05.2026
+  section.panel.section-footer-common#section-contact
+    .group-central
+      .inner
+        .central-bg
+          .wrapper
+            .footer-wrapper
+              .footer-information
+                h2.information-image
+                  img.object-common(src=imgCommonPC+"header_logo.svg" alt="BLUEMARQ DEVELOPMENT" width="255" height="62" loading="eager")
+                .information-content
+                  p
+                    | Sẵn sàng kết nối nguồn lực, bảo chứng
+                    br(clas="md")
+                    | tương lai cùng BLUEMARQ Development.
+                .information-social
+                  ul.social-list
+                    li.social-item
+                      a.item-button.is-facebook(href="#")
+                    li.social-item
+                      a.item-button.is-youtube(href="#")
+                    li.social-item
+                      a.item-button.is-instagram(href="#")
+              .footer-inner
+                .footer-contact
+                  p.footer-heading TRỤ SỞ CHÍNH
+                  ul.list-footer-contact
+                    li.list-item
+                      .item-icon
+                        img.image-common(src=imgCommonPC+"social_icon_07.svg" alt="Địa chỉ" width="20" height="20" loading="eager")
+                      .item-content
+                        p
+                          | Tòa nhà BLUEMARQ, 2W Ung Văn Khiêm,
+                          br
+                          | P. Thạnh Mỹ Tây, TP. Hồ Chí Minh, Việt Nam.
+                    li.list-item
+                      .item-icon
+                        img.image-common(src=imgCommonPC+"social_icon_08.svg" alt="Trang web" width="20" height="20" loading="eager")
+                      .item-content
+                        a.trans(href="www.bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") www.bluemarqdevelopment.com
+                    li.list-item
+                      .item-icon
+                        img.image-common(src=imgCommonPC+"social_icon_09.svg" alt="Email" width="20" height="20" loading="eager")
+                      .item-content
+                        a.trans(href="mailto:contact@bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") contact@bluemarqdevelopment.com
+                    li.list-item
+                      .item-icon
+                        img.image-common(src=imgCommonPC+"social_icon_10.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                      .item-content
+                        p Hotline: 1900 8063 | 028 6252 5252
+                .footer-sitemap
+                  p.footer-heading LIÊN KẾT NHANH
+                  ul.list-footer-sitemap
+                    li.list-item
+                      a.item-link(href=path+"/") Trang chủ
+                    li.list-item
+                      a.item-link(href=path+"/introduction/") Giới thiệu
+                    li.list-item
+                      a.item-link(href=path+"/projects/") Dự án
+                    li.list-item
+                      a.item-link(href=path+"/news/") Tin tức
+                    li.list-item
+                      a.item-link(href=path+"/recruitment/") Tuyển dụng
+                    li.list-item
+                      a.item-link(href=path+"/gallery/") Thư viện
+                    li.list-item
+                      a.item-link(href=path+"/contact/") Liên hệ
+              .footer-bottom
+                small.footer-copyright © 2026 BLUEMARQ Development. All rights reserved.
+                .footer-policy
+                  .policy-item
+                    a.item-link(href=path+"/#") Chính sách bảo mật
+                  .policy-item
+                    a.item-link(href=path+"/#") Điều khoản sử dụng
+                  .policy-item
+                    a.item-link(href=path+"/#") Sitemap

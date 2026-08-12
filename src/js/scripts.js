@@ -4,18 +4,14 @@
   let __scrollY = 0;
   let __normalScrollY = 0;
   const isDesktop = () => window.innerWidth >= 1024.98;
-  const tabletBreak = 1280;
+  const tabletBreak = 1024.98;
   const mobileBreak = 767.98;
-  const mobileXSBreak = 414;
-  const Mask = document.querySelector('.mask'),
+  const mobileXSBreak = 360;
+  const Mask = document.querySelector(".mask"),
     WindBody = document.body,
     HTML = document.documentElement;
-  history.scrollRestoration = 'manual';
+  history.scrollRestoration = "manual";
   window.scrollTo(0, 0);
-
-  window.addEventListener('beforeunload', () => {
-    window.scrollTo(0, 0);
-  });
 
   const delay = (time, callback) => setTimeout(callback, time);
 
@@ -110,18 +106,22 @@
     const outers = panels.map((p) => p.querySelector(".group-central"));
     const inners = panels.map((p) => p.querySelector(".inner"));
     const images = panels.map((p) => p.querySelector(".group-bg"));
-    const headings = panels.map((p) => Array.from(p.querySelectorAll(".hero-title")).filter(Boolean));
-    const subs = panels.map((p) => Array.from(p.querySelectorAll(".hero-sub")).filter(Boolean));
+    const headings = panels.map((p) =>
+      Array.from(p.querySelectorAll(".hero-title")).filter(
+        (el) => !el.classList.contains("js-title-fade")
+      )
+    );
+    const subs = panels.map((p) =>
+      Array.from(p.querySelectorAll(".hero-sub")).filter(Boolean)
+    );
     const stage = document.querySelector(".slider-stage");
     const navEl = document.getElementById("nav");
-    const navItems = navEl.querySelectorAll(".nav-item");
+    const navItems = navEl ? navEl.querySelectorAll(".nav-item") : [];
     const headerLogo = document.getElementById("logo-primary");
 
     if (
       !headerLogo ||
-      !navEl ||
       !stage ||
-      !navItems.length ||
       !panels ||
       !outers ||
       !inners ||
@@ -155,12 +155,12 @@
 
     const updateNav = (i) =>
       navItems.forEach((n, j) =>
-        n.classList.toggle("active", j === i && j < SLIDER_COUNT),
+        n.classList.toggle("active", j === i && j < SLIDER_COUNT)
       );
 
     const updateNavByTarget = (targetId) =>
       navItems.forEach((n) =>
-        n.classList.toggle("active", n.dataset.target === targetId),
+        n.classList.toggle("active", n.dataset.target === targetId)
       );
 
     const showUI = () => {
@@ -182,89 +182,124 @@
     };
 
     /* ---------------- NAV ---------------- */
-    navItems.forEach((item, idx) => {
-      item.addEventListener("click", () => {
-        if (s.navLock) return;
+    if (navItems.length) {
+      navItems.forEach((item, idx) => {
+        item.addEventListener("click", () => {
+          if (s.navLock) return;
 
-        if (isTablet()) {
-          const target = document.getElementById(item.dataset.target);
-          if (!target) return;
-          target.scrollIntoView({
-            behavior: "smooth",
-          });
-          return;
-        }
-
-        if (idx < SLIDER_COUNT) {
-          if (!s.active) {
-            s.navLock = true;
-            relock(idx, () => (s.navLock = false));
-          } else {
-            if (s.animating) return;
-            goto(idx, idx > s.cur ? 1 : -1);
+          if (isTablet()) {
+            const target = document.getElementById(item.dataset.target);
+            if (!target) return;
+            target.scrollIntoView({
+              behavior: "smooth",
+            });
+            return;
           }
-        } else {
-          const target = document.getElementById(item.dataset.target);
-          if (!target) return;
 
-          s.navLock = true;
-          updateNavByTarget(item.dataset.target);
-
-          const normalScroll = document.querySelector(".normal-scroll");
-
-          release(() => {
-            if (normalScroll) {
-              const y = getOffset(target, normalScroll);
-
-              window.scrollTo({
-                top: y,
-                behavior: "smooth",
-              });
+          if (idx < SLIDER_COUNT) {
+            if (!s.active) {
+              s.navLock = true;
+              relock(idx, () => (s.navLock = false));
             } else {
-              target.scrollIntoView({
-                behavior: "smooth",
-              });
+              if (s.animating) return;
+              goto(idx, idx > s.cur ? 1 : -1);
             }
+          } else {
+            const target = document.getElementById(item.dataset.target);
+            if (!target) return;
 
-            setTimeout(() => (s.navLock = false), 1000);
-          });
-        }
+            s.navLock = true;
+            updateNavByTarget(item.dataset.target);
+
+            const normalScroll = document.querySelector(".normal-scroll");
+
+            release(() => {
+              if (normalScroll) {
+                const y = getOffset(target, normalScroll);
+
+                window.scrollTo({
+                  top: y,
+                  behavior: "smooth",
+                });
+              } else {
+                target.scrollIntoView({
+                  behavior: "smooth",
+                });
+              }
+
+              setTimeout(() => (s.navLock = false), 1000);
+            });
+          }
+        });
       });
-    });
+    }
 
-    const mobileLinks = document.querySelectorAll(
-      ".navigation-menu .item-link",
+    /* ---------------- EXPLORE CTA ---------------- */
+    const exploreBtn = document.querySelector(
+      ".section-top-keyvisual .hero-sub",
     );
 
-    mobileLinks.forEach((link) => {
-      link.addEventListener("click", (e) => {
+    if (exploreBtn) {
+      exploreBtn.addEventListener("click", (e) => {
         e.preventDefault();
+        if (s.animating || s.navLock) return;
 
-        const hash = (link.getAttribute("href") || "").split("#")[1];
+        const hash = (exploreBtn.getAttribute("href") || "").split("#")[1];
         const panelIndex = panels.findIndex((panel) => panel.id === hash);
-        const navItem = Array.from(navItems).find(
-          (item) => item.dataset.target === hash,
-        );
-        if (!navItem && panelIndex < 0) return;
+        if (panelIndex < 0) return;
 
-        window.dispatchEvent(new CustomEvent("header:close-menu"));
-
-        setTimeout(() => {
-          if (s.active) {
-            observer?.enable();
-          }
-
-          if (panelIndex >= 0 && !s.active) {
-            s.navLock = true;
-            relock(panelIndex, () => (s.navLock = false));
-          } else if (panelIndex >= 0 && !s.animating) {
-            goto(panelIndex, panelIndex > s.cur ? 1 : -1);
-          } else if (navItem) {
-            navItem.click();
-          }
-        }, 550);
+        if (!s.active) {
+          s.navLock = true;
+          relock(panelIndex, () => (s.navLock = false));
+        } else {
+          goto(panelIndex, panelIndex > s.cur ? 1 : -1);
+        }
       });
-    });
+    }
+
+    const mobileLinks = document.querySelectorAll(
+      ".navigation-menu .item-link"
+    );
+
+    if (mobileLinks.length) {
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", (e) => {
+          const href = link.getAttribute("href") || "";
+          const hash = href.split("#")[1];
+
+          // If no hash, allow normal navigation
+          if (!hash) {
+            window.dispatchEvent(new CustomEvent("header:close-menu"));
+            return;
+          }
+
+          e.preventDefault();
+
+          const panelIndex = panels.findIndex((panel) => panel.id === hash);
+          const navItem = Array.from(navItems).find(
+            (item) => item.dataset.target === hash
+          );
+          if (!navItem && panelIndex < 0) return;
+
+          window.dispatchEvent(new CustomEvent("header:close-menu"));
+
+          setTimeout(() => {
+            if (s.active) {
+              observer?.enable();
+            }
+
+            if (panelIndex >= 0 && !s.active) {
+              s.navLock = true;
+              relock(panelIndex, () => (s.navLock = false));
+            } else if (panelIndex >= 0 && !s.animating) {
+              goto(panelIndex, panelIndex > s.cur ? 1 : -1);
+            } else if (navItem) {
+              navItem.click();
+            }
+          }, 550);
+        });
+      });
+    }
 
     /* ---------------- GOTO ---------------- */
     const goto = (i, dir, cb) => {
@@ -297,11 +332,17 @@
 
         if (headings[i]?.length)
           headings[i].forEach((h) =>
-            gsap.set(h, { autoAlpha: 1, yPercent: 0 }),
+            gsap.set(h, {
+              autoAlpha: 1,
+              yPercent: 0,
+            })
           );
         if (subs[i]?.length)
           subs[i].forEach((sub) =>
-            gsap.set(sub, { autoAlpha: 1, yPercent: 0 }),
+            gsap.set(sub, {
+              autoAlpha: 1,
+              yPercent: 0,
+            })
           );
 
         panels.forEach((p, idx) => p.classList.toggle("is-active", idx === i));
@@ -343,6 +384,13 @@
           panels[i].querySelectorAll(".swiper").forEach((el) => {
             if (el.swiper) el.swiper.update();
           });
+          window.dispatchEvent(
+            new CustomEvent("slider:panel-change", {
+              detail: {
+                index: i,
+              },
+            })
+          );
           cb?.();
         },
       });
@@ -354,11 +402,10 @@
 
         if (images[s.cur]) {
           tl.to(
-            images[s.cur],
-            {
+            images[s.cur], {
               yPercent: -14 * d,
             },
-            0,
+            0
           );
         }
       }
@@ -366,46 +413,40 @@
       const curTargets = [outers[i], inners[i]].filter(Boolean);
       if (curTargets.length) {
         tl.fromTo(
-          curTargets,
-          {
+          curTargets, {
             yPercent: (j) => (j ? -100 * d : 100 * d),
             immediateRender: false,
-          },
-          {
+          }, {
             yPercent: 0,
           },
-          0,
+          0
         );
       }
 
       if (images[i]) {
         tl.fromTo(
-          images[i],
-          {
+          images[i], {
             yPercent: 14 * d,
-          },
-          {
+          }, {
             yPercent: 0,
           },
-          0,
+          0
         );
       }
 
       if (headings[i]?.length) {
         headings[i].forEach((h, j) => {
           tl.fromTo(
-            h,
-            {
+            h, {
               autoAlpha: 0,
               yPercent: 200 * d,
-            },
-            {
+            }, {
               autoAlpha: 1,
               yPercent: 0,
               duration: 0.9,
               ease: "power2.out",
             },
-            0.18,
+            0.18
           );
         });
       }
@@ -413,23 +454,35 @@
       if (subs[i]?.length) {
         subs[i].forEach((sub, j) => {
           tl.fromTo(
-            sub,
-            {
+            sub, {
               autoAlpha: 0,
               yPercent: 200 * d,
-            },
-            {
+            }, {
               autoAlpha: 1,
               yPercent: 0,
               duration: 0.8,
               ease: "power2.out",
             },
-            0.28,
+            0.28
           );
         });
       }
 
       s.cur = i;
+
+      window.__APP_STATE__.goto = goto;
+
+      /* Update dark bg for panel with .js-bg */
+      const currentPanel = panels[i];
+      if (currentPanel) {
+        const isBg = currentPanel.classList.contains("js-bg");
+        const isLocation = currentPanel.classList.contains("js-bg-2");
+        document.documentElement.classList.toggle("is-dark-bg", isBg);
+        document.documentElement.classList.toggle(
+          "is-dark-bg-02",
+          isBg && isLocation
+        );
+      }
     };
 
     /* ---------------- RELEASE ---------------- */
@@ -442,7 +495,7 @@
       s.lastPanel = s.cur;
       s.active = false;
       observer?.disable();
-      document.documentElement.classList.remove("is-dark-bg");
+      document.documentElement.classList.remove("is-dark-bg", "is-dark-bg-02");
       const normalScroll = document.querySelector(".normal-scroll");
 
       gsap.to(stage, {
@@ -506,11 +559,18 @@
           s.switching = false;
           s.animating = false;
           panels.forEach((p, idx) =>
-            p.classList.toggle("is-active", idx === target),
+            p.classList.toggle("is-active", idx === target)
           );
           updateLogo(target);
           observer?.enable();
           onDone?.();
+          window.dispatchEvent(
+            new CustomEvent("slider:panel-change", {
+              detail: {
+                index: target,
+              },
+            })
+          );
 
           setTimeout(() => {
             window.dispatchEvent(new Event("scroll"));
@@ -547,7 +607,6 @@
       window.__APP_STATE__.observer = observer;
     };
 
-
     /* ---------------- START ---------------- */
     if (!isTablet()) {
       const hash = window.location.hash?.replace("#", "");
@@ -555,11 +614,16 @@
       goto(0, 1, () => {
         if (!hash) return;
 
+        // Bỏ qua hash tabs (tab1, tab2...) - xử lý bởi initTabsFromHash
+        if (/^tab\d+$/.test(hash)) return;
+
         history.replaceState(null, "", window.location.pathname);
 
-        const matchedPanelIndex = panels.findIndex((panel) => panel.id === hash);
+        const matchedPanelIndex = panels.findIndex(
+          (panel) => panel.id === hash
+        );
         const matchedNavItem = Array.from(navItems).find(
-          (item) => item.dataset.target === hash,
+          (item) => item.dataset.target === hash
         );
 
         setTimeout(() => {
@@ -574,7 +638,7 @@
               release(() =>
                 target.scrollIntoView({
                   behavior: "smooth",
-                }),
+                })
               );
             } else {
               target.scrollIntoView({
@@ -593,71 +657,72 @@
       panels.forEach((p) =>
         gsap.set(p, {
           clearProps: "all",
-        }),
+        })
       );
     }
 
-    const sectionIds = Array.from(navItems)
-      .map((n) => n.dataset.target)
-      .filter(Boolean);
+    if (navItems.length) {
+      const sectionIds = Array.from(navItems)
+        .map((n) => n.dataset.target)
+        .filter(Boolean);
 
-    const sections = sectionIds
-      .map((id) => document.getElementById(id))
-      .filter(Boolean);
+      const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
 
-    if (sections.length) {
-      const scrollSections = sections.filter(
-        (sec) => !sec.classList.contains("panel"),
-      );
-      const bgSections = scrollSections.filter((sec) =>
-        sec.classList.contains("js-bg"),
-      );
+      if (sections.length) {
+        const scrollSections = sections.filter(
+          (sec) => !sec.classList.contains("panel")
+        );
+        const bgSections = scrollSections.filter((sec) =>
+          sec.classList.contains("js-bg")
+        );
 
-      const updateDarkBg = () => {
-        if (window.__APP_STATE__?.sliderState?.active) {
-          document.documentElement.classList.remove("is-dark-bg");
-          return;
-        }
-        const anyVisible = bgSections.some((sec) => {
-          const rect = sec.getBoundingClientRect();
-          return rect.top < window.innerHeight && rect.bottom > 0;
-        });
-        document.documentElement.classList.toggle("is-dark-bg", anyVisible);
-      };
-
-      const updateNavOnScroll = () => {
-        if (window.__APP_STATE__?.sliderState?.active) return;
-        if (s.navLock) return;
-
-        let best = null;
-        let bestDist = Infinity;
-        scrollSections.forEach((sec) => {
-          const rect = sec.getBoundingClientRect();
-          if (rect.bottom > 0) {
-            const dist = Math.abs(rect.top);
-            if (dist < bestDist) {
-              bestDist = dist;
-              best = sec;
-            }
+        const updateDarkBg = () => {
+          if (window.__APP_STATE__?.sliderState?.active) {
+            return;
           }
+          const anyVisible = bgSections.some((sec) => {
+            const rect = sec.getBoundingClientRect();
+            return rect.top < window.innerHeight && rect.bottom > 0;
+          });
+          document.documentElement.classList.toggle("is-dark-bg", anyVisible);
+        };
+
+        const updateNavOnScroll = () => {
+          if (window.__APP_STATE__?.sliderState?.active) return;
+          if (s.navLock) return;
+
+          let best = null;
+          let bestDist = Infinity;
+          scrollSections.forEach((sec) => {
+            const rect = sec.getBoundingClientRect();
+            if (rect.bottom > 0) {
+              const dist = Math.abs(rect.top);
+              if (dist < bestDist) {
+                bestDist = dist;
+                best = sec;
+              }
+            }
+          });
+          if (best) updateNavByTarget(best.id);
+        };
+
+        window.addEventListener("scroll", updateDarkBg, {
+          passive: true,
         });
-        if (best) updateNavByTarget(best.id);
-      };
+        window.addEventListener("scroll", updateNavOnScroll, {
+          passive: true,
+        });
 
-      window.addEventListener("scroll", updateDarkBg, {
-        passive: true,
-      });
-      window.addEventListener("scroll", updateNavOnScroll, {
-        passive: true,
-      });
-
-      const origRelease = release;
-      window.addEventListener("slider:released", () => {
-        setTimeout(() => {
-          updateDarkBg();
-          updateNavOnScroll();
-        }, 650);
-      });
+        const origRelease = release;
+        window.addEventListener("slider:released", () => {
+          setTimeout(() => {
+            updateDarkBg();
+            updateNavOnScroll();
+          }, 650);
+        });
+      }
     }
   };
 
@@ -768,12 +833,10 @@
 
     targets.forEach((el) => {
       gsap.fromTo(
-        el,
-        {
+        el, {
           autoAlpha: 0,
           y: 100,
-        },
-        {
+        }, {
           autoAlpha: 1,
           y: 0,
           duration: 0.8,
@@ -829,10 +892,36 @@
 
     return isIOS && /Zalo/i.test(ua);
   };
+
   // End helper
 
   const initIntro = () => {
     Done();
+    const isTablet = () => window.innerWidth < 1024.98;
+    const maskIntro = document.getElementById("mask");
+
+    const startApp = () => {
+      setTimeout(() => {
+        if (!isTablet()) {
+          document.body.style.overflow = "hidden";
+        }
+        app();
+        const video = document.getElementById("video-element");
+
+        if (video) {
+          video.play().catch(() => {
+            console.warn("Autoplay blocked.");
+          });
+        }
+        initMobileAnimations();
+      }, 600);
+    };
+
+    if (!maskIntro) {
+      WindBody.classList.add("showed");
+      startApp();
+      return;
+    }
 
     if (isIOSZalo()) {
       Mask?.remove();
@@ -843,36 +932,42 @@
       app();
       initMobileAnimations();
 
+      // Khi mở từ Zalo: thay video bằng ảnh poster (không chạy video)
       const video = document.getElementById("video-element");
+      if (video) {
+        const poster = video.getAttribute("poster");
+        const parent = video.parentElement;
 
-      const playVideo = () => video?.play().catch(() => { });
+        // Tạo ảnh thay thế video
+        const img = document.createElement("img");
+        img.className = "object-common";
+        img.src = poster || "";
+        img.alt = "BLUEMARQ Development";
+        img.width = 1920;
+        img.height = 1050;
+        img.loading = "eager";
 
-      playVideo();
-
-      ["touchstart", "click"].forEach((eventName) => {
-        document.addEventListener(eventName, playVideo, {
-          once: true,
-          passive: true,
-        });
-      });
+        // Thay video bằng ảnh
+        parent?.replaceChild(img, video);
+      }
 
       return;
     }
 
-    const isTablet = () => window.innerWidth < 1024.98;
+    window.scrollTo(0, 0);
 
     if (!isTablet()) {
       document.body.style.overflow = "hidden";
+    } else {
+      freezeWindow(true);
     }
 
     delay(1000, () => {
       Mask?.classList.add("showed");
     });
-
     delay(3000, () => {
       Mask?.classList.add("hide");
     });
-
     delay(3800, () => {
       Mask?.remove();
 
@@ -929,28 +1024,11 @@
             });
           }, hideAfterMs);
         });
+
+        freezeWindow(false);
       }, 50);
     });
-
-    setTimeout(() => {
-      setTimeout(() => {
-        if (!isTablet()) {
-          document.body.style.overflow = "hidden";
-        }
-
-        app();
-
-        const video = document.getElementById("video-element");
-
-        if (video) {
-          video.play().catch(() => {
-            console.warn("Autoplay blocked.");
-          });
-        }
-
-        initMobileAnimations();
-      }, 600);
-    }, 1200);
+    startApp();
   };
 
   const sliderIntroduction = () => {
@@ -1184,12 +1262,10 @@
 
     fadeInElements.forEach((element) => {
       gsap.fromTo(
-        element,
-        {
+        element, {
           opacity: 0,
           y: 50,
-        },
-        {
+        }, {
           opacity: 1,
           y: 0,
           duration: 0.8,
@@ -1222,8 +1298,7 @@
         const hash = href.split("#")[1];
         const linkPath = href.split("#")[0];
 
-        const isSamePage =
-          !linkPath ||
+        const isSamePage = !linkPath ||
           linkPath === window.location.pathname ||
           linkPath === window.location.origin + window.location.pathname ||
           linkPath.endsWith(window.location.pathname);
@@ -1247,6 +1322,9 @@
 
     const hash = window.location.hash?.replace("#", "");
     if (!hash) return;
+
+    // Bỏ qua hash tabs (tab1, tab2...) - xử lý bởi initTabsFromHash
+    if (/^tab\d+$/.test(hash)) return;
 
     const target = getTargetSection(hash);
 
@@ -1279,9 +1357,9 @@
     const keyframeName = `${prefix}-${Date.now()}-${Math.random().toString(36).slice(2)}`;
     const style = document.createElement("style");
 
-    style.textContent = reverse
-      ? `@keyframes ${keyframeName} { from { transform: translate3d(-${oneSetWidth}px, 0, 0); } to { transform: translate3d(0, 0, 0); } }`
-      : `@keyframes ${keyframeName} { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-${oneSetWidth}px, 0, 0); } }`;
+    style.textContent = reverse ?
+      `@keyframes ${keyframeName} { from { transform: translate3d(-${oneSetWidth}px, 0, 0); } to { transform: translate3d(0, 0, 0); } }` :
+      `@keyframes ${keyframeName} { from { transform: translate3d(0, 0, 0); } to { transform: translate3d(-${oneSetWidth}px, 0, 0); } }`;
     document.head.appendChild(style);
 
     wrapper.style.width = "max-content";
@@ -1302,7 +1380,10 @@
     document.documentElement.classList.toggle(
       "is-dark-bg",
       bgSections.some((sec) => {
-        const { top, bottom } = sec.getBoundingClientRect();
+        const {
+          top,
+          bottom
+        } = sec.getBoundingClientRect();
         return top < window.innerHeight && bottom > 0;
       }),
     );
@@ -1332,7 +1413,7 @@
     if (!wrappers.length) return;
 
     const minVisibleWidth = 50;
-    const maxVisibleWidth = 100;
+    const maxVisibleWidth = 95;
     const isDragDesktop = () => window.innerWidth >= 1024.98;
     const clamp = (value) => Math.min(maxVisibleWidth, Math.max(minVisibleWidth, value));
 
@@ -1402,6 +1483,96 @@
     });
   };
 
+  const initTabs = () => {
+    const tabsWrappers = document.querySelectorAll('.js-tabs, .list-news-tabs');
+    if (!tabsWrappers.length) return;
+
+    tabsWrappers.forEach((wrapper) => {
+      const buttons = wrapper.querySelectorAll('.tab-btn');
+      const panels = wrapper.querySelectorAll('.tab-panel');
+      if (!buttons.length || !panels.length) return;
+
+      let isAnimating = false;
+
+      const activateTab = (targetId) => {
+        const targetPanel = wrapper.querySelector(`#panel-${targetId}`);
+        if (!targetPanel) return;
+
+        buttons.forEach((btn) =>
+          btn.classList.toggle('active', btn.dataset.tab === targetId)
+        );
+
+        panels.forEach((panel) => {
+          if (panel === targetPanel) {
+            panel.classList.add('active');
+            gsap.fromTo(
+              panel, {
+                autoAlpha: 0,
+                y: 30
+              }, {
+                autoAlpha: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power2.out',
+                onComplete: () => {
+                  isAnimating = false;
+                },
+              }
+            );
+          } else {
+            panel.classList.remove('active');
+          }
+        });
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+          if (isAnimating) return;
+          const targetId = button.dataset.tab;
+          if (!targetId) return;
+          if (button.classList.contains('active')) return;
+          isAnimating = true;
+          activateTab(targetId);
+        });
+      });
+
+      wrapper.__activateTab = activateTab;
+    });
+  };
+
+  const initTabsFromHash = () => {
+    const applyHash = () => {
+      const hash = window.location.hash?.replace('#', '');
+      if (!hash) return;
+      if (!/^tab\d+$/.test(hash)) return;
+
+      history.replaceState(null, '', window.location.pathname + window.location.search);
+
+      const tabsWrappers = document.querySelectorAll('.js-tabs, .list-news-tabs');
+      if (!tabsWrappers.length) return;
+
+      tabsWrappers.forEach((wrapper) => {
+        const targetButton = Array.from(
+          wrapper.querySelectorAll('.tab-btn')
+        ).find((btn) => btn.dataset.tab === hash);
+        if (!targetButton) return;
+
+        targetButton.click();
+
+        setTimeout(() => {
+          wrapper.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+          });
+        }, 300);
+      });
+    };
+
+    applyHash();
+
+    window.addEventListener('hashchange', applyHash);
+  };
+
   window.WebFontConfig = {
     custom: {
       families: [
@@ -1429,8 +1600,12 @@
   scrollPage();
   initMobileNavLinks();
   slideKeyvisual();
-  window.addEventListener("scroll", handleDarkBg, { passive: true });
+  window.addEventListener("scroll", handleDarkBg, {
+    passive: true
+  });
   sliderProjects();
   dragProjectsImage();
   partnersSlider();
+  initTabs();
+  initTabsFromHash();
 })();
