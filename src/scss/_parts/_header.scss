@@ -42,6 +42,10 @@
   top: -0.02rem;
 }
 
+html.is-device-iphone .header-common .header-lang span {
+  top: 0;
+}
+
 .header-common .header-logo {
   display: block;
   will-change: opacity, visibility;
@@ -158,8 +162,8 @@
   }
 
   .header-common .header-icon {
-    width: 0.26rem;
-    height: 0.25rem;
+    width: 0.55rem;
+    height: 0.21rem;
   }
 
   .header-common .header-phone {
@@ -196,7 +200,7 @@
 
 @media only screen and (max-width: 767.98px) {
   .header-common {
-    padding: 0.22rem 0;
+    padding: 0.12rem 0;
   }
 
   .header-common .header-inner {
@@ -237,8 +241,8 @@
   .header-common .header-logo {
     opacity: 1;
     visibility: visible;
-    width: 1.33rem;
-    height: 0.76rem;
+    width: 1.26rem;
+    height: 0.31rem;
   }
 
   .header-common .header-logo img {

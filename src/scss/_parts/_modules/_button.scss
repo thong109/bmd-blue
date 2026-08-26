@@ -72,6 +72,14 @@
     padding: 0.04rem 0.7rem 0.04rem 0.4rem;
   }
 
+  html.is-device-iphone .button-common-primary {
+    padding: 0.1rem 0.7rem 0.04rem 0.4rem;
+  }
+
+  html.is-device-iphone .button-common-primary::after {
+    top: calc(50% + 0.01rem);
+  }
+
   .button-common-primary::after {
     width: 0.26rem;
     height: 0.18rem;

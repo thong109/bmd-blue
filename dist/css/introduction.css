@@ -1,0 +1,5 @@
+@media print, (min-width: 768px) {
+  .section-introduction-about .central-bg {
+    background: url(../resources/images/introduction/about_bg_01.jpg) center/cover no-repeat;
+  }
+}

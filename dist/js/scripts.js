@@ -1400,10 +1400,10 @@
         loop: true,
         speed: 500,
         slidesPerView: 'auto',
-        autoplay: {
-          delay: 3000,
-          disableOnInteraction: false,
-        },
+        // autoplay: {
+        //   delay: 3000,
+        //   disableOnInteraction: false,
+        // },
       });
     });
   };

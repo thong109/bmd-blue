@@ -230,28 +230,35 @@ input[type=search] {
   font-family: AcuminPro;
   font-style: normal;
   font-weight: 500;
-  src: url("./../resources/fonts/AcuminPro-Medium.ttf") format("truetype");
+  src: url("../resources/fonts/AcuminPro-Medium.ttf") format("truetype");
   font-display: swap;
 }
 @font-face {
   font-family: AcuminPro;
   font-style: normal;
   font-weight: 400;
-  src: url("./../resources/fonts/AcuminPro-Regular.ttf") format("truetype");
+  src: url("../resources/fonts/AcuminPro-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+@font-face {
+  font-family: AcuminPro;
+  font-style: normal;
+  font-weight: 600;
+  src: url("../resources/fonts/AcuminPro-Semibold.ttf") format("truetype");
   font-display: swap;
 }
 @font-face {
   font-family: AcuminPro;
   font-style: normal;
   font-weight: 700;
-  src: url("./../resources/fonts/AcuminPro-Bold.ttf") format("truetype");
+  src: url("../resources/fonts/AcuminPro-Bold.ttf") format("truetype");
   font-display: swap;
 }
 @font-face {
   font-family: Akeila;
   font-style: normal;
   font-weight: 400;
-  src: url("./../resources/fonts/Akeila.otf") format("opentype");
+  src: url("../resources/fonts/Akeila.otf") format("opentype");
   font-display: swap;
 }
 html {
@@ -423,6 +430,10 @@ html.is-touchable .trans:hover {
   top: -0.02rem;
 }
 
+html.is-device-iphone .header-common .header-lang span {
+  top: 0;
+}
+
 .header-common .header-logo {
   display: block;
   will-change: opacity, visibility;
@@ -536,8 +547,8 @@ html.is-touchable .trans:hover {
     max-width: 16.8rem;
   }
   .header-common .header-icon {
-    width: 0.26rem;
-    height: 0.25rem;
+    width: 0.55rem;
+    height: 0.21rem;
   }
   .header-common .header-phone {
     gap: 0.15rem;
@@ -567,7 +578,7 @@ html.is-touchable .trans:hover {
 }
 @media only screen and (max-width: 767.98px) {
   .header-common {
-    padding: 0.22rem 0;
+    padding: 0.12rem 0;
   }
   .header-common .header-inner {
     flex-direction: row-reverse;
@@ -600,8 +611,8 @@ html.is-touchable .trans:hover {
   .header-common .header-logo {
     opacity: 1;
     visibility: visible;
-    width: 1.33rem;
-    height: 0.76rem;
+    width: 1.26rem;
+    height: 0.31rem;
   }
   .header-common .header-logo img {
     width: 100%;
@@ -1708,6 +1719,12 @@ html.is-touchable .trans:hover {
     font-size: 0.16rem;
     padding: 0.04rem 0.7rem 0.04rem 0.4rem;
   }
+  html.is-device-iphone .button-common-primary {
+    padding: 0.1rem 0.7rem 0.04rem 0.4rem;
+  }
+  html.is-device-iphone .button-common-primary::after {
+    top: calc(50% + 0.01rem);
+  }
   .button-common-primary::after {
     width: 0.26rem;
     height: 0.18rem;
@@ -1913,7 +1930,7 @@ html.is-touchable .trans:hover {
 
 @media print, (min-width: 768px) {
   .title-common-primary {
-    margin-bottom: 0.12rem;
+    margin-bottom: 0.4rem;
     font-size: 0.5rem;
     line-height: 1.2;
   }
@@ -1945,6 +1962,30 @@ html.is-touchable .trans:hover {
     font-size: 0.44rem;
   }
 }
+.title-common-secondary {
+  font-family: "AcuminPro", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+}
+.title-common-secondary.is-gold {
+  color: #c6a45a;
+}
+@media print, (min-width: 768px) {
+  .title-common-secondary {
+    margin-bottom: 0.12rem;
+    font-size: 0.18rem;
+    line-height: 1.6111111111;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .title-common-secondary {
+    margin-bottom: 0.1rem;
+    font-size: 0.16rem;
+    line-height: 1.5;
+  }
+}
+
 .list-common-news {
   margin-bottom: 0.25rem;
 }
@@ -1982,6 +2023,8 @@ html.is-touchable .trans:hover {
   position: relative;
   overflow: hidden;
   padding-top: 56.9682151589%;
+  border: 1px solid #fff;
+  border-radius: 0.1rem;
 }
 
 .list-common-news .item-image img {

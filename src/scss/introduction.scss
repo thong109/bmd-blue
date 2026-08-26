@@ -1,0 +1,10 @@
+@charset "utf-8";
+@use "_base/base"as *;
+
+.section-introduction-about {
+  @include desktop {
+    .central-bg {
+      background: url(../resources/images/introduction/about_bg_01.jpg) center / cover no-repeat;
+    }
+  }
+}

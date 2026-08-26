@@ -6,7 +6,7 @@
   font-family: AcuminPro;
   font-style: normal;
   font-weight: 500;
-  src: url("./../resources/fonts/AcuminPro-Medium.ttf") format("truetype");
+  src: url("../resources/fonts/AcuminPro-Medium.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -14,7 +14,15 @@
   font-family: AcuminPro;
   font-style: normal;
   font-weight: 400;
-  src: url("./../resources/fonts/AcuminPro-Regular.ttf") format("truetype");
+  src: url("../resources/fonts/AcuminPro-Regular.ttf") format("truetype");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: AcuminPro;
+  font-style: normal;
+  font-weight: 600;
+  src: url("../resources/fonts/AcuminPro-Semibold.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -22,7 +30,7 @@
   font-family: AcuminPro;
   font-style: normal;
   font-weight: 700;
-  src: url("./../resources/fonts/AcuminPro-Bold.ttf") format("truetype");
+  src: url("../resources/fonts/AcuminPro-Bold.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -30,7 +38,7 @@
   font-family: Akeila;
   font-style: normal;
   font-weight: 400;
-  src: url("./../resources/fonts/Akeila.otf") format("opentype");
+  src: url("../resources/fonts/Akeila.otf") format("opentype");
   font-display: swap;
 }
 
