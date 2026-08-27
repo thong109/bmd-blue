@@ -1,0 +1,41 @@
+@charset "utf-8";
+@use "_base/base"as *;
+
+.section-contact {
+  .contact-wrapper {
+    position: relative;
+  }
+
+  @include desktop {
+    .central-bg {
+      background: url(../resources/images/contact/contact_bg_01.jpg) center / cover no-repeat;
+    }
+
+    .contact-wrapper {
+      max-width: 7.21rem;
+      padding: .57rem 0 .5rem .77rem;
+    }
+
+    .paragraph-common {
+      margin-bottom: .2rem;
+    }
+  }
+
+  @include tablet {
+    .central-bg {
+      padding: .8rem 0;
+      background: url(../resources/images/contact/contact_bg_02.jpg) center / cover no-repeat;
+    }
+
+    .contact-wrapper {
+      max-width: 100%;
+    }
+  }
+
+  @include mobile {
+    .central-bg {
+      padding: 1.4rem 0 .8rem;
+      background: url(../resources/images/contact/contact_bg_02.jpg) center / cover no-repeat;
+    }
+  }
+}

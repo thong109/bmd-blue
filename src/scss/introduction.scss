@@ -2,9 +2,469 @@
 @use "_base/base"as *;
 
 .section-introduction-about {
-  @include desktop {
+  color: #fff;
+
+  .central-bg {
+    position: relative;
+    overflow: hidden;
+    background: #0d2341 url(../resources/images/introduction/capability_bg.png) center / cover no-repeat;
+  }
+
+  .about-media {
+    position: absolute;
+    inset: 0 0 0 auto;
+    width: 58%;
+    height: 100%;
+  }
+
+  .about-media::after {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(90deg, #0d2341 0%, rgba(13, 35, 65, 0.78) 9%, rgba(13, 35, 65, 0) 30%),
+      linear-gradient(180deg, rgba(13, 35, 65, 0.38) 0%, rgba(13, 35, 65, 0) 30%, rgba(13, 35, 65, 0.28) 100%);
+    content: "";
+  }
+
+  .about-media img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-layout {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 16.6rem;
+    margin: 0 auto;
+    padding: 0.9rem 0 0.45rem;
+  }
+
+  .about-content {
+    position: relative;
+    width: 6.8rem;
+    min-height: 6.5rem;
+    padding: 0.9rem 0 0.8rem 0.6rem;
+  }
+
+  .title-common-primary {
+    margin-bottom: .19rem;
+  }
+
+  .about-lead {
+    margin-bottom: .5rem;
+    font-size: 0.3rem;
+    font-weight: 500;
+    line-height: calc(40 / 30);
+  }
+
+  .paragraph-common {
+    width: 6.45rem;
+  }
+}
+
+@include tablet {
+  .section-introduction-about {
+    min-height: 100vh;
+
+    .central-bg,
+    .about-layout {
+      min-height: 100vh;
+      height: auto;
+    }
+
+    .about-content {
+      width: 6rem;
+    }
+
+    .about-lead {
+      font-size: 0.24rem;
+    }
+
+    .paragraph-common {
+      width: 5rem;
+    }
+  }
+}
+
+@include mobile {
+  .section-introduction-about {
     .central-bg {
-      background: url(../resources/images/introduction/about_bg_01.jpg) center / cover no-repeat;
+      display: block;
+      background-image: url(../resources/images/introduction/capability_bg_sp.png);
+    }
+
+    .about-media {
+      position: relative;
+      width: 100%;
+      height: 3.1rem;
+      margin-top: 0.8rem;
+    }
+
+    .about-media::after {
+      background: linear-gradient(180deg, rgba(13, 35, 65, 0) 55%, #0d2341 100%);
+    }
+
+    .about-layout {
+      display: block;
+      min-height: 0;
+      padding: 0 .1rem 0.7rem;
+    }
+
+    .about-content {
+      width: 100%;
+      min-height: 0;
+      padding: 0.2rem 0 0.5rem 0.3rem;
+    }
+
+    .title-common-primary {
+      font-size: 0.32rem;
+    }
+
+    .about-lead {
+      margin-top: 0.22rem;
+      font-size: 0.22rem;
+      line-height: 1.4;
+    }
+
+    .paragraph-common {
+      width: auto;
+      margin-top: 0.3rem;
+      padding-right: 0.1rem;
+      font-size: 0.14rem;
+      line-height: 1.65;
+    }
+  }
+}
+
+.section-introduction-capability {
+  color: #fff;
+
+  .central-bg {
+    background: #0d2341 url(../resources/images/introduction/capability_bg.png) center / cover no-repeat;
+  }
+
+  .capability-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 4.58rem;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    max-width: 16.6rem;
+    margin: 0 auto;
+    padding: 0.92rem 1.02rem 0.62rem 0;
+  }
+
+  .capability-intro {
+    position: relative;
+    max-width: 7rem;
+    padding: .28rem 0 1.7rem 0.6rem;
+  }
+
+  .capability-list {
+    display: grid;
+    gap: 0.5rem;
+    max-height: calc(100vh - 1.54rem);
+    overflow: hidden auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+  }
+
+  .capability-list::-webkit-scrollbar {
+    display: none;
+  }
+
+  .capability-item {
+    position: relative;
+    overflow: hidden;
+    height: 2.57rem;
+    border: 0.01rem solid rgba(255, 255, 255, 0.4);
+    border-radius: 0.09rem;
+    background: #102b4d;
+  }
+
+  .capability-item::after {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(5, 20, 40, 0) 35%, rgba(5, 20, 40, 0.82) 100%);
+    content: "";
+  }
+
+  .capability-picture,
+  .capability-picture img {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .capability-picture img {
+    object-fit: cover;
+  }
+
+  .capability-card-content {
+    position: absolute;
+    z-index: 1;
+    right: 0.3rem;
+    bottom: 0.16rem;
+    left: 0.3rem;
+  }
+
+  .capability-card-title {
+    font-size: 0.3rem;
+    font-weight: 600;
+    line-height: calc(40 / 30);
+    text-transform: uppercase;
+    white-space: nowrap;
+    margin-bottom: .03rem;
+  }
+
+  .capability-card-description {
+    margin: 0;
+    font-size: 0.18rem;
+    line-height: calc(28 / 18);
+  }
+}
+
+@include tablet {
+  .section-introduction-capability {
+    min-height: 100vh;
+
+    .central-bg {
+      min-height: 100vh;
+      height: auto;
+    }
+
+    .capability-layout {
+      grid-template-columns: minmax(0, 1fr) 4rem;
+      gap: 0.5rem;
+      padding: .8rem .2rem;
+    }
+
+    .capability-list {
+      gap: 0.3rem;
+    }
+
+    .capability-item {
+      height: 2.25rem;
+    }
+
+    .capability-card-title {
+      font-size: 0.25rem;
+    }
+  }
+}
+
+@include mobile {
+  .section-introduction-capability {
+    .central-bg {
+      background-image: url(../resources/images/introduction/capability_bg_sp.png);
+    }
+
+    .capability-layout {
+      display: block;
+      padding: 0.7rem 0.1rem;
+    }
+
+    .capability-intro {
+      max-width: none;
+      padding: 0.28rem 0 1rem 0.3rem;
+    }
+
+    .capability-list {
+      gap: 0.2rem;
+      margin-top: 0.4rem;
+      max-height: none;
+      overflow: visible;
+    }
+
+    .capability-item {
+      height: 2.25rem;
+      border-radius: 0.08rem;
+    }
+
+    .capability-card-content {
+      right: 0.18rem;
+      bottom: 0.14rem;
+      left: 0.18rem;
+    }
+
+    .capability-card-title {
+      font-size: 0.22rem;
+      white-space: normal;
+    }
+
+    .capability-card-description {
+      margin-top: 0.04rem;
+      font-size: 0.13rem;
+    }
+  }
+}
+
+.section-introduction-lead {
+  color: #fff;
+
+  .central-bg {
+    background: #0d2341 url(../resources/images/introduction/capability_bg.png) center / cover no-repeat;
+  }
+
+  .lead-layout {
+    width: 100%;
+    max-width: 18rem;
+    margin: 0 auto;
+    padding: clamp(1rem, 14vh, 1.45rem) 0.6rem clamp(0.35rem, 5vh, 0.55rem);
+  }
+
+  .lead-heading {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 5.4rem;
+    align-items: start;
+    gap: 0.7rem;
+  }
+
+  .title-common-primary {
+    margin: 0;
+  }
+
+  .lead-list {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 0.28rem;
+    margin-top: clamp(0.3rem, 5.7vh, 0.6rem);
+  }
+
+  .lead-picture {
+    display: block;
+    overflow: hidden;
+    width: 100%;
+    height: min(4.78rem, 45vh);
+    border: 0.01rem solid rgba(255, 255, 255, 0.7);
+    border-radius: 0.08rem;
+  }
+
+  .lead-picture img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .lead-name {
+    margin: clamp(0.15rem, 3.3vh, 0.3rem) 0 .03rem;
+    color: #d5ab4e;
+    font-size: 0.3rem;
+    font-weight: 600;
+    line-height: calc(32 / 30);
+  }
+
+  .lead-position {
+    font-size: 0.18rem;
+    line-height: 1.4;
+  }
+}
+
+@media (min-width: 1025px) and (max-height: 760px) {
+  .section-introduction-lead {
+    .lead-layout {
+      padding-top: 0.82rem;
+      padding-bottom: 0.25rem;
+    }
+
+    .lead-heading {
+      grid-template-columns: minmax(0, 1fr) 5rem;
+    }
+
+    .lead-list {
+      margin-top: 0.25rem;
+    }
+
+    .lead-picture {
+      height: 3.25rem;
+    }
+
+    .lead-name {
+      margin-top: 0.12rem;
+      font-size: 0.25rem;
+    }
+
+    .lead-position {
+      margin-top: 0.04rem;
+      font-size: 0.16rem;
+    }
+  }
+}
+
+@include tablet {
+  .section-introduction-lead {
+    min-height: 100vh;
+
+    .central-bg,
+    .lead-layout {
+      min-height: 100vh;
+      height: auto;
+    }
+
+    .lead-layout {
+      padding: 1.2rem 0.3rem 0.7rem;
+    }
+
+    .lead-heading {
+      grid-template-columns: minmax(0, 1fr) 4.2rem;
+      gap: 0.4rem;
+    }
+
+    .lead-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0.4rem 0.24rem;
+    }
+
+    .lead-picture {
+      height: auto;
+      aspect-ratio: 398 / 478;
+    }
+  }
+}
+
+@include mobile {
+  .section-introduction-lead {
+    .central-bg {
+      background-image: url(../resources/images/introduction/capability_bg_sp.png);
+    }
+
+    .lead-layout {
+      padding: .7rem 0.1rem;
+    }
+
+    .lead-heading {
+      display: block;
+    }
+
+    .title-common-primary {
+      margin-bottom: .2rem;
+    }
+
+    .lead-list {
+      gap: 0.32rem 0.16rem;
+      margin-top: 0.4rem;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+
+    .lead-name {
+      margin-top: 0.12rem;
+      font-size: 0.2rem;
+    }
+
+    .lead-position {
+      margin-top: 0.04rem;
+      font-size: 0.13rem;
     }
   }
 }

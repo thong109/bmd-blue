@@ -1071,52 +1071,6 @@ html.is-device-iphone .header-common .header-lang span {
     opacity: 0;
   }
 }
-#contactPopup .popup-box {
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 0.12rem;
-}
-
-#contactPopup .popup-body {
-  height: 100%;
-}
-
-#contactPopup .footer-common-contact {
-  margin: 0 auto;
-  width: 100%;
-}
-
-#contactPopup .contact-form {
-  border: none;
-  padding: 0;
-}
-
-#contactPopup .popup-overlay {
-  background: rgba(13, 29, 25, 0.6);
-}
-
-@media print, (min-width: 768px) {
-  #contactPopup .popup-box {
-    max-width: 11rem;
-    max-height: 7.5rem;
-  }
-  #contactPopup .footer-common-contact {
-    padding: 0.96rem 0;
-    max-width: 5.4rem;
-  }
-  #contactPopup .contact-title {
-    margin-bottom: 0.84rem;
-    font-size: 0.45rem;
-  }
-  #contactPopup .form-group {
-    gap: 0.3rem;
-    margin-bottom: 0.3rem;
-  }
-  #contactPopup .form-controller {
-    margin-top: 0.7rem;
-  }
-}
 #utilitiesPopup .popup-box {
   background: url(../resources/images/top/utilities_bg_01.jpg) center center/cover no-repeat;
 }
@@ -1394,6 +1348,9 @@ html.is-device-iphone .header-common .header-lang span {
   .section-footer-common .footer-wrapper {
     gap: 0.3rem;
   }
+  .section-footer-common .central-bg {
+    min-height: auto;
+  }
 }
 @media only screen and (max-width: 767.98px) {
   .section-footer-common .central-bg {
@@ -1599,6 +1556,115 @@ html.is-device-iphone .header-common .header-lang span {
     margin-bottom: 0;
   }
 }
+.form-common {
+  font-size: 0.18rem;
+  line-height: 2.5;
+}
+.form-common .form-group + .form-group {
+  margin-top: 0.15rem;
+}
+.form-common .form-label {
+  display: block;
+  font-weight: 400;
+  letter-spacing: -0.05em;
+  color: #d9d9d9;
+}
+.form-common .input-common {
+  height: 0.49rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.1rem;
+  width: 100%;
+  color: #fff;
+  padding: 0 0.17rem;
+}
+.form-common .input-common::-moz-placeholder {
+  color: #9B9B9B;
+  opacity: 0.5;
+}
+.form-common .input-common::placeholder {
+  color: #9B9B9B;
+  opacity: 0.5;
+}
+.form-common .input-common:focus {
+  outline: none;
+}
+.form-common .textarea-common {
+  height: 0.98rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.1rem;
+  width: 100%;
+  color: #fff;
+  padding: 0.1rem 0.17rem;
+}
+.form-common .textarea-common::-moz-placeholder {
+  color: #9B9B9B;
+  opacity: 0.5;
+}
+.form-common .textarea-common::placeholder {
+  color: #9B9B9B;
+  opacity: 0.5;
+}
+.form-common .textarea-common:focus {
+  outline: none;
+}
+.form-common .form-controller {
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 0.4rem;
+}
+@media only screen and (max-width: 767.98px) {
+  .form-common .form-controller {
+    justify-content: center;
+  }
+}
+
+#contactPopup .contact-wrapper {
+  position: relative;
+}
+#contactPopup .popup-box {
+  background: url(../resources/images/common/form_bg.jpg) center center/cover no-repeat;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 0.12rem;
+}
+#contactPopup .popup-close {
+  background: url(../resources/images/common/close_icon_03.svg) center center/cover no-repeat;
+  width: 0.18rem;
+  height: 0.2rem;
+  top: 0.2rem;
+  right: 0.2rem;
+  cursor: pointer;
+}
+#contactPopup .popup-body {
+  height: 100%;
+}
+#contactPopup .popup-overlay {
+  background: rgba(13, 29, 25, 0.6);
+}
+@media print, (min-width: 768px) {
+  #contactPopup .popup-box {
+    max-width: 10.72rem;
+    max-height: 60svh;
+  }
+  #contactPopup .popup-body {
+    padding: 0.59rem 1.2rem;
+  }
+  #contactPopup .contact-wrapper {
+    padding: 0 0 0 0.55rem;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  #contactPopup .popup-box {
+    max-width: 100%;
+    width: calc(100% - 0.2rem);
+    height: auto;
+  }
+  #contactPopup .popup-body {
+    padding: 0.3rem 0.2rem;
+  }
+}
+
 .c-breadcrumb {
   position: relative;
   font-weight: 700;
@@ -1667,6 +1733,7 @@ html.is-device-iphone .header-common .header-lang span {
   letter-spacing: -0.05em;
   text-transform: uppercase;
   transition: background 0.5s cubic-bezier(0.15, 0.41, 0.69, 0.94);
+  color: #0b1f3a;
 }
 
 .button-common-primary::after {
@@ -1909,6 +1976,7 @@ html.is-device-iphone .header-common .header-lang span {
   text-transform: uppercase;
   font-family: "Montserrat", sans-serif;
   color: #C6A45A;
+  font-weight: 700;
 }
 
 .title-common-primary.is-center {

@@ -1,0 +1,125 @@
+extends ../_base/_layout.pug
+block vars
+  - var metaTitle = 'BLUEMARQ Development | Contact'
+  - var path = '..'
+  - var page = 'contact'
+  - var imgPC = path + '/resources/images/contact/'
+  - var imgSP = path + '/resources/images/contact/sp/'
+  - var imgCommonPC = path + '/resources/images/common/'
+  - var imgCommonSP = path + '/resources/images/common/sp/'
+  - var videoCommon = path + '/resources/video/'
+
+block content
+  main
+    .slider-stage(aria-hidden="true")
+      section.panel.section-contact
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .contact-wrapper
+                  span.decor-common.md
+                  h1.title-common-primary Liên hệ
+                  .paragraph-common
+                    p Vui lòng để lại thông tin, đội ngũ BLUEMARQ Development sẽ phản hồi trong thời gian sớm nhất.
+                  form(action="").form-common
+                    .form-group
+                      label(for="name").form-label Họ tên *
+                      input.input-common(type="text" name="name" id="name" required placeholder="Nhập tên của bạn")
+                    .form-group
+                      label(for="email").form-label Email *
+                      input.input-common(type="email" name="email" id="email" required placeholder="Nhập email của bạn")
+                    .form-group
+                      label(for="phone").form-label Điện thoại *
+                      input.input-common(type="text" name="phone" id="phone" placeholder="Nhập điện thoại của bạn")
+                    .form-group
+                      label(for="note").form-label Yêu cầu
+                      textarea.textarea-common(name="note" id="note" placeholder="Viết nội dung yêu cầu")
+                    .form-controller
+                      a.button-common-primary(href="#")
+                        span.button-wrapper Gửi liên hệ
+      section.panel.section-footer-common#section-contact
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .footer-wrapper
+                  .footer-information
+                    h2.information-image
+                      img.object-common(src=imgCommonPC+"header_logo.svg" alt="BLUEMARQ DEVELOPMENT" width="255" height="62" loading="eager")
+                    .information-content
+                      p
+                        | Sẵn sàng kết nối nguồn lực, bảo chứng
+                        br(clas="md")
+                        | tương lai cùng BLUEMARQ Development.
+                    .information-social
+                      ul.social-list
+                        li.social-item
+                          a.item-button.is-facebook(href="#")
+                        li.social-item
+                          a.item-button.is-youtube(href="#")
+                        li.social-item
+                          a.item-button.is-instagram(href="#")
+                  .footer-inner
+                    .footer-contact
+                      p.footer-heading TRỤ SỞ CHÍNH
+                      ul.list-footer-contact
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_07.svg" alt="Địa chỉ" width="20" height="20" loading="eager")
+                          .item-content
+                            p
+                              | Tòa nhà BLUEMARQ, 2W Ung Văn Khiêm,
+                              br
+                              | P. Thạnh Mỹ Tây, TP. Hồ Chí Minh, Việt Nam.
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_08.svg" alt="Trang web" width="20" height="20" loading="eager")
+                          .item-content
+                            a.trans(href="www.bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") www.bluemarqdevelopment.com
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_09.svg" alt="Email" width="20" height="20" loading="eager")
+                          .item-content
+                            a.trans(href="mailto:contact@bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") contact@bluemarqdevelopment.com
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_10.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p Hotline: 1900 8063 | 028 6252 5252
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_12.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p MST:
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_13.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p Giờ làm việc:
+                    .footer-sitemap
+                      p.footer-heading LIÊN KẾT NHANH
+                      ul.list-footer-sitemap
+                        li.list-item
+                          a.item-link(href=path+"/") Trang chủ
+                        li.list-item
+                          a.item-link(href=path+"/introduction/") Giới thiệu
+                        li.list-item
+                          a.item-link(href=path+"/projects/") Dự án
+                        li.list-item
+                          a.item-link(href=path+"/news/") Tin tức
+                        li.list-item
+                          a.item-link(href=path+"/recruitment/") Tuyển dụng
+                        li.list-item
+                          a.item-link(href=path+"/gallery/") Thư viện
+                        li.list-item
+                          a.item-link(href=path+"/contact/") Liên hệ
+                  .footer-bottom
+                    small.footer-copyright © 2026 BLUEMARQ Development. All rights reserved.
+                    .footer-policy
+                      .policy-item
+                        a.item-link(href=path+"/#") Chính sách bảo mật
+                      .policy-item
+                        a.item-link(href=path+"/#") Điều khoản sử dụng
+                      .policy-item
+                        a.item-link(href=path+"/#") Sitemap

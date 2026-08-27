@@ -581,6 +581,48 @@
 
     /* ---------------- OBSERVER (DESKTOP ONLY) ---------------- */
     let observer = null;
+    let panelListTarget = 0;
+    let activeScrollList = null;
+
+    const scrollPanelList = (direction, deltaY = 0) => {
+      const panel = panels[s.cur];
+      const list = panel?.querySelector(".capability-list");
+      if (!list || list.scrollHeight <= list.clientHeight + 2) return false;
+
+      if (activeScrollList !== list) {
+        activeScrollList = list;
+        panelListTarget = list.scrollTop;
+      }
+
+      const atTop = list.scrollTop <= 2;
+      const atBottom =
+        list.scrollTop + list.clientHeight >= list.scrollHeight - 2;
+
+      const maxScroll = list.scrollHeight - list.clientHeight;
+      const targetAtTop = panelListTarget <= 2;
+      const targetAtBottom = panelListTarget >= maxScroll - 2;
+
+      if (
+        (direction < 0 && atTop && targetAtTop) ||
+        (direction > 0 && atBottom && targetAtBottom)
+      ) {
+        return false;
+      }
+
+      const distance = Math.max(35, Math.min(Math.abs(deltaY) * 0.85, 160));
+      panelListTarget = Math.max(
+        0,
+        Math.min(panelListTarget + direction * distance, maxScroll)
+      );
+
+      gsap.to(list, {
+        scrollTop: panelListTarget,
+        duration: 0.7,
+        ease: "power3.out",
+        overwrite: true,
+      });
+      return true;
+    };
 
     const initObserver = () => {
       if (isTablet()) return;
@@ -593,12 +635,14 @@
 
         onDown: (self) => {
           if (!s.animating && s.active && !s.switching) {
+            if (scrollPanelList(-1, self.deltaY)) return;
             goto(s.cur - 1, -1);
           }
         },
 
         onUp: (self) => {
           if (!s.animating && s.active && !s.switching) {
+            if (scrollPanelList(1, self.deltaY)) return;
             goto(s.cur + 1, 1);
           }
         },
@@ -821,6 +865,39 @@
       closeBtn: popup.querySelector(".popup-close"),
       overlay: popup.querySelector(".popup-overlay"),
     };
+  };
+
+  const initContactPopup = () => {
+    const trigger = document.querySelector(".header-phone");
+    const elements = getPopupElements("contactPopup");
+    if (!trigger || !elements) return;
+
+    const { popup, closeBtn, overlay } = elements;
+
+    const openPopup = (event) => {
+      event?.preventDefault();
+      popup.classList.add("active");
+      popup.setAttribute("aria-hidden", "false");
+      freezeWindow(true);
+      window.__APP_STATE__?.observer?.disable();
+    };
+
+    const closePopup = () => {
+      if (!popup.classList.contains("active")) return;
+      popup.classList.remove("active");
+      popup.setAttribute("aria-hidden", "true");
+      freezeWindow(false);
+      if (window.__APP_STATE__?.sliderState?.active) {
+        window.__APP_STATE__?.observer?.enable();
+      }
+    };
+
+    trigger.addEventListener("click", openPopup);
+    closeBtn?.addEventListener("click", closePopup);
+    overlay?.addEventListener("click", closePopup);
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") closePopup();
+    });
   };
 
   const initMobileAnimations = () => {
@@ -1298,6 +1375,9 @@
         const hash = href.split("#")[1];
         const linkPath = href.split("#")[0];
 
+        // Links without a hash point to another page and must navigate normally.
+        if (!hash) return;
+
         const isSamePage = !linkPath ||
           linkPath === window.location.pathname ||
           linkPath === window.location.origin + window.location.pathname ||
@@ -1595,6 +1675,7 @@
 
   detectDevice();
   initIntro();
+  initContactPopup();
   triggerClick();
   fadeInAnimation();
   scrollPage();
