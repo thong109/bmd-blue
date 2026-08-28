@@ -13,7 +13,7 @@
   .about-media {
     position: absolute;
     inset: 0 0 0 auto;
-    width: 58%;
+    width: 100%;
     height: 100%;
   }
 
@@ -24,6 +24,7 @@
       linear-gradient(90deg, #0d2341 0%, rgba(13, 35, 65, 0.78) 9%, rgba(13, 35, 65, 0) 30%),
       linear-gradient(180deg, rgba(13, 35, 65, 0.38) 0%, rgba(13, 35, 65, 0) 30%, rgba(13, 35, 65, 0.28) 100%);
     content: "";
+    pointer-events: none;
   }
 
   .about-media img {
@@ -73,11 +74,11 @@
 
 @include tablet {
   .section-introduction-about {
-    min-height: 100vh;
+    min-height: auto;
 
     .central-bg,
     .about-layout {
-      min-height: 100vh;
+      min-height: auto;
       height: auto;
     }
 
@@ -235,10 +236,10 @@
 
 @include tablet {
   .section-introduction-capability {
-    min-height: 100vh;
+    min-height: auto;
 
     .central-bg {
-      min-height: 100vh;
+      min-height: auto;
       height: auto;
     }
 
@@ -250,6 +251,7 @@
 
     .capability-list {
       gap: 0.3rem;
+      max-height: calc(70vh - 1.5rem);
     }
 
     .capability-item {
@@ -417,8 +419,8 @@
     }
 
     .lead-heading {
-      grid-template-columns: minmax(0, 1fr) 4.2rem;
-      gap: 0.4rem;
+      grid-template-columns: repeat(1, minmax(0, 1fr));
+      gap: 0.3rem;
     }
 
     .lead-list {

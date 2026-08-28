@@ -9,7 +9,7 @@
 .section-introduction-about .about-media {
   position: absolute;
   inset: 0 0 0 auto;
-  width: 58%;
+  width: 100%;
   height: 100%;
 }
 .section-introduction-about .about-media::after {
@@ -17,13 +17,16 @@
   inset: 0;
   background: linear-gradient(90deg, #0d2341 0%, rgba(13, 35, 65, 0.78) 9%, rgba(13, 35, 65, 0) 30%), linear-gradient(180deg, rgba(13, 35, 65, 0.38) 0%, rgba(13, 35, 65, 0) 30%, rgba(13, 35, 65, 0.28) 100%);
   content: "";
+  pointer-events: none;
 }
 .section-introduction-about .about-media img {
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
 }
 .section-introduction-about .wrapper {
   position: relative;
@@ -58,11 +61,11 @@
 
 @media (min-width: 768px) and (max-width: 1024.98px) {
   .section-introduction-about {
-    min-height: 100vh;
+    min-height: auto;
   }
   .section-introduction-about .central-bg,
   .section-introduction-about .about-layout {
-    min-height: 100vh;
+    min-height: auto;
     height: auto;
   }
   .section-introduction-about .about-content {
@@ -168,7 +171,8 @@
   height: 100%;
 }
 .section-introduction-capability .capability-picture img {
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 .section-introduction-capability .capability-card-content {
   position: absolute;
@@ -193,10 +197,10 @@
 
 @media (min-width: 768px) and (max-width: 1024.98px) {
   .section-introduction-capability {
-    min-height: 100vh;
+    min-height: auto;
   }
   .section-introduction-capability .central-bg {
-    min-height: 100vh;
+    min-height: auto;
     height: auto;
   }
   .section-introduction-capability .capability-layout {
@@ -206,6 +210,7 @@
   }
   .section-introduction-capability .capability-list {
     gap: 0.3rem;
+    max-height: calc(70vh - 1.5rem);
   }
   .section-introduction-capability .capability-item {
     height: 2.25rem;
@@ -289,8 +294,10 @@
   display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center top;
+     object-position: center top;
 }
 .section-introduction-lead .lead-name {
   margin: clamp(0.15rem, 3.3vh, 0.3rem) 0 0.03rem;
@@ -340,8 +347,8 @@
     padding: 1.2rem 0.3rem 0.7rem;
   }
   .section-introduction-lead .lead-heading {
-    grid-template-columns: minmax(0, 1fr) 4.2rem;
-    gap: 0.4rem;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 0.3rem;
   }
   .section-introduction-lead .lead-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -379,5 +386,3 @@
     font-size: 0.13rem;
   }
 }
-
-/*# sourceMappingURL=introduction.css.map */
