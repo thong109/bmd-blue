@@ -1,0 +1,192 @@
+extends ../_base/_layout.pug
+block vars
+  - var metaTitle = 'BLUEMARQ Development | Gallery'
+  - var path = '..'
+  - var page = 'gallery'
+  - var imgPC = path + '/resources/images/gallery/'
+  - var imgSP = path + '/resources/images/gallery/sp/'
+  - var imgCommonPC = path + '/resources/images/common/'
+  - var imgCommonSP = path + '/resources/images/common/sp/'
+  - var videoCommon = path + '/resources/video/'
+
+block content
+  - var projectItems = [{ image: 'project_cloud9.png', title: 'Cloud9 Tower ngày mở bán', type: 'event' }, { image: 'project_the_prive.png', title: 'Dự án The Privé', type: 'project' }, { image: 'project_landscape.png', title: 'Dự án', type: 'project' }, { image: 'project_sunview_town.png', title: 'Dự án Sunview Town', type: 'project' }, { image: 'project_opal_riverside.png', title: 'Dự án Opal Riverside', type: 'project' }, { image: 'project_opal_garden.png', title: 'Dự án Opal Garden', type: 'project' }, { image: 'project_st_moritz.png', title: 'Dự án St. Moritz', type: 'project' }, { image: 'project_opal_skyline.png', title: 'Dự án Opal Skyline', type: 'project' }]
+  - var projectImages = projectItems.filter(function(item) { return item.type === 'project'; })
+  - var eventImages = projectItems.filter(function(item) { return item.type === 'event'; })
+  - var allSliderItems = projectItems.concat(projectItems.slice(0, 4))
+  - var gallerySliderItems = projectImages
+  - var eventSliderItems = eventImages
+  - var videoItems = [{ image: 'video_gem_sky_world.png', title: 'Gem Sky World', date: '20.05.2026', duration: '00:00:15', url: 'https://www.youtube.com/embed/aqz-KE-bpKQ' }, { image: 'video_opal_skyline.png', title: 'Opal Skyline', date: '20.05.2026', duration: '00:00:15', url: 'https://www.youtube.com/embed/M7lc1UVf-VE' }]
+  - var videoSliderItems = videoItems.concat(videoItems, videoItems)
+  - var documentItems = [{ image: 'document_company_profile.png', title: 'Profile công ty', size: '12Mgb' }, { image: 'document_project_legal.png', title: 'Pháp lý dự án', size: '09Mgb' }, { image: 'document_contract_form.png', title: 'Hợp đồng biểu mẫu', size: '07Mgb' }, { image: 'document_land_certificate.png', title: 'Giấy CNQSDĐ', size: '05Mgb' }]
+
+  mixin gallerySlider(items)
+    .swiper.gallery-images-slider.js-gallery-images-slider
+      .swiper-wrapper
+        each item, itemIndex in items
+          - var popupItems = Array.from({ length: Math.min(3, items.length) }, function(_, offset) { return items[(itemIndex + offset) % items.length]; })
+          .swiper-slide
+            article.gallery-image-card.js-slide-image(
+              data-title=item.title
+              data-gallery=JSON.stringify(popupItems.map(function(imageItem) { return { url: imgPC + imageItem.image, alt: imageItem.title, w: 397, h: 260 }; }))
+            )
+              img.gallery-image(src=imgPC+item.image alt=item.title width="397" height="260" loading="lazy")
+              h3.gallery-image-title= item.title
+      .swiper-pagination
+
+  main
+    .slider-stage(aria-hidden="true")
+      section.panel.section-gallery-images
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .gallery-images-layout
+                  h1.title-common-primary.is-center Thư viện hình ảnh
+                  .list-common-tabs.js-tabs
+                    .block-wrap
+                      ul.block-list
+                        li.block-item.tab-btn.active(data-tab="tab1")
+                          p.item-text Tất cả
+                        li.block-item.tab-btn(data-tab="tab2")
+                          p.item-text Hình ảnh dự án
+                        li.block-item.tab-btn(data-tab="tab3")
+                          p.item-text Hình ảnh sự kiện
+                    .tabs-content
+                      .tab-panel.active#panel-tab1
+                        +gallerySlider(allSliderItems)
+                      .tab-panel#panel-tab2
+                        +gallerySlider(gallerySliderItems)
+                      .tab-panel#panel-tab3
+                        +gallerySlider(eventSliderItems)
+      section.panel.section-gallery-video
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .gallery-video-layout
+                  h2.title-common-primary.is-center Thư viện video
+                  .swiper.gallery-video-slider.js-gallery-video-slider
+                    .swiper-wrapper
+                      each item in videoSliderItems
+                        .swiper-slide
+                          article.gallery-video-card
+                            a.gallery-video-media.js-slide-video(
+                              href="#"
+                              aria-label="Phát video "+item.title
+                              data-title=item.title
+                              data-url=item.url || ""
+                              data-poster=imgPC+item.image
+                            )
+                              img.gallery-video-thumbnail(src=imgPC+item.image alt=item.title width="790" height="530" loading="lazy")
+                              span.gallery-video-play
+                                img(src=imgPC+"video_play.svg" alt="" width="50" height="50")
+                              time.gallery-video-duration= item.duration
+                            h3.gallery-video-title= item.title
+                            time.gallery-video-date(datetime="2026-05-20")
+                              img(src=imgPC+"video_calendar.svg" alt="" width="14" height="14")
+                              span= item.date
+                    .swiper-pagination
+      section.panel.section-gallery-document
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .gallery-document-layout
+                  h2.title-common-primary.is-center Thư viện tài liệu
+                  .gallery-document-list
+                    each item in documentItems
+                      article.gallery-document-card
+                        a.gallery-document-link(href="#" download aria-label="Tải xuống "+item.title)
+                          .gallery-document-media
+                            img.gallery-document-thumbnail(src=imgPC+item.image alt=item.title width="398" height="530" loading="lazy")
+                          .gallery-document-info
+                            h3.gallery-document-title= item.title
+                            .gallery-document-meta
+                              img(src=imgPC+"document_pdf.svg" alt="" width="26" height="32")
+                              span= item.size
+      section.panel.section-footer-common
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .footer-wrapper
+                  .footer-information
+                    h2.information-image
+                      img.object-common(src=imgCommonPC+"header_logo.svg" alt="BLUEMARQ DEVELOPMENT" width="255" height="62" loading="eager")
+                    .information-content
+                      p
+                        | Sẵn sàng kết nối nguồn lực, bảo chứng 
+                        br(class="md")
+                        | tương lai cùng BLUEMARQ Development.
+                    .information-social
+                      ul.social-list
+                        li.social-item
+                          a.item-button.is-facebook(href="#")
+                        li.social-item
+                          a.item-button.is-youtube(href="#")
+                        li.social-item
+                          a.item-button.is-instagram(href="#")
+                  .footer-inner
+                    .footer-contact
+                      p.footer-heading TRỤ SỞ CHÍNH
+                      ul.list-footer-contact
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_07.svg" alt="Địa chỉ" width="20" height="20" loading="eager")
+                          .item-content
+                            p
+                              | Tòa nhà BLUEMARQ, 2W Ung Văn Khiêm,
+                              br
+                              | P. Thạnh Mỹ Tây, TP. Hồ Chí Minh, Việt Nam.
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_08.svg" alt="Trang web" width="20" height="20" loading="eager")
+                          .item-content
+                            a.trans(href="www.bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") www.bluemarqdevelopment.com
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_09.svg" alt="Email" width="20" height="20" loading="eager")
+                          .item-content
+                            a.trans(href="mailto:contact@bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") contact@bluemarqdevelopment.com
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_10.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p Hotline: 1900 8063 | 028 6252 5252
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_12.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p MST:
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_13.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p Giờ làm việc:
+                    .footer-sitemap
+                      p.footer-heading LIÊN KẾT NHANH
+                      ul.list-footer-sitemap
+                        li.list-item
+                          a.item-link(href=path+"/") Trang chủ
+                        li.list-item
+                          a.item-link(href=path+"/introduction/") Giới thiệu
+                        li.list-item
+                          a.item-link(href=path+"/gallery/") Dự án
+                        li.list-item
+                          a.item-link(href=path+"/news/") Tin tức
+                        li.list-item
+                          a.item-link(href=path+"/recruitment/") Tuyển dụng
+                        li.list-item
+                          a.item-link(href=path+"/gallery/") Thư viện
+                        li.list-item
+                          a.item-link(href=path+"/contact/") Liên hệ
+                  .footer-bottom
+                    small.footer-copyright © 2026 BLUEMARQ Development. All rights reserved.
+                    .footer-policy
+                      .policy-item
+                        a.item-link(href=path+"/policy/") Chính sách bảo mật
+                      .policy-item
+                        a.item-link(href=path+"/#") Điều khoản sử dụng
+                      .policy-item
+                        a.item-link(href=path+"/#") Sitemap

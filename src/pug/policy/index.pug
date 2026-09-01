@@ -1,0 +1,163 @@
+extends ../_base/_layout.pug
+block vars
+	- var metaTitle = 'BLUEMARQ Development | Policy'
+	- var path = '..'
+	- var page = 'policy'
+	- var imgPC = path + '/resources/images/policy/'
+	- var imgSP = path + '/resources/images/policy/sp/'
+	- var imgCommonPC = path + '/resources/images/common/'
+	- var imgCommonSP = path + '/resources/images/common/sp/'
+	- var videoCommon = path + '/resources/video/'
+
+block content
+	main
+		section.section-policy
+			.wrapper
+				h1.title-common-primary Chính sách bảo mật
+				.list-common-tabs.js-tabs.policy-tabs
+					.block-wrap
+						ul.block-list(role="tablist")
+							li.block-item.tab-btn.active(data-tab="tab1" role="tab" aria-selected="true")
+								span.item-text Dành cho khách hàng/ đối tác
+							li.block-item.tab-btn(data-tab="tab2" role="tab" aria-selected="false")
+								span.item-text Dành cho người lao động/ ứng viên
+					.tabs-content
+						.tab-panel.active#panel-tab1(role="tabpanel")
+							.policy-introduction
+								h2 Chính sách bảo vệ dữ liệu cá nhân đối với khách hàng/đối tác
+								.paragraph-common
+									p Chính sách bảo vệ dữ liệu cá nhân đối với Khách hàng/Đối tác của Công ty Cổ phần Đầu tư kinh doanh Bất động sản Hà An (sau đây gọi tắt là “Chính sách”) nhằm mục đích thông báo với Khách hàng và Đối tác những Dữ liệu cá nhân của Khách hàng/Đối tác do Công ty Cổ phần Đầu tư kinh doanh Bất động sản Hà An (“Công ty”) xử lý, mục đích xử lý, cách thức xử lý, thời gian lưu trữ, quyền, nghĩa vụ của Khách hàng/Đối tác đối với Dữ liệu cá nhân của mình theo quy định của Pháp luật Việt Nam về Bảo vệ Dữ liệu cá nhân. Chính sách này đồng thời đưa ra các khuyến nghị để giúp Khách hàng/ Đối tác nâng cao nhận thức về bảo vệ Dữ liệu cá nhân.
+									p Chính sách này là một phần không thể tách rời của các bản Hợp đồng, Điều khoản chung, Điều khoản sử dụng sản phẩm, dịch vụ của Công ty. Chính sách này được áp dụng cho toàn bộ hoạt động cung cấp sản phẩm, dịch vụ của Công ty và áp dụng trên toàn bộ các nền tảng có tương tác với Khách hàng/Đối tác cá nhân trên môi trường số.
+									p Công ty có trách nhiệm thông báo và lấy chấp thuận của Khách hàng/Đối tác đối với Chính sách này trước khi thực hiện hoạt động xử lý dữ liệu cá nhân theo quy định của pháp luật. Bằng việc tích vào ô “Tôi đã đọc và chấp thuận” hoặc “Tôi đồng ý với Chính sách, Điều khoản sử dụng của Công ty” hoặc bằng việc ký kết hợp đồng với Công ty có dẫn chiếu tới Chính sách này, hoặc bằng việc ký kết, tiếp tục thực hiện hợp đồng, giao dịch đã ký với Công ty hoặc bằng việc tiếp tục đăng ký, đăng nhập, sử dụng website/wapsite/ứng dụng của Công ty hoặc sử dụng sản phẩm, dịch vụ của Công ty mà không có bất kì khiếu nại nào đối với Chính sách này, Khách hàng/Đối tác xác nhận rằng đã đọc kỹ, hiểu rõ và chấp thuận toàn bộ nội dung Chính sách bảo vệ Dữ liệu cá nhân của Công ty được ban hành tại từng thời điểm.
+							+policyAccordion('customer')
+						.tab-panel#panel-tab2(role="tabpanel")
+							.policy-introduction
+								h2 Chính sách bảo vệ dữ liệu cá nhân đối với người lao động/ứng viên
+								p Chính sách quy định việc thu thập, sử dụng, lưu trữ và bảo vệ dữ liệu cá nhân của Người lao động/Ứng viên trong quá trình tuyển dụng, ký kết và thực hiện quan hệ lao động với Công ty.
+								p Bằng việc cung cấp hồ sơ hoặc tiếp tục tham gia quy trình tuyển dụng, Người lao động/Ứng viên xác nhận đã đọc, hiểu và đồng ý với nội dung Chính sách này.
+							+policyAccordion('employee')
+		section.panel.section-footer-common
+			.group-central
+				.inner
+					.central-bg
+						.wrapper
+							.footer-wrapper
+								.footer-information
+									h2.information-image
+										img.object-common(src=imgCommonPC+"header_logo.svg" alt="BLUEMARQ DEVELOPMENT" width="255" height="62" loading="eager")
+									.information-content
+										p
+											| Sẵn sàng kết nối nguồn lực, bảo chứng 
+											br(class="md")
+											| tương lai cùng BLUEMARQ Development.
+									.information-social
+										ul.social-list
+											li.social-item
+												a.item-button.is-facebook(href="#")
+											li.social-item
+												a.item-button.is-youtube(href="#")
+											li.social-item
+												a.item-button.is-instagram(href="#")
+								.footer-inner
+									.footer-contact
+										p.footer-heading TRỤ SỞ CHÍNH
+										ul.list-footer-contact
+											li.list-item
+												.item-icon
+													img.image-common(src=imgCommonPC+"social_icon_07.svg" alt="Địa chỉ" width="20" height="20" loading="eager")
+												.item-content
+													p
+														| Tòa nhà BLUEMARQ, 2W Ung Văn Khiêm,
+														br
+														| P. Thạnh Mỹ Tây, TP. Hồ Chí Minh, Việt Nam.
+											li.list-item
+												.item-icon
+													img.image-common(src=imgCommonPC+"social_icon_08.svg" alt="Trang web" width="20" height="20" loading="eager")
+												.item-content
+													a.trans(href="www.bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") www.bluemarqdevelopment.com
+											li.list-item
+												.item-icon
+													img.image-common(src=imgCommonPC+"social_icon_09.svg" alt="Email" width="20" height="20" loading="eager")
+												.item-content
+													a.trans(href="mailto:contact@bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") contact@bluemarqdevelopment.com
+											li.list-item
+												.item-icon
+													img.image-common(src=imgCommonPC+"social_icon_10.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+												.item-content
+													p Hotline: 1900 8063 | 028 6252 5252
+									.footer-sitemap
+										p.footer-heading LIÊN KẾT NHANH
+										ul.list-footer-sitemap
+											li.list-item
+												a.item-link(href=path+"/") Trang chủ
+											li.list-item
+												a.item-link(href=path+"/introduction/") Giới thiệu
+											li.list-item
+												a.item-link(href=path+"/projects/") Dự án
+											li.list-item
+												a.item-link(href=path+"/news/") Tin tức
+											li.list-item
+												a.item-link(href=path+"/recruitment/") Tuyển dụng
+											li.list-item
+												a.item-link(href=path+"/gallery/") Thư viện
+											li.list-item
+												a.item-link(href=path+"/contact/") Liên hệ
+								.footer-bottom
+									small.footer-copyright © 2026 BLUEMARQ Development. All rights reserved.
+									.footer-policy
+										.policy-item
+											a.item-link(href=path+"/policy/") Chính sách bảo mật
+										.policy-item
+											a.item-link(href=path+"/#") Điều khoản sử dụng
+										.policy-item
+											a.item-link(href=path+"/#") Sitemap
+
+mixin policyAccordion(prefix)
+	- var articles = ['Định nghĩa và giải thích từ ngữ', 'Xử lý Dữ liệu cá nhân', 'Mục đích xử lý Dữ liệu cá nhân', 'Cách thức xử lý Dữ liệu cá nhân', 'Thời gian bắt đầu, thời gian kết thúc xử lý dữ liệu', 'Chia sẻ Dữ liệu cá nhân', 'Quyền của chủ thể dữ liệu', 'Nghĩa vụ của chủ thể dữ liệu', 'Lưu trữ Dữ liệu cá nhân', 'Nghĩa vụ của Công ty', 'Hậu quả, thiệt hại không mong muốn có khả năng xảy ra', 'Quảng cáo trên internet và bên thứ ba', 'Xử lý Dữ liệu cá nhân không cần sự đồng ý của chủ thể dữ liệu', 'Thông tin liên lạc']
+	.policy-accordion.js-policy-accordion
+		each title, index in articles
+			- var itemId = prefix + '-policy-' + (index + 1)
+			.policy-accordion-item
+				button.policy-accordion-button(type="button" aria-expanded=index === 0 ? 'true' : 'false' aria-controls=itemId)
+					span.policy-accordion-icon(aria-hidden="true")
+					span Điều #{index + 1}. #{title}
+				.policy-accordion-content(id=itemId)
+					.policy-accordion-inner
+						if index === 0
+							.paragraph-common
+								p 1. Công ty tiến hành xử lý Dữ liệu cá nhân trong những trường hợp dưới đây:
+								ul
+									li a. Khi Khách hàng/Đối tác hoặc người đại diện hợp pháp của Khách hàng/Đối tác liên hệ với Công ty để yêu cầu tư vấn sản phẩm, dịch vụ của Công ty hoặc bày tỏ sự quan tâm tới các sản phẩm, dịch vụ của Công ty;
+									li b. Khi Khách hàng/Đối tác dùng thử, ký kết hợp đồng, đăng ký, sử dụng sản phẩm, dịch vụ của Công ty;
+									li c. Khi Khách hàng/Đối tác truy cập và/hoặc đăng ký tài khoản tại các website/wapsite/ứng dụng sản phẩm, dịch vụ của Công ty;
+									li d. Khi Khách hàng, Đối tác đồng thuận cung cấp Dữ liệu cá nhân cho Công ty qua các nguồn công khai như: website/wapsite/ứng dụng sản phẩm, dịch vụ của Công ty; cuộc họp, sự kiện, hội thảo, hội nghị, các mạng xã hội, hay chương trình đối thoại, thảo luận do Công ty tổ chức, tài trợ hoặc tham dự và/hoặc từ các tệp lưu trữ (cookies) ghi nhận được trên website của Công ty;
+									li e. Khi khách hàng, Đối tác của một tổ chức, doanh nghiệp cho phép tổ chức, doanh nghiệp đó chia sẻ dữ liệu cá nhân của khách hàng với Công ty;
+									li f. Là khách hàng của một tổ chức, doanh nghiệp được Công ty thực hiện góp vốn, mua cổ phần; hoặc là khách hàng của một tổ chức, doanh nghiệp có hoạt động hợp tác cung cấp sản phẩm, dịch vụ với Công ty.
+									li g. Khi có yêu cầu của các cơ quan nhà nước có thẩm quyền.
+									li h. Khi công ty tiến hành các công việc theo mục đích xử lý Dữ liệu cá nhân được quy định tại Điều 3 Chính sách này.
+									li i. Các trường hợp khác theo quy định của pháp luật.
+								p 2. Dữ liệu cá nhân của Khách hàng/Đối tác được Công ty tiến hành xử lý (sau đây gọi tắt là “Dữ liệu cá nhân”) bao gồm những thông tin dưới đây và có thể thay đổi tùy thuộc vào loại sản phẩm hoặc dịch vụ, cách thức tương tác của Khách hàng/Đối tác với Công ty:
+								p a. Dữ liệu cá nhân cơ bản:
+								ul
+									li – Họ, chữ đệm và tên khai sinh, tên gọi khác (nếu có);
+									li – Ngày, tháng, năm sinh; ngày, tháng, năm chết hoặc mất tích;
+									li – Giới tính;
+									li – Nơi sinh, nơi đăng ký khai sinh, nơi thường trú, nơi tạm trú, nơi ở hiện tại, quê quán, địa chỉ liên hệ;
+									li – Quốc tịch;
+									li – Hình ảnh của cá nhân;
+									li – Số điện thoại, số chứng minh nhân dân, số định danh cá nhân, số hộ chiếu, số giấy phép lái xe, số biển số xe, số mã số thuế cá nhân, số bảo hiểm xã hội, số thẻ bảo hiểm y tế;
+									li – Tình trạng hôn nhân;
+									li – Thông tin về mối quan hệ gia đình (cha mẹ, con cái);
+									li – Thông tin về tài khoản số của cá nhân; dữ liệu cá nhân phản ánh hoạt động, lịch sử hoạt động trên không gian mạng;
+									li – Các thông tin khác gắn liền với một con người cụ thể hoặc giúp xác định một con người cụ thể không thuộc quy định tại điểm b khoản 2 Điều này.
+								p b. Dữ liệu cá nhân nhạy cảm:
+								ul
+									li – Dữ liệu về tội phạm, hành vi phạm tội được thu thập, lưu trữ bởi các cơ quan thực thi pháp luật;
+									li – Thông tin Khách hàng/Đối tác của tổ chức tín dụng, chi nhánh ngân hàng nước ngoài, tổ chức cung ứng dịch vụ trung gian thanh toán, các tổ chức được phép khác, gồm: thông tin định danh Khách hàng/Đối tác theo quy định của pháp luật, thông tin về tài khoản, thông tin về tiền gửi, thông tin về tài sản gửi, thông tin về giao dịch, thông tin về tổ chức, cá nhân là bên bảo đảm tại tổ chức tín dụng, chi nhánh ngân hàng, tổ chức cung ứng dịch vụ trung gian thanh toán;
+									li – Dữ liệu về vị trí của cá nhân được xác định qua dịch vụ định vị.
+									li – Dữ liệu cá nhân khác được pháp luật quy định là đặc thù và cần có biện pháp bảo mật cần thiết.
+								p c. Công ty sẽ thông báo cho Khách hàng/Đối tác các Dữ liệu cá nhân bắt buộc phải cung cấp và/hoặc tùy chọn cung cấp tại thời điểm Khách hàng/Đối tác liên hệ, trao đổi hoặc đăng ký, ký kết hợp đồng với Công ty. Dữ liệu cá nhân bắt buộc phải cung cấp được hiểu là các Dữ liệu cá nhân mà Công ty cần phải thu thập từ Khách hàng/Đối tác theo quy định của pháp luật hoặc các Dữ liệu cá nhân thiết yếu để phục vụ việc triển khai cung cấp một phần hoặc toàn bộ sản phẩm, dịch vụ của Công ty cho Khách hàng/Đối tác.
+								p d. Nếu các Dữ liệu cá nhân bắt buộc không được cung cấp theo yêu cầu của Công ty, Khách hàng/Đối tác sẽ không thể sử dụng một số sản phẩm, dịch vụ của Công ty. Trong trường hợp này, Công ty có thể từ chối cung cấp sản phẩm, dịch vụ cho Khách hàng/Đối tác mà không phải chịu bất kì một khoản bồi thường và/hoặc phạt vi phạm nào (trừ trường hợp do lỗi của Công ty).
+								p e. Tại từng thời điểm, Khách hàng/Đối tác có thể tự nguyện cung cấp cho Công ty các Dữ liệu cá nhân nằm ngoài yêu cầu của Công ty. Khi Khách hàng/Đối tác cung cấp Dữ liệu cá nhân nằm ngoài yêu cầu của Công ty đồng nghĩa với việc Khách hàng/Đối tác cho phép Công ty xử lý Dữ liệu cá nhân của Khách hàng/Đối tác với mục đích được nêu trong Chính sách này hoặc với mục đích được nêu tại thời điểm Khách hàng/Đối tác cung cấp những Dữ liệu cá nhân đó. Ngoài ra, khi Khách hàng/Đối tác chủ động cung cấp thông tin nằm ngoài yêu cầu của Công ty, Khách hàng/Đối tác vui lòng không cung cấp Dữ liệu cá nhân nhạy cảm theo quy định của pháp luật tại từng thời điểm. Công ty sẽ không thực hiện xử lý và không chịu bất kì trách nhiệm pháp lý nào đối với các Dữ liệu cá nhân nhạy cảm do Khách hàng/Đối tác tự nguyện cung cấp nằm ngoài yêu cầu của Công ty.`
+						else
+							p Nội dung chi tiết của Điều #{index + 1} sẽ được cập nhật theo chính sách bảo vệ dữ liệu cá nhân hiện hành của Công ty.

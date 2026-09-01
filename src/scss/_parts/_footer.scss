@@ -11,7 +11,7 @@
 }
 
 #mediaPopup .popup-box {
-  background: url(../resources/images/top/gallery_bg_01.jpg) center center/cover no-repeat;
+  background: url(../resources/images/common/bg_common.png) center center/cover no-repeat;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -19,7 +19,13 @@
 }
 
 #mediaPopup .popup-close {
-  background: url(../resources/images/top/close_icon_01.svg) center center/cover no-repeat;
+  background: url(../resources/images/common/close_icon_01.svg) center center/cover no-repeat;
+}
+
+
+#mediaPopup .popup-box:has(.slide-video) .swiper-controller {
+  grid-template-columns: 1fr auto;
+  gap: 0;
 }
 
 @media print,
@@ -30,10 +36,6 @@
     align-items: center;
     flex-direction: column;
     justify-content: center;
-  }
-
-  #mediaPopup .popup-box:has(.slide-video) {
-    display: block;
   }
 
   #mediaPopup .popup-box:has(.slide-video) .popup-title {
@@ -63,10 +65,10 @@
 @media print,
 (min-width: 768px) {
 
-  #premisesPopup .popup-close,
-  #premisesDetailPopup .popup-close {
-    background: url(../resources/images/top/close_icon_02.svg) center center/cover no-repeat;
-  }
+  // #premisesPopup .popup-close,
+  // #premisesDetailPopup .popup-close {
+  //   background: url(../resources/images/top/close_icon_02.svg) center center/cover no-repeat;
+  // }
 
   #premisesPopup .popup-body,
   #premisesDetailPopup .popup-body {
@@ -625,17 +627,16 @@
 
 @media only screen and (max-width: 767.98px) {
   .footer-policy {
-    margin-top: 0.1rem;
     justify-content: center;
-    flex-wrap: wrap;
-    padding: 0 .3rem;
+    margin: .1rem -0.1rem 0;
   }
 
   .footer-policy .policy-item {
     margin-bottom: 0.1rem;
     text-align: center;
     border-right: 1px solid #616d80;
-    width: 50%;
+    width: auto;
+    padding: 0 .1rem;
 
     &:last-child {
       border: none;
@@ -706,6 +707,14 @@
     margin-top: .4rem;
   }
 
+  @include screen-low {
+    .form-group {
+      &+.form-group {
+        margin-top: 0;
+      }
+    }
+  }
+
   @include mobile {
     .form-controller {
       justify-content: center;
@@ -716,6 +725,11 @@
 #contactPopup {
   .contact-wrapper {
     position: relative;
+    width: 100%;
+  }
+
+  .decor-common {
+    clip-path: none;
   }
 
   .popup-box {
@@ -737,6 +751,8 @@
 
   .popup-body {
     height: 100%;
+    display: flex;
+    align-items: center;
   }
 
   .popup-overlay {
@@ -746,7 +762,7 @@
   @include desktop {
     .popup-box {
       max-width: 10.72rem;
-      max-height: 60svh;
+      max-height: 90%;
     }
 
     .popup-body {
@@ -755,6 +771,20 @@
 
     .contact-wrapper {
       padding: 0 0 0 .55rem;
+    }
+  }
+
+  @include screen-low {
+    .popup-body {
+      padding: .3rem .6rem;
+    }
+
+    .title-common-primary {
+      margin-bottom: .2rem;
+    }
+
+    .contact-wrapper {
+      padding: 0 0 0 0.6rem;
     }
   }
 

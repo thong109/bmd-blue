@@ -1,6 +1,9 @@
 .section-introduction-about {
   color: #fff;
 }
+.section-introduction-about.is-active .ani-zoom {
+  animation-play-state: running;
+}
 .section-introduction-about .central-bg {
   position: relative;
   overflow: hidden;
@@ -80,14 +83,14 @@
 }
 @media only screen and (max-width: 767.98px) {
   .section-introduction-about .central-bg {
-    display: block;
+    display: flex;
+    flex-direction: column-reverse;
     background-image: url(../resources/images/introduction/capability_bg_sp.png);
   }
   .section-introduction-about .about-media {
     position: relative;
     width: 100%;
     height: 3.1rem;
-    margin-top: 0.8rem;
   }
   .section-introduction-about .about-media::after {
     background: linear-gradient(180deg, rgba(13, 35, 65, 0) 55%, #0d2341 100%);
@@ -95,7 +98,7 @@
   .section-introduction-about .about-layout {
     display: block;
     min-height: 0;
-    padding: 0 0.1rem 0.7rem;
+    padding: 1.4rem 0 0.4rem;
   }
   .section-introduction-about .about-content {
     width: 100%;
@@ -106,16 +109,13 @@
     font-size: 0.32rem;
   }
   .section-introduction-about .about-lead {
-    margin-top: 0.22rem;
+    margin: 0.2rem 0;
     font-size: 0.22rem;
     line-height: 1.4;
   }
   .section-introduction-about .paragraph-common {
     width: auto;
     margin-top: 0.3rem;
-    padding-right: 0.1rem;
-    font-size: 0.14rem;
-    line-height: 1.65;
   }
 }
 .section-introduction-capability {
@@ -225,7 +225,10 @@
   }
   .section-introduction-capability .capability-layout {
     display: block;
-    padding: 0.7rem 0.1rem;
+    padding: 0.7rem 0;
+  }
+  .section-introduction-capability .capability-heading {
+    margin-right: -0.1rem;
   }
   .section-introduction-capability .capability-intro {
     max-width: none;
@@ -253,6 +256,187 @@
   .section-introduction-capability .capability-card-description {
     margin-top: 0.04rem;
     font-size: 0.13rem;
+  }
+}
+.section-introduction-implementation {
+  color: #fff;
+}
+.section-introduction-implementation .central-bg {
+  position: relative;
+  overflow: hidden;
+  background: #0b1f3a url(../resources/images/introduction/implementation_bg.png) center/cover no-repeat;
+}
+.section-introduction-implementation .central-bg::before {
+  position: absolute;
+  inset: 0;
+  background: url(../resources/images/introduction/implementation_pattern.png) center/cover no-repeat;
+  content: "";
+  opacity: 0.3;
+  pointer-events: none;
+}
+.section-introduction-implementation .wrapper {
+  position: relative;
+  z-index: 1;
+}
+.section-introduction-implementation .implementation-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 7.4rem;
+  align-items: center;
+  gap: 1.25rem;
+  width: 100%;
+  max-width: 16.8rem;
+  min-height: 6.59rem;
+  margin: 0 auto;
+  padding: 1.05rem 0.18rem 0.3rem 0.4rem;
+}
+.section-introduction-implementation .implementation-heading {
+  position: relative;
+  padding-left: 0.6rem;
+  display: flex;
+  align-items: center;
+  max-height: 5.27rem;
+}
+.section-introduction-implementation .implementation-heading,
+.section-introduction-implementation .implementation-list {
+  height: 100%;
+}
+.section-introduction-implementation .implementation-list {
+  display: grid;
+  gap: 0.55rem;
+  padding-top: 0.35rem;
+}
+.section-introduction-implementation .implementation-item {
+  display: grid;
+  grid-template-columns: 0.89rem minmax(0, 1fr);
+  align-items: start;
+  gap: 0.65rem;
+  min-height: 1.79rem;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-introduction-implementation .implementation-icon {
+  position: relative;
+  width: 0.89rem;
+  height: 0.89rem;
+  transition: filter 0.45s ease;
+}
+.section-introduction-implementation .implementation-icon > img:first-child {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.section-introduction-implementation .implementation-icon-symbol {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0.5rem;
+  height: 0.5rem;
+  -o-object-fit: contain;
+     object-fit: contain;
+  transform: translate(-50%, -50%);
+}
+.section-introduction-implementation .implementation-content {
+  padding-top: 0.02rem;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-introduction-implementation .implementation-content .title-common-primary {
+  margin-bottom: 0.14rem;
+  font-size: 0.4rem;
+  line-height: 1.5;
+  letter-spacing: -0.02rem;
+  transition: text-shadow 0.45s ease;
+}
+.section-introduction-implementation .implementation-content .paragraph-common {
+  max-width: 5rem;
+  font-size: 0.18rem;
+  line-height: 1.6111111111;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .section-introduction-implementation .implementation-item:hover {
+    transform: translateX(0.12rem);
+  }
+  .section-introduction-implementation .implementation-item:hover .implementation-icon {
+    filter: drop-shadow(0 0 0.14rem rgba(198, 164, 90, 0.48));
+  }
+  .section-introduction-implementation .implementation-item:hover .implementation-content {
+    transform: translateX(0.05rem);
+  }
+  .section-introduction-implementation .implementation-item:hover .title-common-primary {
+    text-shadow: 0 0 0.18rem rgba(198, 164, 90, 0.35);
+  }
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+  .section-introduction-implementation .implementation-layout {
+    grid-template-columns: minmax(0, 1fr) 5.4rem;
+    gap: 0.45rem;
+    min-height: 7.68rem;
+    padding: 0.8rem 0.2rem 0.35rem;
+  }
+  .section-introduction-implementation .implementation-heading .title-common-primary {
+    font-size: 0.38rem;
+    white-space: normal;
+  }
+  .section-introduction-implementation .implementation-list {
+    gap: 0.25rem;
+  }
+  .section-introduction-implementation .implementation-item {
+    grid-template-columns: 0.72rem minmax(0, 1fr);
+    gap: 0.35rem;
+    min-height: 1.5rem;
+  }
+  .section-introduction-implementation .implementation-icon {
+    width: 0.72rem;
+    height: 0.72rem;
+  }
+  .section-introduction-implementation .implementation-content .title-common-primary {
+    font-size: 0.28rem;
+  }
+  .section-introduction-implementation .implementation-content .paragraph-common {
+    font-size: 0.15rem;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .section-introduction-implementation .central-bg {
+    background-position: center;
+  }
+  .section-introduction-implementation .implementation-layout {
+    display: block;
+    min-height: 0;
+    padding: 0.7rem 0;
+  }
+  .section-introduction-implementation .implementation-heading {
+    padding: 0 0 0.3rem;
+    justify-content: center;
+  }
+  .section-introduction-implementation .implementation-heading .title-common-primary {
+    font-size: 0.32rem;
+  }
+  .section-introduction-implementation .implementation-list {
+    gap: 0.32rem;
+    margin-top: 0.55rem;
+    padding: 0;
+  }
+  .section-introduction-implementation .implementation-item {
+    grid-template-columns: 0.66rem minmax(0, 1fr);
+    gap: 0.22rem;
+    min-height: 0;
+  }
+  .section-introduction-implementation .implementation-icon {
+    width: 0.66rem;
+    height: 0.66rem;
+  }
+  .section-introduction-implementation .implementation-icon-symbol {
+    width: 0.36rem;
+    height: 0.36rem;
+  }
+  .section-introduction-implementation .implementation-content .title-common-primary {
+    margin-bottom: 0.05rem;
+    font-size: 0.22rem;
+    line-height: 1.35;
+  }
+  .section-introduction-implementation .implementation-content .paragraph-common {
+    font-size: 0.13rem;
+    line-height: 1.55;
   }
 }
 .section-introduction-lead {
@@ -323,7 +507,7 @@
     margin-top: 0.25rem;
   }
   .section-introduction-lead .lead-picture {
-    height: 3.25rem;
+    height: 5.25rem;
   }
   .section-introduction-lead .lead-name {
     margin-top: 0.12rem;
@@ -364,7 +548,7 @@
     background-image: url(../resources/images/introduction/capability_bg_sp.png);
   }
   .section-introduction-lead .lead-layout {
-    padding: 0.7rem 0.1rem;
+    padding: 0.7rem 0;
   }
   .section-introduction-lead .lead-heading {
     display: block;

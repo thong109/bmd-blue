@@ -21,6 +21,30 @@
     }
   }
 
+  @include screen-low {
+    .contact-wrapper {
+      padding: 0.7rem 0 0.3rem 0.77rem;
+    }
+
+    .decor-common {
+      top: 50%;
+      height: 90%;
+      transform: translateY(-50%);
+    }
+
+    .title-common-primary {
+      margin-bottom: .2rem;
+    }
+
+    .form-controller {
+      margin-top: .2rem;
+    }
+
+    .form-group+.form-group {
+      margin: 0;
+    }
+  }
+
   @include tablet {
     .central-bg {
       padding: .8rem 0;
@@ -36,6 +60,14 @@
     .central-bg {
       padding: 1.4rem 0 .8rem;
       background: url(../resources/images/contact/contact_bg_02.jpg) center / cover no-repeat;
+    }
+
+    .contact-wrapper {
+      padding: .2rem 0 .3rem .3rem;
+    }
+
+    .form-common {
+      margin-top: .2rem;
     }
   }
 }

@@ -1,0 +1,250 @@
+@charset "utf-8";
+@use "_base/base"as *;
+
+.header-common .header-logo {
+  opacity: 1;
+  visibility: visible;
+}
+
+.section-policy {
+  min-height: 100svh;
+  padding: 1.75rem 0 1.2rem;
+  overflow: hidden;
+  background: #0b1f3a url(../resources/images/recruitment/recruitment_about_overlay.png) center top / 19.63rem auto no-repeat;
+  color: #fff;
+}
+
+.section-policy>.wrapper {
+  width: min(14rem, calc(100% - .4rem));
+}
+
+.section-policy>.wrapper>.title-common-primary {
+  margin: 0;
+  color: #c6a45a;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.policy-tabs {
+  margin-top: .4rem;
+}
+
+.policy-tabs .block-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 8.8rem;
+  margin: 0 auto;
+  padding: 0;
+  border-bottom: 1px solid rgba(245, 241, 232, .45);
+  list-style: none;
+}
+
+.policy-tabs .block-list .block-item {
+  position: relative;
+  padding: 0 0 .14rem;
+  color: #f5f1e8;
+  font-size: .2rem;
+  line-height: .29rem;
+  text-align: center;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.policy-tabs .block-list .block-item::after {
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 3px;
+  content: "";
+  background: #c6a45a;
+  transform: scaleX(0);
+  transition: transform .35s ease;
+}
+
+.policy-tabs .block-list .block-item.active {
+  color: #c6a45a;
+}
+
+.policy-tabs .block-list .block-item.active::after {
+  transform: scaleX(1);
+}
+
+.policy-tabs .tabs-content {
+  margin-top: .95rem;
+}
+
+.policy-tabs .tab-panel {
+  display: none;
+}
+
+.policy-tabs .tab-panel.active {
+  display: block;
+}
+
+.policy-introduction h2 {
+  margin: 0 0 .25rem;
+  color: #c6a45a;
+  font-size: .4rem;
+  line-height: 1.25;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.policy-introduction p+p,
+.policy-accordion-inner p+p {
+  margin-top: .15rem;
+}
+
+.policy-accordion {
+  margin-top: .3rem;
+  border-top: 1px solid rgba(198, 164, 90, .35);
+}
+
+.policy-accordion-item {
+  border-bottom: 1px solid rgba(198, 164, 90, .35);
+}
+
+.policy-accordion-button {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: .12rem;
+  width: 100%;
+  padding: .14rem .08rem;
+  border: 0;
+  background: transparent;
+  color: #fff;
+  font: inherit;
+  font-size: .18rem;
+  font-weight: 600;
+  line-height: .29rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.policy-accordion-icon {
+  flex: 0 0 auto;
+  width: 0;
+  height: 0;
+  border-top: .07rem solid #c6a45a;
+  border-right: .06rem solid transparent;
+  border-left: .06rem solid transparent;
+  transition: transform .3s ease;
+  margin-top: .12rem;
+}
+
+.policy-accordion-item.is-active .policy-accordion-button {
+  color: #c6a45a;
+}
+
+.policy-accordion-item.is-active .policy-accordion-icon {
+  transform: rotate(180deg);
+}
+
+.policy-accordion-content {
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  opacity: 0;
+  transition: grid-template-rows .45s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
+}
+
+.policy-accordion-inner {
+  padding: 0 .6rem;
+  overflow: hidden;
+  transition: padding .45s cubic-bezier(.22, 1, .36, 1);
+}
+
+.policy-accordion-item.is-active .policy-accordion-content {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.policy-accordion-item.is-active .policy-accordion-inner {
+  padding-top: .02rem;
+  padding-bottom: .28rem;
+}
+
+@include desktop {
+  .section-policy>.wrapper>.title-common-primary {
+    font-size: .5rem;
+    line-height: 1.2;
+  }
+}
+
+@include tablet {
+  .section-policy {
+    padding: 1.2rem 0 .8rem;
+  }
+
+  .section-policy>.wrapper {
+    width: calc(100% - .6rem);
+  }
+
+  .policy-tabs .block-list {
+    width: 100%;
+  }
+
+  .policy-tabs .tabs-content {
+    margin-top: .6rem;
+  }
+
+  .policy-introduction h2 {
+    font-size: .32rem;
+  }
+}
+
+@include mobile {
+  .section-policy {
+    padding: 1.4rem 0 .7rem;
+  }
+
+  .section-policy>.wrapper {
+    width: calc(100% - .4rem);
+  }
+
+  .policy-tabs {
+    margin-top: .3rem;
+  }
+
+  .policy-tabs.list-common-tabs .block-list {
+    display: inline-flex;
+    gap: .3rem;
+    width: max-content;
+    margin-bottom: .3rem;
+  }
+
+  .policy-tabs .block-list .block-item {
+    padding: 0 .08rem .12rem;
+    font-size: .13rem;
+    line-height: .18rem;
+    white-space: nowrap;
+  }
+
+  .policy-tabs .block-list .item-text {
+    display: block;
+  }
+
+  .policy-tabs .tabs-content {
+    margin-top: .1rem;
+  }
+
+  .policy-introduction h2 {
+    font-size: .25rem;
+    line-height: 1.6;
+  }
+
+  .policy-accordion-button {
+    font-size: .18rem;
+    line-height: calc(29 / 18);
+  }
+
+  .policy-accordion-inner {
+    padding: 0;
+  }
+
+  .policy-accordion-item.is-active .policy-accordion-inner {
+    padding-bottom: .22rem;
+  }
+}

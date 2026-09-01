@@ -1,0 +1,261 @@
+extends ../_base/_layout.pug
+block vars
+  - var metaTitle = 'BLUEMARQ Development | Recruitment'
+  - var path = '..'
+  - var page = 'recruitment'
+  - var imgPC = path + '/resources/images/recruitment/'
+  - var imgSP = path + '/resources/images/recruitment/sp/'
+  - var imgCommonPC = path + '/resources/images/common/'
+  - var imgCommonSP = path + '/resources/images/common/sp/'
+  - var videoCommon = path + '/resources/video/'
+
+mixin recruitmentPositionCard(title)
+  article.recruitment-position-card
+    dl.recruitment-position-details
+      .recruitment-position-detail
+        dt Vị trí
+        dd.recruitment-position-name= title
+      .recruitment-position-detail
+        dt Số lượng
+        dd 03
+      .recruitment-position-detail
+        dt Nơi làm việc
+        dd TP. Hồ Chí Minh
+      .recruitment-position-detail
+        dt Thời gian hết hạn
+        dd.recruitment-position-date 25.07.2026
+    a.button-common-primary(href="#")
+      span.button-wrapper Ứng tuyển
+
+block content
+  main
+    .slider-stage(aria-hidden="true")
+      section.panel.section-recruitment-about
+        .group-central
+          .inner
+            .central-bg
+              .recruitment-about-pattern
+              .recruitment-about-media.ani-zoom
+                img.object-common(src=imgPC+"recruitment_about_people.jpg" alt="Đội ngũ BLUEMARQ Development cùng hợp tác trong môi trường làm việc" width="1804" height="1114" loading="eager")
+              .wrapper
+                .recruitment-about-layout
+                  .recruitment-about-content
+                    span.decor-common
+                    h1.title-common-primary.hero-title.js-title Văn hóa doanh nghiệp
+                    .paragraph-common.hero-sub.js-title
+                      p Tại BLUEMARQ Development, con người là tài sản quan trọng nhất. Chúng tôi xây dựng môi trường đề cao hợp tác, minh bạch, hiệu suất và tinh thần học hỏi không ngừng — nơi mỗi cá nhân được trao cơ hội phát huy năng lực và trưởng thành cùng tổ chức.
+                      p
+                        strong Bốn giá trị văn hóa:
+                    ul.recruitment-about-values.hero-sub.js-title
+                      li
+                        span Hợp tác
+                      li
+                        span Minh bạch
+                      li
+                        span Hiệu suất
+                      li
+                        span Học hỏi
+      section.panel.section-recruitment-policy
+        .group-central
+          .inner
+            .central-bg
+              .recruitment-policy-pattern
+              .recruitment-policy-media.ani-zoom
+                img.object-common(src=imgPC+"recruitment_policy_people.jpg" alt="Đội ngũ BLUEMARQ Development trao đổi trong môi trường làm việc chuyên nghiệp" width="1878" height="1062" loading="lazy")
+              .wrapper
+                .recruitment-policy-layout
+                  .recruitment-policy-content
+                    span.decor-common
+                    h2.title-common-primary.hero-title.js-title Chính sách nhân sự
+                    .paragraph-common.hero-sub.js-title
+                      p BLUEMARQ Development phát triển con người bằng lộ trình nghề nghiệp rõ ràng, chương trình đào tạo bài bản và chính sách đãi ngộ cạnh tranh, minh bạch — gắn với hiệu quả đóng góp của mỗi cá nhân.
+                    ul.recruitment-policy-list.hero-sub.js-title
+                      li.recruitment-policy-item
+                        img.recruitment-policy-icon(src=imgPC+"recruitment_policy_career.svg" alt="" width="57" height="70" loading="lazy")
+                        .recruitment-content
+                          .recruitment-heading
+                            h3 Lộ trình
+                            strong nghề nghiệp
+                          p định hướng phát triển theo năng lực.
+                      li.recruitment-policy-item
+                        img.recruitment-policy-icon(src=imgPC+"recruitment_policy_training.svg" alt="" width="62" height="65" loading="lazy")
+                        .recruitment-content
+                          .recruitment-heading
+                            h3 Đào tạo
+                            strong &amp; phát triển
+                          p bồi đắp chuyên môn, kỹ năng, tư duy.
+                      li.recruitment-policy-item
+                        img.recruitment-policy-icon(src=imgPC+"recruitment_policy_benefit.svg" alt="" width="60" height="62" loading="lazy")
+                        .recruitment-content
+                          .recruitment-heading
+                            h3 Lương thưởng
+                            strong &amp; phúc lợi
+                          p cạnh tranh, minh bạch, theo hiệu quả.
+      section.panel.section-recruitment-position
+        .group-central
+          .inner
+            .central-bg
+              .recruitment-about-pattern
+              .recruitment-position-layout
+                .recruitment-position-heading
+                  h2.title-common-primary.hero-title.js-title Vị trí tuyển dụng
+                  .paragraph-common.hero-sub.js-title
+                    p Gia nhập BLUEMARQ Development - cùng kiến tạo những công trình chuẩn mực.
+                .swiper.recruitment-position-slider.js-recruitment-position-slider.hero-sub.js-title
+                  .swiper-wrapper
+                    .swiper-slide
+                      +recruitmentPositionCard('Nhân viên chăm sóc khách hàng')
+                    .swiper-slide
+                      +recruitmentPositionCard('Trưởng phòng kinh doanh')
+                    .swiper-slide
+                      +recruitmentPositionCard('Nhân viên kinh doanh')
+                    .swiper-slide
+                      +recruitmentPositionCard('Giám đốc chi nhánh Miền Nam')
+                    .swiper-slide
+                      +recruitmentPositionCard('Nhân viên kế toán tài chính')
+                    .swiper-slide
+                      +recruitmentPositionCard('Nhân viên chăm sóc khách hàng')
+                    .swiper-slide
+                      +recruitmentPositionCard('Trưởng phòng kinh doanh')
+                    .swiper-slide
+                      +recruitmentPositionCard('Nhân viên kinh doanh')
+                    .swiper-slide
+                      +recruitmentPositionCard('Giám đốc chi nhánh Miền Nam')
+                    .swiper-slide
+                      +recruitmentPositionCard('Nhân viên kế toán tài chính')
+      section.panel.section-recruitment-apply
+        .group-central
+          .inner
+            .central-bg
+              .recruitment-about-pattern
+              .wrapper
+                .recruitment-apply-layout
+                  h2.title-common-primary.hero-title.js-title Nộp hồ sơ trực tuyến
+                  .recruitment-apply-body.hero-sub.js-title
+                    .recruitment-apply-rules
+                      span.decor-common
+                      h3.recruitment-apply-heading Quy định hồ sơ
+                      .paragraph-common
+                        p Khi tham gia ứng tuyển ứng viên phải hoàn chỉnh bộ hồ sơ ứng tuyển theo quy định của Công ty gồm:
+                        ul
+                          li
+                            | Phiếu thông tin ứng viên 
+                            a(href="#" download) [Tải về tại đây]
+                          li Bằng chuyên môn (chứng thực)
+                          li Chứng thực chứng chỉ liên quan (chứng chỉ nghề, tin học, ngoại ngữ...)
+                          li Sơ yếu lý lịch (bản chính có xác nhận của địa phương)
+                          li Giấy khám sức khỏe (bản chính, không quá 06 tháng)
+                          li Chứng minh nhân dân, hộ khẩu (có công chứng, chứng thực)
+                          li Thư dự tuyển (phiếu dự tuyển lao động hoặc Đơn xin việc)
+                          li Bảng điểm (nếu chưa có bằng chuyên môn)
+                          li Hình 3*4 (04 tấm)
+                        p Lưu ý: BLUEMARQ Development chỉ liên hệ qua mail hoặc số điện thoại đối với các hồ sơ đạt yêu cầu sơ tuyển.
+                    .recruitment-apply-form
+                      h3.recruitment-apply-heading Form tuyển dụng
+                      form.form-common(action="" method="post" enctype="multipart/form-data")
+                        .form-group
+                          input.input-common(type="text" name="name" required placeholder="Họ tên *" aria-label="Họ tên")
+                        .form-group
+                          input.input-common(type="email" name="email" placeholder="Email" aria-label="Email")
+                        .form-group
+                          input.input-common(type="tel" name="phone" required placeholder="Điện thoại *" aria-label="Điện thoại")
+                        .form-group
+                          select.input-common(name="position" required aria-label="Chọn vị trí ứng tuyển")
+                            option(value="" selected disabled) Chọn vị trí ứng tuyển *
+                            option(value="customer-service") Nhân viên chăm sóc khách hàng
+                            option(value="sales-manager") Trưởng phòng kinh doanh
+                            option(value="sales") Nhân viên kinh doanh
+                            option(value="branch-director") Giám đốc chi nhánh Miền Nam
+                            option(value="accountant") Nhân viên kế toán tài chính
+                        .form-group.recruitment-apply-file
+                          input(type="file" name="cv" id="recruitment-cv" accept=".pdf,.doc,.docx" required)
+                          label(for="recruitment-cv")
+                            span.recruitment-apply-file-name Chọn CV
+                        .form-controller
+                          button.button-common-primary(type="submit")
+                            span.button-wrapper Gửi hồ sơ
+      section.panel.section-footer-common
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .footer-wrapper
+                  .footer-information
+                    h2.information-image
+                      img.object-common(src=imgCommonPC+"header_logo.svg" alt="BLUEMARQ DEVELOPMENT" width="255" height="62" loading="eager")
+                    .information-content
+                      p
+                        | Sẵn sàng kết nối nguồn lực, bảo chứng 
+                        br(class="md")
+                        | tương lai cùng BLUEMARQ Development.
+                    .information-social
+                      ul.social-list
+                        li.social-item
+                          a.item-button.is-facebook(href="#")
+                        li.social-item
+                          a.item-button.is-youtube(href="#")
+                        li.social-item
+                          a.item-button.is-instagram(href="#")
+                  .footer-inner
+                    .footer-contact
+                      p.footer-heading TRỤ SỞ CHÍNH
+                      ul.list-footer-contact
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_07.svg" alt="Địa chỉ" width="20" height="20" loading="eager")
+                          .item-content
+                            p
+                              | Tòa nhà BLUEMARQ, 2W Ung Văn Khiêm,
+                              br
+                              | P. Thạnh Mỹ Tây, TP. Hồ Chí Minh, Việt Nam.
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_08.svg" alt="Trang web" width="20" height="20" loading="eager")
+                          .item-content
+                            a.trans(href="www.bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") www.bluemarqdevelopment.com
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_09.svg" alt="Email" width="20" height="20" loading="eager")
+                          .item-content
+                            a.trans(href="mailto:contact@bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") contact@bluemarqdevelopment.com
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_10.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p Hotline: 1900 8063 | 028 6252 5252
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_12.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p MST:
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_13.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p Giờ làm việc:
+                    .footer-sitemap
+                      p.footer-heading LIÊN KẾT NHANH
+                      ul.list-footer-sitemap
+                        li.list-item
+                          a.item-link(href=path+"/") Trang chủ
+                        li.list-item
+                          a.item-link(href=path+"/introduction/") Giới thiệu
+                        li.list-item
+                          a.item-link(href=path+"/projects/") Dự án
+                        li.list-item
+                          a.item-link(href=path+"/news/") Tin tức
+                        li.list-item
+                          a.item-link(href=path+"/recruitment/") Tuyển dụng
+                        li.list-item
+                          a.item-link(href=path+"/gallery/") Thư viện
+                        li.list-item
+                          a.item-link(href=path+"/contact/") Liên hệ
+                  .footer-bottom
+                    small.footer-copyright © 2026 BLUEMARQ Development. All rights reserved.
+                    .footer-policy
+                      .policy-item
+                        a.item-link(href=path+"/policy/") Chính sách bảo mật
+                      .policy-item
+                        a.item-link(href=path+"/#") Điều khoản sử dụng
+                      .policy-item
+                        a.item-link(href=path+"/#") Sitemap

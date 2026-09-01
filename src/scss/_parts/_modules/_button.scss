@@ -17,6 +17,7 @@
   text-transform: uppercase;
   transition: background 0.5s cubic-bezier(0.15, 0.41, 0.69, 0.94);
   color: #0b1f3a;
+  cursor: pointer;
 }
 
 .button-common-primary::after {
@@ -117,12 +118,24 @@
   background: url(../resources/images/common/arrow_icon_02.svg) center center/contain no-repeat;
 }
 
+.button-common-secondary.is-back {
+  border-color: #F5F1E8;
+}
+
+.button-common-secondary.is-back::before {
+  background: url(../resources/images/common/arrow_icon_04.svg) center center/contain no-repeat;
+}
+
 .button-common-secondary:hover {
   border-color: #F5F1E8;
 }
 
 .button-common-secondary:hover::before {
   transform: translate(0.05rem, -0.05rem);
+}
+
+.button-common-secondary.is-back:hover::before {
+  transform: translateX(-0.05rem);
 }
 
 @media print,

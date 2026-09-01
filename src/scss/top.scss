@@ -447,7 +447,7 @@
     flex-direction: column;
     justify-content: flex-end;
     align-items: flex-start;
-    padding: 1rem 1.55rem 1.23rem 1.18rem;
+    padding: 1rem 1.55rem .72rem 1.18rem;
   }
 
   .section-top-projects .content-wrapper {
@@ -701,6 +701,12 @@
 
 .section-top-architecture {
   position: relative;
+
+  &.is-active {
+    .ani-zoom {
+      animation-play-state: running;
+    }
+  }
 }
 
 .section-top-architecture .content-right {

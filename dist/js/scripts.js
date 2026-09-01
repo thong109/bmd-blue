@@ -382,7 +382,13 @@
               });
           });
           panels[i].querySelectorAll(".swiper").forEach((el) => {
-            if (el.swiper) el.swiper.update();
+            if (
+              el.swiper &&
+              !el.swiper.destroyed &&
+              el.getClientRects().length
+            ) {
+              el.swiper.update();
+            }
           });
           window.dispatchEvent(
             new CustomEvent("slider:panel-change", {
@@ -816,6 +822,25 @@
 
   const freezeWindow = (lock) => {
     const normalScroll = document.querySelector(".normal-scroll");
+    const isProjectsDetail = document.documentElement.classList.contains(
+      "is-page-projects-detail"
+    );
+
+    if (isProjectsDetail) {
+      if (lock) {
+        __scrollY = window.scrollY || window.pageYOffset;
+        document.documentElement.style.overflow = "hidden";
+        document.body.style.overflow = "hidden";
+      } else {
+        document.documentElement.style.overflow = "";
+        document.body.style.overflow = "";
+
+        if (Math.abs(window.scrollY - __scrollY) > 1) {
+          window.scrollTo(0, __scrollY);
+        }
+      }
+      return;
+    }
 
     if (lock) {
       __scrollY = window.scrollY || window.pageYOffset;
@@ -1480,15 +1505,15 @@
         loop: true,
         speed: 500,
         slidesPerView: 'auto',
-        // autoplay: {
-        //   delay: 3000,
-        //   disableOnInteraction: false,
-        // },
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false,
+        },
       });
     });
   };
 
-  const dragProjectsImage = () => {
+  const dragGalleryImage = () => {
     const wrappers = document.querySelectorAll(".section-top-projects .projects-wrapper");
     if (!wrappers.length) return;
 
@@ -1556,10 +1581,289 @@
           disableOnInteraction: false
         },
         pagination: {
-          el: '#bankPagination',
+          el: '.swiper-pagination',
           clickable: true
         }
       });
+    });
+  };
+
+  const galleryImagesSlider = (scope = document) => {
+    const sliders = scope.matches?.('.js-gallery-images-slider') ?
+      [scope] : scope.querySelectorAll('.js-gallery-images-slider');
+    if (!sliders.length) return;
+
+    sliders.forEach((slider) => {
+      const tabPanel = slider.closest('.tab-panel');
+      if (slider.swiper || (tabPanel && !tabPanel.classList.contains('active'))) return;
+
+      const slideCount = slider.querySelectorAll('.swiper-slide').length;
+      const minimumSlides = window.innerWidth >= 1025 ? 8 :
+        window.innerWidth >= 768 ? 4 : 2;
+      const canAutoplay = slideCount > minimumSlides;
+
+      new Swiper(slider, {
+        speed: 900,
+        watchOverflow: true,
+        slidesPerView: 2,
+        slidesPerGroup: 2,
+        spaceBetween: 20,
+        grid: {
+          rows: 1,
+          fill: 'row',
+        },
+        pagination: {
+          el: slider.querySelector('.swiper-pagination'),
+          clickable: true,
+        },
+        autoplay: canAutoplay ? {
+          delay: 3000,
+          disableOnInteraction: false
+        } : false,
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 30,
+            grid: {
+              rows: 2,
+              fill: 'row',
+            },
+          },
+          1025: {
+            slidesPerView: 4,
+            slidesPerGroup: 4,
+            spaceBetween: 30,
+            grid: {
+              rows: 2,
+              fill: 'row',
+            },
+          },
+        },
+      });
+    });
+  };
+
+  const galleryVideoSlider = () => {
+    const sliders = document.querySelectorAll('.js-gallery-video-slider');
+    if (!sliders.length) return;
+
+    sliders.forEach((slider) => {
+      new Swiper(slider, {
+        loop: true,
+        speed: 900,
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        spaceBetween: 16,
+        pagination: {
+          el: slider.querySelector('.swiper-pagination'),
+          clickable: true,
+        },
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 32,
+          },
+          1025: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 48,
+          },
+        },
+      });
+    });
+  };
+
+  const projectsSectionSlider = () => {
+    const sliders = document.querySelectorAll('.js-projects-slider');
+    if (!sliders.length) return;
+
+    sliders.forEach((slider) => {
+      new Swiper(slider, {
+        speed: 900,
+        loop: true,
+        slidesPerView: 1,
+        slidesPerGroup: 1,
+        spaceBetween: 20,
+        pagination: {
+          el: slider.querySelector('.swiper-pagination'),
+          clickable: true,
+        },
+        autoplay: {
+          delay: 3000,
+          disableOnInteraction: false
+        },
+        breakpoints: {
+          768: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 28,
+          },
+          1025: {
+            slidesPerView: 2,
+            slidesPerGroup: 2,
+            spaceBetween: 52,
+          },
+        },
+      });
+    });
+  };
+
+  const projectsUtilitiesSlider = () => {
+    const sliders = document.querySelectorAll('.js-projects-utilities-slider');
+    if (!sliders.length) return;
+
+    sliders.forEach((slider) => {
+      new Swiper(slider, {
+        loop: true,
+        speed: 1000,
+        slidesPerView: 1,
+        autoplay: {
+          delay: 3500,
+          disableOnInteraction: false,
+        },
+      });
+    });
+  };
+
+  const recruitmentPositionSlider = () => {
+    const sliders = document.querySelectorAll('.js-recruitment-position-slider');
+    if (!sliders.length) return;
+
+    sliders.forEach((slider) => {
+      if (slider.swiper) return;
+
+      const slideCount = slider.querySelectorAll('.swiper-wrapper > .swiper-slide').length;
+      const hasFewSlides = slideCount <= 2;
+      slider.classList.toggle('is-centered', hasFewSlides);
+
+      new Swiper(slider, {
+        loop: !hasFewSlides,
+        loopAdditionalSlides: 5,
+        loopPreventsSliding: false,
+        speed: 700,
+        slidesPerView: 'auto',
+        slidesPerGroup: 1,
+        centerInsufficientSlides: true,
+        spaceBetween: 16,
+        grabCursor: !hasFewSlides,
+        roundLengths: true,
+        watchSlidesProgress: true,
+        breakpoints: {
+          768: {
+            spaceBetween: 20,
+          },
+          1025: {
+            spaceBetween: 25,
+          },
+        },
+      });
+    });
+  };
+
+  const recruitmentFileInput = () => {
+    const wrappers = document.querySelectorAll('.recruitment-apply-file');
+    if (!wrappers.length) return;
+
+    wrappers.forEach((wrapper) => {
+      const input = wrapper.querySelector('input[type="file"]');
+      const fileName = wrapper.querySelector('.recruitment-apply-file-name');
+      if (!input || !fileName) return;
+
+      input.addEventListener('change', () => {
+        const name = input.files?.[0]?.name || 'Chọn CV';
+        fileName.textContent = name;
+        fileName.title = input.files?.[0]?.name || '';
+      });
+    });
+  };
+
+  const projectsDetailScroll = () => {
+    const sections = document.querySelectorAll('.js-projects-detail-scroll');
+    if (!sections.length || typeof gsap === 'undefined' || typeof ScrollTrigger === 'undefined') return;
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    sections.forEach((section) => {
+      const track = section.querySelector('.js-projects-detail-track');
+      const viewport = section.querySelector('.projects-detail-sticky');
+      const panels = section.querySelectorAll('.projects-detail-panel');
+      if (!track || !viewport) return;
+
+      const revealPanel = (panel, scrollTrigger, paused = false) => {
+        const targets = panel.querySelectorAll('.js-projects-detail-reveal');
+        if (!targets.length) return null;
+
+        return gsap.fromTo(targets, {
+          autoAlpha: 0,
+          y: 32,
+        }, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 1.4,
+          stagger: .2,
+          ease: 'power2.out',
+          scrollTrigger,
+          paused,
+        });
+      };
+
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        section.classList.add('is-reduced-motion');
+        return;
+      }
+
+      if (!window.matchMedia('(min-width: 1025px)').matches) {
+        section.classList.add('is-static');
+        gsap.set(track, { clearProps: 'transform' });
+        panels.forEach((panel) => {
+          revealPanel(panel, {
+            trigger: panel,
+            start: 'top 82%',
+            toggleActions: 'play none none reverse',
+          });
+        });
+        return;
+      }
+
+      gsap.set(track, { x: 0 });
+      const revealAnimations = Array.from(panels, (panel) => revealPanel(panel, null, true));
+      const revealedPanels = new Set();
+
+      const showPanel = (index) => {
+        if (revealedPanels.has(index)) return;
+        revealedPanels.add(index);
+        revealAnimations[index]?.play();
+      };
+
+      const scrollTween = gsap.to(track, {
+        x: () => -Math.max(0, track.scrollWidth - window.innerWidth),
+        ease: 'none',
+        scrollTrigger: {
+          trigger: section,
+          start: 'top top',
+          end: () => `+=${Math.max(1, track.scrollWidth - window.innerWidth)}`,
+          scrub: 1.2,
+          pin: viewport,
+          pinSpacing: true,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const index = Math.min(
+              panels.length - 1,
+              Math.round(self.progress * (panels.length - 1))
+            );
+            showPanel(index);
+          },
+        },
+      });
+
+      showPanel(0);
     });
   };
 
@@ -1585,6 +1889,7 @@
         panels.forEach((panel) => {
           if (panel === targetPanel) {
             panel.classList.add('active');
+            galleryImagesSlider(targetPanel);
             gsap.fromTo(
               panel, {
                 autoAlpha: 0,
@@ -1595,6 +1900,11 @@
                 duration: 0.6,
                 ease: 'power2.out',
                 onComplete: () => {
+                  targetPanel.querySelectorAll('.swiper').forEach((element) => {
+                    if (element.swiper && !element.swiper.destroyed) {
+                      element.swiper.update();
+                    }
+                  });
                   isAnimating = false;
                 },
               }
@@ -1617,6 +1927,48 @@
       });
 
       wrapper.__activateTab = activateTab;
+    });
+  };
+
+  const initPolicyAccordion = () => {
+    const accordions = document.querySelectorAll('.js-policy-accordion');
+    if (!accordions.length) return;
+
+    accordions.forEach((accordion) => {
+      const items = accordion.querySelectorAll('.policy-accordion-item');
+      let scrollTimer;
+
+      items.forEach((item) => {
+        const button = item.querySelector('.policy-accordion-button');
+        const content = item.querySelector('.policy-accordion-content');
+        if (!button || !content) return;
+
+        button.addEventListener('click', () => {
+          const shouldOpen = !item.classList.contains('is-active');
+
+          items.forEach((currentItem) => {
+            const currentButton = currentItem.querySelector('.policy-accordion-button');
+            const isCurrent = currentItem === item && shouldOpen;
+
+            currentItem.classList.toggle('is-active', isCurrent);
+            currentButton?.setAttribute('aria-expanded', String(isCurrent));
+          });
+
+          clearTimeout(scrollTimer);
+          if (!shouldOpen) return;
+
+          scrollTimer = setTimeout(() => {
+            const header = document.querySelector('header');
+            const headerOffset = header?.getBoundingClientRect().height || 0;
+            const top = window.scrollY + item.getBoundingClientRect().top - headerOffset - 16;
+
+            window.scrollTo({
+              top: Math.max(0, top),
+              behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+            });
+          }, 460);
+        });
+      });
     });
   };
 
@@ -1653,6 +2005,349 @@
     window.addEventListener('hashchange', applyHash);
   };
 
+  const initPanelZoomAnimation = () => {
+    const panels = [...document.querySelectorAll('.panel')].filter((panel) =>
+      panel.querySelector('.ani-zoom')
+    );
+    if (!panels.length) return;
+
+    panels.forEach((panel) => {
+      const restart = () => {
+        panel.querySelectorAll('.ani-zoom').forEach((element) => {
+          element.style.animation = 'none';
+          void element.offsetWidth;
+          element.style.animation = '';
+        });
+      };
+
+      let wasActive = panel.classList.contains('is-active');
+      const observer = new MutationObserver(() => {
+        const isActive = panel.classList.contains('is-active');
+        if (isActive && !wasActive) restart();
+        wasActive = isActive;
+      });
+
+      observer.observe(panel, {
+        attributes: true,
+        attributeFilter: ['class'],
+      });
+
+      if (wasActive) restart();
+    });
+  };
+
+  const sliderGalleryDetail = (scope = document) => {
+    const sliders = scope.querySelectorAll(".js-slider-gallery-detail");
+    if (!sliders.length) return;
+
+    sliders.forEach((container) => {
+      const slider = container.querySelector(".swiper");
+      const sliderTitle = container.querySelector(".swiper-title");
+      if (!slider || slider.swiper) return;
+
+      const updateTitle = (swiper) => {
+        const activeSlide = swiper.slides[swiper.activeIndex];
+        if (sliderTitle && activeSlide) {
+          sliderTitle.textContent = activeSlide.dataset.title || "";
+        }
+      };
+
+      new Swiper(slider, {
+        loop: true,
+        speed: 500,
+        slidesPerView: 1,
+        navigation: {
+          nextEl: slider.querySelector(".swiper-button-next"),
+          prevEl: slider.querySelector(".swiper-button-prev"),
+        },
+        pagination: {
+          el: slider.querySelector(".swiper-pagination"),
+          type: "fraction",
+        },
+        on: {
+          init: updateTitle,
+          slideChange: updateTitle,
+        },
+      });
+    });
+  };
+
+  const createPopup = ({
+    id,
+    className = "",
+    hasTitle = true
+  }) => {
+    if (document.getElementById(id)) return;
+
+    const popup = document.createElement("div");
+    popup.id = id;
+    popup.className = `media-popup ${className}`;
+
+    popup.innerHTML = `
+      <div class="popup-overlay"></div>
+      <div class="popup-box">
+        <button class="popup-close trans js-close-popup"></button>
+        <div class="popup-body" id="${id}-body"></div>
+      </div>
+    `;
+
+    document.body.appendChild(popup);
+  };
+
+  const initPopup = () => {
+    const media = getPopupElements("mediaPopup");
+    const premises = getPopupElements("premisesPopup");
+    const premisesDetail = getPopupElements("premisesDetailPopup");
+    const $header = $("header.header-common");
+    if (!$header.length || !media) return;
+
+    const openTriggers = document.querySelectorAll(".js-open-popup");
+    let currentPopup = null;
+    const popupStack = [];
+
+    const open = (popupId) => {
+      const popupEl = getPopupElements(popupId);
+      if (!popupEl) return;
+
+      const {
+        popup
+      } = popupEl;
+
+      // Nếu popup này chưa có trong stack thì thêm vào
+      if (!popupStack.includes(popup)) {
+        popupStack.push(popup);
+      }
+
+      currentPopup = popup;
+
+      $header.removeClass("is-hide");
+      document.body.style.overflow = "hidden";
+      freezeWindow(true);
+
+      window.__APP_STATE__?.observer?.disable();
+
+      setTimeout(() => {
+        popup.classList.add("active");
+      }, 300);
+    };
+
+    const close = (popup) => {
+      if (!popup) return;
+
+      popup.classList.remove("active");
+
+      // Xóa HTML động tương ứng
+      if (popup === media?.popup) {
+        media.body.innerHTML = "";
+      }
+
+      if (popup === premises?.popup) {
+        premises.body.innerHTML = "";
+      }
+
+      if (popup === premisesDetail?.popup) {
+        premisesDetail.body.innerHTML = "";
+      }
+
+      // Xóa popup khỏi stack
+      const index = popupStack.indexOf(popup);
+
+      if (index !== -1) {
+        popupStack.splice(index, 1);
+      }
+
+      // Lấy popup trước đó
+      currentPopup = popupStack[popupStack.length - 1] || null;
+
+      // Nếu vẫn còn popup trước đó
+      if (currentPopup) {
+        currentPopup.classList.add("active");
+        return;
+      }
+
+      // Không còn popup nào
+      document.body.style.overflow = "";
+      freezeWindow(false);
+
+      if (window.__APP_STATE__?.sliderState?.active) {
+        window.__APP_STATE__?.observer?.enable();
+      }
+    };
+
+    // Mở popup
+    openTriggers.forEach((trigger) => {
+      trigger.addEventListener("click", (e) => {
+        e.preventDefault();
+        const popupId = trigger.dataset.popup;
+        if (!popupId) return;
+        open(popupId);
+      });
+    });
+
+    // Đóng popup
+    document.addEventListener("click", (e) => {
+      if (!currentPopup) return;
+
+      if (e.target.closest(".js-close-popup")) {
+        close(currentPopup);
+        return;
+      }
+
+      if (e.target.closest(".popup-wrapper, .popup-box")) {
+        return;
+      }
+
+      if (e.target === currentPopup) {
+        close(currentPopup);
+        return;
+      }
+
+      const backdrop = currentPopup.querySelector(":scope > .popup-overlay");
+      if (backdrop && e.target === backdrop) {
+        close(currentPopup);
+      }
+    });
+
+    // Đóng bằng phím Escape
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape" && currentPopup) {
+        close(currentPopup);
+      }
+    });
+
+    document.addEventListener("click", async (e) => {
+      const slide = e.target.closest(".js-slide-image");
+      const video = e.target.closest(".js-slide-video");
+      const premisesItem = e.target.closest(".js-premises-item");
+      const premisesDetailItem = e.target.closest(".js-premises-detail-item");
+
+      if (slide && media) {
+        const {
+          body,
+          title
+        } = media;
+        const images = JSON.parse(slide.dataset.gallery || "[]");
+        if (!images.length) return;
+
+        const slideItems = images
+          .map(
+            (img) => `
+          <div class="swiper-slide" data-title="${img.alt}">
+            <div class="slide-wrapper">
+              <div class="slide-image">
+                <img class="object-common" src="${img.url}" alt="${img.alt}"
+                  loading="eager" width="${img.w}" height="${img.h}" />
+              </div>
+            </div>
+          </div>`
+          )
+          .join("");
+
+        body.innerHTML = `
+          <section class="section-gallery">
+            <div class="wrapper">
+              <div class="list-top-gallery-detail js-slider-gallery-detail">
+                <div class="swiper">
+                  <div class="swiper-wrapper">${slideItems}</div>
+                  <div class="swiper-button-prev trans"></div>
+                  <div class="swiper-button-next trans"></div>
+                  <div class="swiper-controller">
+                    <div></div>
+                    <p class="swiper-title">${slide.dataset.title || ""}</p>
+                    <div class="swiper-pagination"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>`;
+
+        open(media.popup.id);
+        if (window.Swiper) {
+          setTimeout(() => sliderGalleryDetail(body), 350);
+        }
+        return;
+      }
+
+      if (video && media) {
+        const {
+          body,
+          title
+        } = media;
+        const url = video.dataset.url;
+        const poster = video.dataset.poster;
+        open(media.popup.id);
+
+        const mediaContent = url ? (() => {
+          const finalUrl = url.includes("?") ?
+            url + "&autoplay=1&mute=1" :
+            url + "?autoplay=1&mute=1";
+
+          return `<iframe class="object-common"
+            src="${finalUrl}"
+            allow="autoplay; encrypted-media"
+            referrerpolicy="strict-origin-when-cross-origin"
+            allowfullscreen>
+          </iframe>`;
+        })() : `<img class="object-common" src="${poster || ''}"
+          alt="${video.dataset.title || ''}" loading="eager" />`;
+
+        body.innerHTML = `
+            <section class="section-gallery">
+              <div class="wrapper">
+                <div class="list-top-gallery-detail">
+                  <div class="slide-video yt-iframe-wrap">
+                    ${mediaContent}
+                  </div>
+                </div>
+                <div class="swiper-controller">
+                  <p class="swiper-title">${video.dataset.title || ""}</p>
+                </div>
+              </div>
+            </section>
+          `;
+        return;
+      }
+
+      if (premisesItem && premises) {
+        const {
+          body
+        } = premises;
+
+        open("premisesPopup");
+        body.innerHTML = "Loading...";
+
+        try {
+          const html = await (await fetch(premisesItem.dataset.url)).text();
+          body.innerHTML = html;
+          initProductsTopSlider(body);
+          hoverApartment(body);
+        } catch {
+          body.innerHTML = "Load failed";
+        }
+      }
+
+      if (premisesDetailItem && premisesDetail) {
+        const url = premisesDetailItem.dataset.url;
+        if (!url) return;
+
+        const {
+          body
+        } = premisesDetail;
+
+        open("premisesDetailPopup", {
+          lock: false,
+        });
+        body.innerHTML = "Loading...";
+
+        try {
+          body.innerHTML = await (await fetch(url)).text();
+        } catch {
+          body.innerHTML = "Load failed";
+        }
+      }
+    });
+  };
+
   window.WebFontConfig = {
     custom: {
       families: [
@@ -1679,14 +2374,31 @@
   triggerClick();
   fadeInAnimation();
   scrollPage();
+  initPanelZoomAnimation();
   initMobileNavLinks();
   slideKeyvisual();
   window.addEventListener("scroll", handleDarkBg, {
     passive: true
   });
   sliderProjects();
-  dragProjectsImage();
+  dragGalleryImage();
   partnersSlider();
+  galleryImagesSlider();
+  galleryVideoSlider();
+  projectsSectionSlider();
+  projectsUtilitiesSlider();
+  recruitmentPositionSlider();
+  recruitmentFileInput();
+  projectsDetailScroll();
   initTabs();
+  initPolicyAccordion();
   initTabsFromHash();
+  createPopup({
+    id: "mediaPopup",
+  });
+  createPopup({
+    id: "premisesPopup",
+    hasTitle: false,
+  });
+  initPopup();
 })();

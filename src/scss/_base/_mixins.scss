@@ -47,6 +47,12 @@
   }
 }
 
+@mixin screen-low {
+  @media (min-width: 768px) and (max-height: 980px) {
+    @content; 
+  }
+}
+
 @mixin print {
   @media print {
     @content;

@@ -5,6 +5,18 @@
   color: #fff;
   font-size: 0.18rem;
   line-height: 1.6111111111;
+
+  strong {
+    font-weight: 700;
+  }
+
+  p+p {
+    margin-top: .15rem;
+  }
+
+  p + ul {
+    margin-top: 0.15rem;
+  }
 }
 
 .paragraph-common p:last-child {

@@ -16,7 +16,7 @@ block content
         .group-central
           .inner
             .central-bg
-              picture.about-media
+              picture.about-media.ani-zoom
                 source(media="(max-width: 767.98px)" srcset=imgPC+"about_city_sp.png")
                 img(src=imgPC+"about_city.jpg" alt="Khu đô thị hiện đại do BLUEMARQ Development phát triển" width="1920" height="1050" loading="eager")
               .wrapper
@@ -37,7 +37,7 @@ block content
                   .capability-intro
                     .capability-heading
                       span.decor-common
-                      h1.title-common-primary Năng lực<br>phát triển toàn diện
+                      h2.title-common-primary Năng lực<br>phát triển toàn diện
                     .paragraph-common
                       p Từ nghiên cứu phát triển sản phẩm, ứng dụng công nghệ đến thi công và quản lý dự án, BLUEMARQ Development làm chủ toàn bộ chuỗi giá trị để mang đến những công trình chất lượng cao.
                   ul.capability-list
@@ -137,6 +137,41 @@ block content
                           h3.title-common-primary.is-small Tận Tâm
                           .paragraph-common
                             p Chăm chút đến từng chi tiết trong không gian sống. Luôn đặt lợi ích cư dân lên hàng đầu, mang lại những di sản vượt thời gian (Dedication).
+      section.panel.section-introduction-implementation
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .implementation-layout
+                  .implementation-heading
+                    span.decor-common.md
+                    span.decor-common-secondary.sm
+                    h2.title-common-primary Năng lực triển khai
+                  ul.implementation-list
+                    li.implementation-item
+                      .implementation-icon
+                        img(src=imgPC+"implementation_icon_circle.svg" alt="" width="89" height="89" loading="lazy")
+                        img.implementation-icon-symbol(src=imgPC+"implementation_icon_ownership.png" alt="" width="48" height="51" loading="lazy")
+                      .implementation-content
+                        h3.title-common-primary Đa sở hữu
+                        .paragraph-common
+                          p Hà An hướng tới việc đa dạng hóa và mở rộng quy mô sở hữu bao gồm cá nhân, pháp nhân, các định chế tài chính trong và ngoài nước nhằm tăng quy mô vốn điều lệ.
+                    li.implementation-item
+                      .implementation-icon
+                        img(src=imgPC+"implementation_icon_circle.svg" alt="" width="89" height="89" loading="lazy")
+                        img.implementation-icon-symbol(src=imgPC+"implementation_icon_industry.png" alt="" width="56" height="43" loading="lazy")
+                      .implementation-content
+                        h3.title-common-primary Đa ngành nghề
+                        .paragraph-common
+                          p Xuất phát từ dịch vụ bất động sản nhưng Hà An không ngừng tìm kiếm, nghiên cứu và phát triển sang các ngành khác, đem lại giá trị gia tăng cho xã hội.
+                    li.implementation-item
+                      .implementation-icon
+                        img(src=imgPC+"implementation_icon_circle.svg" alt="" width="89" height="89" loading="lazy")
+                        img.implementation-icon-symbol(src=imgPC+"implementation_icon_global.png" alt="" width="44" height="44" loading="lazy")
+                      .implementation-content
+                        h3.title-common-primary Đa quốc gia
+                        .paragraph-common
+                          p Không chỉ phát triển tại thị trường Việt Nam, Hà An định hướng vươn ra khu vực Đông Nam Á và toàn cầu trong tương lai gần.
       section.panel.section-introduction-lead#section-lead
         .group-central
           .inner
@@ -182,7 +217,7 @@ block content
                     h2.title-common-primary Đối tác chiến lược
                     .paragraph-common
                       p Đồng hành cùng các định chế tài chính, nhà thầu và đơn vị tư vấn hàng đầu trong nước và quốc tế.
-                  .list-relationship-tabs.js-tabs
+                  .list-common-tabs.js-tabs
                     .block-wrap
                       ul.block-list
                         li.block-item.tab-btn.active(data-tab="tab1" data-tabs-bound="true")
@@ -196,9 +231,9 @@ block content
                     .tabs-content
                       .tab-panel.active#panel-tab1(data-hover-bound="true")
                         .swiper-container
-                          .swiper.js-relationship-slider.swiper-initialized.swiper-horizontal.swiper-backface-hidden
-                            .swiper-wrapper#swiper-wrapper-100b5295befe88929(aria-live="off" style="transition-duration: 1500ms; transform: translate3d(-1152px, 0px, 0px);")
-                              .swiper-slide.swiper-slide-next(role="group" aria-label="3 / 3" data-swiper-slide-index="2" style="width: 576px;")
+                          .swiper.js-relationship-slider
+                            .swiper-wrapper
+                              .swiper-slide
                                 .logo-grid
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_01.png" width="225" height="116" loading="eager" alt="Viet A Bank")
@@ -272,7 +307,7 @@ block content
                                     img.object-common(src=imgPC+"partners_img_08.png" width="225" height="116" loading="eager" alt="Viet A Bank")
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_09.png" width="225" height="116" loading="eager" alt="Viet A Bank")
-                              .swiper-slide.swiper-slide-prev(role="group" aria-label="1 / 3" data-swiper-slide-index="0" style="width: 576px;")
+                              .swiper-slide
                                 .logo-grid
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_01.png" width="225" height="116" loading="eager" alt="Viet A Bank")
@@ -346,7 +381,7 @@ block content
                                     img.object-common(src=imgPC+"partners_img_08.png" width="225" height="116" loading="eager" alt="Viet A Bank")
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_09.png" width="225" height="116" loading="eager" alt="Viet A Bank")
-                              .swiper-slide.swiper-slide-active(role="group" aria-label="2 / 3" data-swiper-slide-index="1" style="width: 576px;")
+                              .swiper-slide
                                 .logo-grid
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_01.png" width="225" height="116" loading="eager" alt="Viet A Bank")
@@ -420,11 +455,7 @@ block content
                                     img.object-common(src=imgPC+"partners_img_08.png" width="225" height="116" loading="eager" alt="Viet A Bank")
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_09.png" width="225" height="116" loading="eager" alt="Viet A Bank")
-                            span.swiper-notification(aria-live="assertive" aria-atomic="true")
-                          .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal#bankPagination
-                            span.swiper-pagination-bullet(tabindex="0" role="button" aria-label="Go to slide 1")
-                            span.swiper-pagination-bullet.swiper-pagination-bullet-active(tabindex="0" role="button" aria-label="Go to slide 2" aria-current="true")
-                            span.swiper-pagination-bullet(tabindex="0" role="button" aria-label="Go to slide 3")
+                          .swiper-pagination
                       .tab-panel#panel-tab2(data-hover-bound="true")
                         .paragraph-common
                           p Nội dung
@@ -434,7 +465,7 @@ block content
                       .tab-panel#panel-tab4(data-hover-bound="true")
                         .paragraph-common
                           p Nội dung
-      section.panel.section-footer-common#section-contact
+      section.panel.section-footer-common
         .group-central
           .inner
             .central-bg
@@ -445,8 +476,8 @@ block content
                       img.object-common(src=imgCommonPC+"header_logo.svg" alt="BLUEMARQ DEVELOPMENT" width="255" height="62" loading="eager")
                     .information-content
                       p
-                        | Sẵn sàng kết nối nguồn lực, bảo chứng
-                        br(clas="md")
+                        | Sẵn sàng kết nối nguồn lực, bảo chứng 
+                        br(class="md")
                         | tương lai cùng BLUEMARQ Development.
                     .information-social
                       ul.social-list
@@ -514,7 +545,7 @@ block content
                     small.footer-copyright © 2026 BLUEMARQ Development. All rights reserved.
                     .footer-policy
                       .policy-item
-                        a.item-link(href=path+"/#") Chính sách bảo mật
+                        a.item-link(href=path+"/policy/") Chính sách bảo mật
                       .policy-item
                         a.item-link(href=path+"/#") Điều khoản sử dụng
                       .policy-item

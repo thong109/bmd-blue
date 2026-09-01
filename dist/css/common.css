@@ -369,7 +369,7 @@ html.is-touchable .trans:hover {
 }
 @media only screen and (max-width: 767.98px) {
   .wrapper {
-    width: calc(100% - 0.2rem);
+    width: calc(100% - 0.4rem);
   }
 }
 
@@ -542,9 +542,6 @@ html.is-device-iphone .header-common .header-lang span {
 @media print, (min-width: 768px) {
   .header-common {
     padding: 0.16rem 0;
-  }
-  .header-common .wrapper {
-    max-width: 16.8rem;
   }
   .header-common .header-icon {
     width: 0.55rem;
@@ -1004,7 +1001,7 @@ html.is-device-iphone .header-common .header-lang span {
 }
 
 #mediaPopup .popup-box {
-  background: url(../resources/images/top/gallery_bg_01.jpg) center center/cover no-repeat;
+  background: url(../resources/images/common/bg_common.png) center center/cover no-repeat;
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -1012,7 +1009,12 @@ html.is-device-iphone .header-common .header-lang span {
 }
 
 #mediaPopup .popup-close {
-  background: url(../resources/images/top/close_icon_01.svg) center center/cover no-repeat;
+  background: url(../resources/images/common/close_icon_01.svg) center center/cover no-repeat;
+}
+
+#mediaPopup .popup-box:has(.slide-video) .swiper-controller {
+  grid-template-columns: 1fr auto;
+  gap: 0;
 }
 
 @media print, (min-width: 768px) {
@@ -1022,9 +1024,6 @@ html.is-device-iphone .header-common .header-lang span {
     align-items: center;
     flex-direction: column;
     justify-content: center;
-  }
-  #mediaPopup .popup-box:has(.slide-video) {
-    display: block;
   }
   #mediaPopup .popup-box:has(.slide-video) .popup-title {
     margin-top: 0.2rem;
@@ -1048,10 +1047,6 @@ html.is-device-iphone .header-common .header-lang span {
 }
 
 @media print, (min-width: 768px) {
-  #premisesPopup .popup-close,
-  #premisesDetailPopup .popup-close {
-    background: url(../resources/images/top/close_icon_02.svg) center center/cover no-repeat;
-  }
   #premisesPopup .popup-body,
   #premisesDetailPopup .popup-body {
     height: 100%;
@@ -1538,16 +1533,15 @@ html.is-device-iphone .header-common .header-lang span {
 }
 @media only screen and (max-width: 767.98px) {
   .footer-policy {
-    margin-top: 0.1rem;
     justify-content: center;
-    flex-wrap: wrap;
-    padding: 0 0.3rem;
+    margin: 0.1rem -0.1rem 0;
   }
   .footer-policy .policy-item {
     margin-bottom: 0.1rem;
     text-align: center;
     border-right: 1px solid #616d80;
-    width: 50%;
+    width: auto;
+    padding: 0 0.1rem;
   }
   .footer-policy .policy-item:last-child {
     border: none;
@@ -1612,6 +1606,11 @@ html.is-device-iphone .header-common .header-lang span {
   justify-content: flex-start;
   margin-top: 0.4rem;
 }
+@media (min-width: 768px) and (max-height: 980px) {
+  .form-common .form-group + .form-group {
+    margin-top: 0;
+  }
+}
 @media only screen and (max-width: 767.98px) {
   .form-common .form-controller {
     justify-content: center;
@@ -1620,6 +1619,10 @@ html.is-device-iphone .header-common .header-lang span {
 
 #contactPopup .contact-wrapper {
   position: relative;
+  width: 100%;
+}
+#contactPopup .decor-common {
+  clip-path: none;
 }
 #contactPopup .popup-box {
   background: url(../resources/images/common/form_bg.jpg) center center/cover no-repeat;
@@ -1638,6 +1641,8 @@ html.is-device-iphone .header-common .header-lang span {
 }
 #contactPopup .popup-body {
   height: 100%;
+  display: flex;
+  align-items: center;
 }
 #contactPopup .popup-overlay {
   background: rgba(13, 29, 25, 0.6);
@@ -1645,13 +1650,24 @@ html.is-device-iphone .header-common .header-lang span {
 @media print, (min-width: 768px) {
   #contactPopup .popup-box {
     max-width: 10.72rem;
-    max-height: 60svh;
+    max-height: 90%;
   }
   #contactPopup .popup-body {
     padding: 0.59rem 1.2rem;
   }
   #contactPopup .contact-wrapper {
     padding: 0 0 0 0.55rem;
+  }
+}
+@media (min-width: 768px) and (max-height: 980px) {
+  #contactPopup .popup-body {
+    padding: 0.3rem 0.6rem;
+  }
+  #contactPopup .title-common-primary {
+    margin-bottom: 0.2rem;
+  }
+  #contactPopup .contact-wrapper {
+    padding: 0 0 0 0.6rem;
   }
 }
 @media only screen and (max-width: 767.98px) {
@@ -1734,6 +1750,7 @@ html.is-device-iphone .header-common .header-lang span {
   text-transform: uppercase;
   transition: background 0.5s cubic-bezier(0.15, 0.41, 0.69, 0.94);
   color: #0b1f3a;
+  cursor: pointer;
 }
 
 .button-common-primary::after {
@@ -1827,12 +1844,24 @@ html.is-device-iphone .header-common .header-lang span {
   background: url(../resources/images/common/arrow_icon_02.svg) center center/contain no-repeat;
 }
 
+.button-common-secondary.is-back {
+  border-color: #F5F1E8;
+}
+
+.button-common-secondary.is-back::before {
+  background: url(../resources/images/common/arrow_icon_04.svg) center center/contain no-repeat;
+}
+
 .button-common-secondary:hover {
   border-color: #F5F1E8;
 }
 
 .button-common-secondary:hover::before {
   transform: translate(0.05rem, -0.05rem);
+}
+
+.button-common-secondary.is-back:hover::before {
+  transform: translateX(-0.05rem);
 }
 
 @media print, (min-width: 768px) {
@@ -2326,6 +2355,15 @@ html.is-device-iphone .header-common .header-lang span {
   font-size: 0.18rem;
   line-height: 1.6111111111;
 }
+.paragraph-common strong {
+  font-weight: 700;
+}
+.paragraph-common p + p {
+  margin-top: 0.15rem;
+}
+.paragraph-common p + ul {
+  margin-top: 0.15rem;
+}
 
 .paragraph-common p:last-child {
   margin-bottom: 0;
@@ -2814,7 +2852,7 @@ html.wf-active .fade-in-up {
 
 .decor-common {
   position: absolute;
-  width: 0.23rem;
+  width: 0.2rem;
   height: 100%;
   top: 0;
   left: 0;
@@ -2840,7 +2878,7 @@ html.wf-active .fade-in-up {
 
 @media print, (min-width: 768px) {
   .decor-common {
-    background: url(../resources/images/top/decor_icon_01.svg) top 1.28rem left/contain no-repeat;
+    background: url(../resources/images/top/decor_icon_01.svg) top 1.28rem left/0.2rem 0.2rem no-repeat;
   }
   .decor-common::before {
     height: 1.18rem;
@@ -2851,7 +2889,7 @@ html.wf-active .fade-in-up {
 }
 @media only screen and (max-width: 767.98px) {
   .decor-common {
-    background: url(../resources/images/top/decor_icon_01.svg) top 0.55rem left/contain no-repeat;
+    background: url(../resources/images/top/decor_icon_01.svg) top 0.55rem left/0.2rem 0.2rem no-repeat;
   }
   .decor-common::before {
     height: 0.5rem;
@@ -3015,7 +3053,12 @@ html.wf-active .fade-in-up {
 .section-top-vision.is-active .decor-common,
 .section-introduction-about.is-active .decor-common,
 .section-introduction-capability.is-active .decor-common,
-.section-top-architecture.is-active .decor-common {
+.section-contact.is-active .decor-common,
+.section-introduction-implementation.is-active .decor-common,
+.section-top-architecture.is-active .decor-common,
+.section-recruitment-about.is-active .decor-common,
+.section-recruitment-policy.is-active .decor-common,
+.section-recruitment-apply.is-active .decor-common {
   clip-path: inset(0 0 0 0);
 }
 
@@ -3056,7 +3099,7 @@ html.wf-active .fade-in-up {
 }
 @media only screen and (max-width: 767.98px) {
   .section-top-value .central-bg {
-    padding: 0.4rem 0;
+    padding: 0.7rem 0;
   }
   .section-top-value .value-heading {
     margin-bottom: 0.4rem;
@@ -3209,7 +3252,6 @@ html.wf-active .fade-in-up {
     margin-top: 0.9rem;
   }
   .list-top-relationship .swiper-pagination-bullet {
-    margin: 0 0.05rem !important;
     width: 0.12rem;
     height: 0.12rem;
   }
@@ -3220,8 +3262,7 @@ html.wf-active .fade-in-up {
 }
 @media (min-width: 768px) and (max-width: 1024.98px) {
   .list-top-relationship {
-    padding: 0.4rem;
-    min-height: 9.8rem;
+    min-height: 9rem;
   }
   .list-top-relationship .logo-grid {
     grid-template-columns: repeat(6, 1fr);
@@ -3281,24 +3322,24 @@ html.wf-active .fade-in-up {
     margin-bottom: 0.3rem;
   }
   .section-top-relationship .central-bg {
-    padding: 0.4rem 0;
+    padding: 0.7rem 0;
     background: none;
   }
   .section-top-relationship .relationship-heading {
     margin-bottom: 0.3rem;
   }
 }
-.list-relationship-tabs .block-wrap {
+.list-common-tabs .block-wrap {
   display: flex;
   justify-content: center;
 }
-.list-relationship-tabs .block-list {
+.list-common-tabs .block-list {
   display: inline-flex;
   justify-content: center;
   position: relative;
   border-bottom: 1px solid #c6a45a;
 }
-.list-relationship-tabs .block-item {
+.list-common-tabs .block-item {
   color: #f5f1e8;
   transition: color 0.35s ease;
   font-weight: 500;
@@ -3306,7 +3347,7 @@ html.wf-active .fade-in-up {
   cursor: pointer;
   position: relative;
 }
-.list-relationship-tabs .block-item::after {
+.list-common-tabs .block-item::after {
   position: absolute;
   content: "";
   width: 0;
@@ -3318,30 +3359,30 @@ html.wf-active .fade-in-up {
   transition: width 0.35s ease;
   z-index: 1;
 }
-.list-relationship-tabs .block-item.active, .list-relationship-tabs .block-item:hover {
+.list-common-tabs .block-item.active, .list-common-tabs .block-item:hover {
   color: #c6a45a;
 }
-.list-relationship-tabs .block-item.active::after, .list-relationship-tabs .block-item:hover::after {
+.list-common-tabs .block-item.active::after, .list-common-tabs .block-item:hover::after {
   width: 100%;
 }
-.list-relationship-tabs .item-text {
+.list-common-tabs .item-text {
   margin: 0;
 }
-.list-relationship-tabs .tab-panel {
+.list-common-tabs .tab-panel {
   display: none;
 }
-.list-relationship-tabs .tab-panel.active {
+.list-common-tabs .tab-panel.active {
   display: block;
 }
 @media print, (min-width: 768px) {
-  .list-relationship-tabs {
+  .list-common-tabs {
     margin-bottom: 0.2rem;
   }
-  .list-relationship-tabs .block-list {
+  .list-common-tabs .block-list {
     gap: 0.7rem;
     margin-bottom: 0.4rem;
   }
-  .list-relationship-tabs .block-item {
+  .list-common-tabs .block-item {
     margin-bottom: -0.03rem;
     padding-bottom: 0.11rem;
     font-size: 0.2rem;
@@ -3349,34 +3390,48 @@ html.wf-active .fade-in-up {
   }
 }
 @media (min-width: 768px) and (max-width: 1024.98px) {
-  .list-relationship-tabs .block-list {
+  .list-common-tabs .block-list {
     gap: 0.5rem;
   }
 }
 @media only screen and (max-width: 767.98px) {
-  .list-relationship-tabs {
+  .list-common-tabs {
     margin-bottom: 0.2rem;
   }
-  .list-relationship-tabs .block-wrap {
+  .list-common-tabs .block-wrap {
     display: block;
     width: 100%;
     overflow-x: auto;
   }
-  .list-relationship-tabs .block-wrap::-webkit-scrollbar {
+  .list-common-tabs .block-wrap::-webkit-scrollbar {
     width: 0;
     opacity: 0;
   }
-  .list-relationship-tabs .block-list {
+  .list-common-tabs .block-list {
     gap: 0.3rem;
     margin-bottom: 0.3rem;
     width: -moz-max-content;
     width: max-content;
   }
-  .list-relationship-tabs .block-item {
+  .list-common-tabs .block-item {
     flex-shrink: 0;
     margin-bottom: -0.03rem;
     padding-bottom: 0.11rem;
     font-size: 0.2rem;
     line-height: 1.45;
+  }
+}
+
+@media print, (min-width: 768px) {
+  .ani-zoom {
+    opacity: 0;
+    animation: scaleOut 2s forwards;
+    animation-delay: 0.5s;
+    animation-play-state: paused;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+  .ani-zoom {
+    opacity: 1;
   }
 }

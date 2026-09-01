@@ -208,7 +208,7 @@ block content
                           | Cam kết tuyệt đối của BLUEMARQ
                           br.md
                           | Development cho sự phát triển bền vững. Mọi dự án và không gian sống đều phải tuân thủ khắt khe các tiêu chuẩn xanh sinh thái, tối ưu hóa mức tiêu thụ năng lượng và mang lại nền tảng sức khỏe toàn diện cho con người qua nhiều thế hệ.
-                .architecture-background
+                .architecture-background.ani-zoom
                   picture
                     source(media="(max-width: 767.98px)" srcset=imgPC+"architecture_img_01_sp.jpg")
                     img.object-common(src=imgPC+"architecture_img_01.png" width="1174" height="1050" loading="eager" alt="Architecture For Humanity")
@@ -257,7 +257,7 @@ block content
                     h2.title-common-primary Đối tác
                     .paragraph-common
                       p Đồng hành cùng các định chế tài chính, nhà thầu và đơn vị tư vấn hàng đầu trong nước và quốc tế.
-                  .list-relationship-tabs.js-tabs
+                  .list-common-tabs.js-tabs
                     .block-wrap
                       ul.block-list
                         li.block-item.tab-btn.active(data-tab="tab1" data-tabs-bound="true")
@@ -271,9 +271,9 @@ block content
                     .tabs-content
                       .tab-panel.active#panel-tab1(data-hover-bound="true")
                         .swiper-container
-                          .swiper.js-relationship-slider.swiper-initialized.swiper-horizontal.swiper-backface-hidden
-                            .swiper-wrapper#swiper-wrapper-100b5295befe88929(aria-live="off" style="transition-duration: 1500ms; transform: translate3d(-1152px, 0px, 0px);")
-                              .swiper-slide.swiper-slide-next(role="group" aria-label="3 / 3" data-swiper-slide-index="2" style="width: 576px;")
+                          .swiper.js-relationship-slider
+                            .swiper-wrapper
+                              .swiper-slide
                                 .logo-grid
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_01.png" width="225" height="116" loading="eager" alt="Viet A Bank")
@@ -347,7 +347,7 @@ block content
                                     img.object-common(src=imgPC+"partners_img_08.png" width="225" height="116" loading="eager" alt="Viet A Bank")
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_09.png" width="225" height="116" loading="eager" alt="Viet A Bank")
-                              .swiper-slide.swiper-slide-prev(role="group" aria-label="1 / 3" data-swiper-slide-index="0" style="width: 576px;")
+                              .swiper-slide
                                 .logo-grid
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_01.png" width="225" height="116" loading="eager" alt="Viet A Bank")
@@ -421,7 +421,7 @@ block content
                                     img.object-common(src=imgPC+"partners_img_08.png" width="225" height="116" loading="eager" alt="Viet A Bank")
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_09.png" width="225" height="116" loading="eager" alt="Viet A Bank")
-                              .swiper-slide.swiper-slide-active(role="group" aria-label="2 / 3" data-swiper-slide-index="1" style="width: 576px;")
+                              .swiper-slide
                                 .logo-grid
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_01.png" width="225" height="116" loading="eager" alt="Viet A Bank")
@@ -495,11 +495,7 @@ block content
                                     img.object-common(src=imgPC+"partners_img_08.png" width="225" height="116" loading="eager" alt="Viet A Bank")
                                   .logo-cell
                                     img.object-common(src=imgPC+"partners_img_09.png" width="225" height="116" loading="eager" alt="Viet A Bank")
-                            span.swiper-notification(aria-live="assertive" aria-atomic="true")
-                          .swiper-pagination.swiper-pagination-clickable.swiper-pagination-bullets.swiper-pagination-horizontal#bankPagination
-                            span.swiper-pagination-bullet(tabindex="0" role="button" aria-label="Go to slide 1")
-                            span.swiper-pagination-bullet.swiper-pagination-bullet-active(tabindex="0" role="button" aria-label="Go to slide 2" aria-current="true")
-                            span.swiper-pagination-bullet(tabindex="0" role="button" aria-label="Go to slide 3")
+                          .swiper-pagination
                       .tab-panel#panel-tab2(data-hover-bound="true")
                         .paragraph-common
                           p Nội dung
@@ -522,7 +518,7 @@ block content
                   span ”
                 .hero-sub.js-title
                   p.journey-subtitle — HÀNH TRÌNH KHAI PHÓNG SỰ THỊNH VƯỢNG —
-      section.panel.section-footer-common#section-contact
+      section.panel.section-footer-common
         .group-central
           .inner
             .central-bg
@@ -533,8 +529,8 @@ block content
                       img.object-common(src=imgCommonPC+"header_logo.svg" alt="BLUEMARQ DEVELOPMENT" width="255" height="62" loading="eager")
                     .information-content
                       p
-                        | Sẵn sàng kết nối nguồn lực, bảo chứng
-                        br(clas="md")
+                        | Sẵn sàng kết nối nguồn lực, bảo chứng 
+                        br(class="md")
                         | tương lai cùng BLUEMARQ Development.
                     .information-social
                       ul.social-list
@@ -602,7 +598,7 @@ block content
                     small.footer-copyright © 2026 BLUEMARQ Development. All rights reserved.
                     .footer-policy
                       .policy-item
-                        a.item-link(href=path+"/#") Chính sách bảo mật
+                        a.item-link(href=path+"/policy/") Chính sách bảo mật
                       .policy-item
                         a.item-link(href=path+"/#") Điều khoản sử dụng
                       .policy-item

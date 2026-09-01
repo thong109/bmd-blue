@@ -1,0 +1,122 @@
+extends ../../_base/_layout.pug
+block vars
+  - var metaTitle = 'BLUEMARQ Development | Projects Detail'
+  - var path = '../..'
+  - var page = 'projects'
+  - var pageClass = 'is-page-projects-detail'
+  - var imgPC = path + '/resources/images/projects/'
+  - var imgSP = path + '/resources/images/projects/sp/'
+  - var imgCommonPC = path + '/resources/images/common/'
+  - var imgCommonSP = path + '/resources/images/common/sp/'
+  - var videoCommon = path + '/resources/video/'
+
+include ./_parts/_projects-detail-website.pug
+
+block content
+  main
+    .projects-detail-scroll.js-projects-detail-scroll
+      .projects-detail-sticky
+        .projects-detail-track.js-projects-detail-track
+          section.projects-detail-panel.section-projects-detail-hero
+            .projects-detail-background
+              img.object-common(src=imgPC+"projects_detail_bg.png" alt="Toàn cảnh dự án The Privé" width="1920" height="1078" loading="eager")
+            .projects-detail-shade
+            .wrapper
+              .projects-detail-layout
+                .projects-detail-content
+                  .content-wrapper
+                    h1.projects-detail-title.js-projects-detail-reveal The Privé
+                    ul.projects-detail-meta.js-projects-detail-reveal
+                      li.projects-detail-meta-item
+                        img(src=imgPC+"projects_detail_type.svg" alt="" width="20" height="20")
+                        span Căn hộ hạng sang
+                      li.projects-detail-meta-item
+                        img(src=imgPC+"projects_detail_type.svg" alt="" width="20" height="20")
+                        span Đang triển khai
+                      li.projects-detail-description.paragraph-common
+                        img(src=imgPC+"projects_detail_location.svg" alt="" width="21" height="25")
+                        p Tọa lạc tại vị trí đắc địa bậc nhất khu Đông Sài Gòn, The Privé là điểm giao thoa của các trục đường huyết mạch — biểu tượng cho phong cách sống thượng lưu và giá trị đầu tư bền vững.
+                  +projectsDetailWebsite('#')
+          section.projects-detail-panel.section-projects-detail-overview
+            .projects-overview-media.js-projects-detail-reveal
+              img.object-common(src=imgPC+"projects_detail_overview.png" alt="Tổng quan dự án The Privé" width="1120" height="1050" loading="lazy")
+            .projects-overview-content
+              .content-wrapper
+                h2.projects-overview-title.title-common-primary.js-projects-detail-reveal Tổng quan dự án
+                .paragraph-common.js-projects-detail-reveal
+                  p Được tạo nên từ những mỹ cảm sâu sắc nhất về một cuộc sống thượng lưu đích thực, để trở thành một công trình tuyệt mỹ, kiêu hãnh vươn mình, chạm khắc nên một biểu tượng đẹp nơi trung tâm Sài Gòn.
+                dl.projects-overview-stats.js-projects-detail-reveal
+                  .projects-overview-stat
+                    dt Quy mô
+                    dd
+                      strong 6,7
+                      span ha
+                  .projects-overview-stat
+                    dt Số tháp
+                    dd
+                      strong 12
+                  .projects-overview-stat
+                    dt Số căn hộ
+                    dd
+                      strong 3.175
+                  .projects-overview-stat
+                    dt Mật độ xây dựng
+                    dd
+                      strong 25%
+              +projectsDetailWebsite('#')
+          section.projects-detail-panel.section-projects-detail-map
+            .projects-map-background.js-projects-detail-reveal
+              img.object-common(src=imgPC+"projects_detail_map.png" alt="Bản đồ vị trí dự án The Privé" width="1509" height="1392" loading="lazy")
+            .wrapper
+              .projects-map-content
+                .content-wrapper
+                  h2.title-common-primary.js-projects-detail-reveal Vị trí độc tôn
+                  .paragraph-common.js-projects-detail-reveal
+                    p Tọa lạc tại vị trí đắc địa bậc nhất khu Đông Sài Gòn, The Privé là điểm giao thoa của các trục đường huyết mạch. Dự án tích hợp tiện ích kết nối đa chiều thông qua hệ thống giao thông hiện đại, cho phép cư dân dễ dàng tiếp cận mọi tiện ích của thành phố.
+                +projectsDetailWebsite('#')
+          section.projects-detail-panel.section-projects-detail-utilities
+            .projects-utilities-content
+              .content-wrapper
+                h2.title-common-primary.js-projects-detail-reveal Tiện ích
+                .paragraph-common.js-projects-detail-reveal
+                  p The Privé được thiết kế theo phong cách resort cao cấp, với mật độ xây dựng thấp, phần lớn diện tích dành cho không gian xanh và tiện ích nội khu. Dự án cung cấp hơn 20 tiện ích hiện đại.
+              +projectsDetailWebsite('#')
+            .swiper.projects-utilities-slider.js-projects-utilities-slider.js-projects-detail-reveal
+              .swiper-wrapper
+                .swiper-slide
+                  figure.projects-utilities-item
+                    img.object-common(src=imgPC+"projects_detail_utility_billiards.png" alt="Khu Billards tại The Privé" width="1471" height="1050" loading="eager")
+                    figcaption Billards
+                .swiper-slide
+                  figure.projects-utilities-item
+                    img.object-common(src=imgPC+"projects_detail_utility_gym.png" alt="The Grand Gym tại The Privé" width="2005" height="1129" loading="eager")
+                    figcaption The Grand Gym
+                .swiper-slide
+                  figure.projects-utilities-item
+                    img.object-common(src=imgPC+"projects_detail_utility_versailles.png" alt="Phòng tiệc Versailles tại The Privé" width="1899" height="1069" loading="eager")
+                    figcaption Phòng tiệc Versailles
+          section.projects-detail-panel.section-projects-detail-contact
+            .wrapper
+              .contact-wrapper
+                span.decor-common
+                h1.title-common-primary.js-projects-detail-reveal Liên hệ
+                .paragraph-common.js-projects-detail-reveal
+                  p Vui lòng cung cấp thông tin chi tiết của bạn, chúng tôi sẽ phản hồi bạn trong thời gian sớm nhất.
+                form(action="").form-common
+                  .form-group.js-projects-detail-reveal
+                    label(for="name").form-label Họ tên *
+                    input.input-common(type="text" name="name" id="name" required placeholder="Nhập tên của bạn")
+                  .form-group.js-projects-detail-reveal
+                    label(for="phone").form-label Điện thoại *
+                    input.input-common(type="text" name="phone" id="phone" placeholder="Nhập điện thoại của bạn")
+                  .form-group.js-projects-detail-reveal
+                    label(for="note").form-label Yêu cầu tư vấn *
+                    input.input-common(type="text" name="note" id="note" placeholder="Nhập nội dung cần tư vấn")
+                  .form-controller.js-projects-detail-reveal
+                    a.button-common-primary(href="#")
+                      span.button-wrapper Gửi liên hệ
+              .contact-controller
+                a.projects-detail-website.js-projects-detail-reveal(href=path+"/projects/")
+                  span.button-common-secondary.is-back
+                  span Quay về
+                +projectsDetailWebsite('#')

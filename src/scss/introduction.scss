@@ -4,6 +4,12 @@
 .section-introduction-about {
   color: #fff;
 
+  &.is-active {
+    .ani-zoom {
+      animation-play-state: running;
+    }
+  }
+
   .central-bg {
     position: relative;
     overflow: hidden;
@@ -99,7 +105,8 @@
 @include mobile {
   .section-introduction-about {
     .central-bg {
-      display: block;
+      display: flex;
+      flex-direction: column-reverse;
       background-image: url(../resources/images/introduction/capability_bg_sp.png);
     }
 
@@ -107,7 +114,6 @@
       position: relative;
       width: 100%;
       height: 3.1rem;
-      margin-top: 0.8rem;
     }
 
     .about-media::after {
@@ -117,7 +123,7 @@
     .about-layout {
       display: block;
       min-height: 0;
-      padding: 0 .1rem 0.7rem;
+      padding: 1.4rem 0 .4rem;
     }
 
     .about-content {
@@ -131,7 +137,7 @@
     }
 
     .about-lead {
-      margin-top: 0.22rem;
+      margin: 0.2rem 0;
       font-size: 0.22rem;
       line-height: 1.4;
     }
@@ -139,9 +145,6 @@
     .paragraph-common {
       width: auto;
       margin-top: 0.3rem;
-      padding-right: 0.1rem;
-      font-size: 0.14rem;
-      line-height: 1.65;
     }
   }
 }
@@ -272,7 +275,11 @@
 
     .capability-layout {
       display: block;
-      padding: 0.7rem 0.1rem;
+      padding: 0.7rem 0;
+    }
+
+    .capability-heading {
+      margin-right: -0.1rem;
     }
 
     .capability-intro {
@@ -306,6 +313,227 @@
     .capability-card-description {
       margin-top: 0.04rem;
       font-size: 0.13rem;
+    }
+  }
+}
+
+.section-introduction-implementation {
+  color: #fff;
+
+  .central-bg {
+    position: relative;
+    overflow: hidden;
+    background: #0b1f3a url(../resources/images/introduction/implementation_bg.png) center / cover no-repeat;
+  }
+
+  .central-bg::before {
+    position: absolute;
+    inset: 0;
+    background: url(../resources/images/introduction/implementation_pattern.png) center / cover no-repeat;
+    content: "";
+    opacity: 0.3;
+    pointer-events: none;
+  }
+
+  .wrapper {
+    position: relative;
+    z-index: 1;
+  }
+
+  .implementation-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 7.4rem;
+    align-items: center;
+    gap: 1.25rem;
+    width: 100%;
+    max-width: 16.8rem;
+    min-height: 6.59rem;
+    margin: 0 auto;
+    padding: 1.05rem 0.18rem 0.3rem 0.4rem;
+  }
+
+  .implementation-heading {
+    position: relative;
+    padding-left: 0.6rem;
+    display: flex;
+    align-items: center;
+    max-height: 5.27rem;
+  }
+
+  .implementation-heading,
+  .implementation-list {
+    height: 100%;
+  }
+
+  .implementation-list {
+    display: grid;
+    gap: 0.55rem;
+    padding-top: 0.35rem;
+  }
+
+  .implementation-item {
+    display: grid;
+    grid-template-columns: 0.89rem minmax(0, 1fr);
+    align-items: start;
+    gap: 0.65rem;
+    min-height: 1.79rem;
+    transition: transform .45s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .implementation-icon {
+    position: relative;
+    width: 0.89rem;
+    height: 0.89rem;
+    transition: filter .45s ease;
+  }
+
+  .implementation-icon>img:first-child {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
+  .implementation-icon-symbol {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    object-fit: contain;
+    transform: translate(-50%, -50%);
+  }
+
+  .implementation-content {
+    padding-top: 0.02rem;
+    transition: transform .45s cubic-bezier(.22, 1, .36, 1);
+  }
+
+  .implementation-content .title-common-primary {
+    margin-bottom: 0.14rem;
+    font-size: 0.4rem;
+    line-height: 1.5;
+    letter-spacing: -0.02rem;
+    transition: text-shadow .45s ease;
+  }
+
+  .implementation-content .paragraph-common {
+    max-width: 5rem;
+    font-size: 0.18rem;
+    line-height: calc(29 / 18);
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .section-introduction-implementation {
+    .implementation-item:hover {
+      transform: translateX(.12rem);
+    }
+
+    .implementation-item:hover .implementation-icon {
+      filter: drop-shadow(0 0 .14rem rgba(198, 164, 90, .48));
+    }
+
+    .implementation-item:hover .implementation-content {
+      transform: translateX(.05rem);
+    }
+
+    .implementation-item:hover .title-common-primary {
+      text-shadow: 0 0 .18rem rgba(198, 164, 90, .35);
+    }
+  }
+}
+
+@include tablet {
+  .section-introduction-implementation {
+    .implementation-layout {
+      grid-template-columns: minmax(0, 1fr) 5.4rem;
+      gap: 0.45rem;
+      min-height: 7.68rem;
+      padding: 0.8rem 0.2rem 0.35rem;
+    }
+
+    .implementation-heading .title-common-primary {
+      font-size: 0.38rem;
+      white-space: normal;
+    }
+
+    .implementation-list {
+      gap: 0.25rem;
+    }
+
+    .implementation-item {
+      grid-template-columns: 0.72rem minmax(0, 1fr);
+      gap: 0.35rem;
+      min-height: 1.5rem;
+    }
+
+    .implementation-icon {
+      width: 0.72rem;
+      height: 0.72rem;
+    }
+
+    .implementation-content .title-common-primary {
+      font-size: 0.28rem;
+    }
+
+    .implementation-content .paragraph-common {
+      font-size: 0.15rem;
+    }
+  }
+}
+
+@include mobile {
+  .section-introduction-implementation {
+    .central-bg {
+      background-position: center;
+    }
+
+    .implementation-layout {
+      display: block;
+      min-height: 0;
+      padding: .7rem 0;
+    }
+
+    .implementation-heading {
+      padding: 0 0 .3rem;
+      justify-content: center;
+    }
+
+    .implementation-heading .title-common-primary {
+      font-size: 0.32rem;
+    }
+
+    .implementation-list {
+      gap: 0.32rem;
+      margin-top: 0.55rem;
+      padding: 0;
+    }
+
+    .implementation-item {
+      grid-template-columns: 0.66rem minmax(0, 1fr);
+      gap: 0.22rem;
+      min-height: 0;
+    }
+
+    .implementation-icon {
+      width: 0.66rem;
+      height: 0.66rem;
+    }
+
+    .implementation-icon-symbol {
+      width: 0.36rem;
+      height: 0.36rem;
+    }
+
+    .implementation-content .title-common-primary {
+      margin-bottom: 0.05rem;
+      font-size: 0.22rem;
+      line-height: 1.35;
+    }
+
+    .implementation-content .paragraph-common {
+      font-size: 0.13rem;
+      line-height: 1.55;
     }
   }
 }
@@ -389,7 +617,7 @@
     }
 
     .lead-picture {
-      height: 3.25rem;
+      height: 5.25rem;
     }
 
     .lead-name {
@@ -442,7 +670,7 @@
     }
 
     .lead-layout {
-      padding: .7rem 0.1rem;
+      padding: .7rem 0;
     }
 
     .lead-heading {

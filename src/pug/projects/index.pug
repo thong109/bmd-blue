@@ -1,0 +1,178 @@
+extends ../_base/_layout.pug
+block vars
+  - var metaTitle = 'BLUEMARQ Development | Projects'
+  - var path = '..'
+  - var page = 'projects'
+  - var imgPC = path + '/resources/images/projects/'
+  - var imgSP = path + '/resources/images/projects/sp/'
+  - var imgCommonPC = path + '/resources/images/common/'
+  - var imgCommonSP = path + '/resources/images/common/sp/'
+  - var videoCommon = path + '/resources/video/'
+
+block content
+  - var ongoingProjects = [{ image: 'projects_gem_sky_world.png', title: 'Gem Sky World', type: 'Căn hộ hạng sang', delivery: 'Dự kiến bàn giao: 2026' }, { image: 'projects_opal_skyline.png', title: 'Opal Skyline', type: 'Căn hộ hạng sang', delivery: 'Dự kiến bàn giao: 2027' }]
+  - var ongoingProjectSlides = ongoingProjects.concat(ongoingProjects, ongoingProjects)
+  main
+    .slider-stage(aria-hidden="true")
+      section.panel.section-projects-about
+        .group-central
+          .inner
+            .central-bg
+              img.projects-about-background.object-common(src=imgPC+"projects_about_bg.png" alt="The Privé" width="1920" height="1081" loading="eager")
+              .projects-about-layout
+                .projects-about-body
+                  .wrapper
+                    h1.title-common-primary Dự án nổi bật
+                    .projects-about-content
+                      h2.projects-about-title
+                        a(href=path+"/projects/detail/" aria-label="Xem chi tiết dự án The Privé").trans The Privé — Dấu ấn hạng sang bên dòng sông
+                      ul.projects-about-details
+                        li.projects-about-feature
+                          img(src=imgPC+"projects_about_type.svg" alt="" width="20" height="20")
+                          span Căn hộ hạng sang
+                        li.projects-about-feature
+                          img(src=imgPC+"projects_about_river.svg" alt="" width="20" height="20")
+                          span 3 mặt giáp sông
+                        li.projects-about-description
+                          img(src=imgPC+"projects_about_location.svg" alt="" width="21" height="25")
+                          p Tọa lạc tại vị trí đắc địa bậc nhất khu Đông Sài Gòn, The Privé là điểm giao thoa của các trục đường huyết mạch.
+                    a.button-common-secondary.is-light(href=path+"/projects/detail/" aria-label="Xem chi tiết dự án The Privé")
+      section.panel.section-projects
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .projects-layout
+                  h2.title-common-primary.is-center.hero-title.js-title Dự án đang triển khai
+                  .swiper.projects-slider.js-projects-slider.hero-sub.js-title
+                    .swiper-wrapper
+                      each item in ongoingProjectSlides
+                        .swiper-slide
+                          article.projects-card
+                            a.projects-media(href=path+"/projects/detail/" aria-label="Xem dự án "+item.title)
+                              .projects-image
+                                img.object-common(src=imgPC+item.image alt=item.title width="790" height="500" loading="lazy")
+                              h3.projects-title= item.title
+                              .projects-meta
+                                p.projects-meta-item
+                                  img(src=imgPC+"projects_type.svg" alt="" width="20" height="20")
+                                  span= item.type
+                                p.projects-meta-item
+                                  img(src=imgPC+"projects_delivery.svg" alt="" width="20" height="20")
+                                  span= item.delivery
+                              .projects-description
+                                img(src=imgPC+"projects_location.svg" alt="" width="21" height="25")
+                                p Tọa lạc tại vị trí đắc địa bậc nhất khu Đông Sài Gòn, The Privé là điểm giao thoa của các trục đường huyết mạch — biểu tượng cho phong cách sống thượng lưu và giá trị đầu tư bền vững.
+                    .swiper-pagination
+      section.panel.section-projects
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .projects-layout
+                  h2.title-common-primary.is-center.hero-title.js-title Dự án đã hoàn thành
+                  .swiper.projects-slider.js-projects-slider.hero-sub.js-title
+                    .swiper-wrapper
+                      each item in ongoingProjectSlides
+                        .swiper-slide
+                          article.projects-card
+                            a.projects-media(href=path+"/projects/detail/" aria-label="Xem dự án "+item.title)
+                              .projects-image
+                                img.object-common(src=imgPC+item.image alt=item.title width="790" height="500" loading="lazy")
+                              h3.projects-title= item.title
+                              .projects-meta
+                                p.projects-meta-item
+                                  img(src=imgPC+"projects_type.svg" alt="" width="20" height="20")
+                                  span= item.type
+                                p.projects-meta-item
+                                  img(src=imgPC+"projects_delivery.svg" alt="" width="20" height="20")
+                                  span= item.delivery
+                              .projects-description
+                                img(src=imgPC+"projects_location.svg" alt="" width="21" height="25")
+                                p Tọa lạc tại vị trí đắc địa bậc nhất khu Đông Sài Gòn, The Privé là điểm giao thoa của các trục đường huyết mạch — biểu tượng cho phong cách sống thượng lưu và giá trị đầu tư bền vững.
+                    .swiper-pagination
+      section.panel.section-footer-common
+        .group-central
+          .inner
+            .central-bg
+              .wrapper
+                .footer-wrapper
+                  .footer-information
+                    h2.information-image
+                      img.object-common(src=imgCommonPC+"header_logo.svg" alt="BLUEMARQ DEVELOPMENT" width="255" height="62" loading="eager")
+                    .information-content
+                      p
+                        | Sẵn sàng kết nối nguồn lực, bảo chứng 
+                        br(class="md")
+                        | tương lai cùng BLUEMARQ Development.
+                    .information-social
+                      ul.social-list
+                        li.social-item
+                          a.item-button.is-facebook(href="#")
+                        li.social-item
+                          a.item-button.is-youtube(href="#")
+                        li.social-item
+                          a.item-button.is-instagram(href="#")
+                  .footer-inner
+                    .footer-contact
+                      p.footer-heading TRỤ SỞ CHÍNH
+                      ul.list-footer-contact
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_07.svg" alt="Địa chỉ" width="20" height="20" loading="eager")
+                          .item-content
+                            p
+                              | Tòa nhà BLUEMARQ, 2W Ung Văn Khiêm,
+                              br
+                              | P. Thạnh Mỹ Tây, TP. Hồ Chí Minh, Việt Nam.
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_08.svg" alt="Trang web" width="20" height="20" loading="eager")
+                          .item-content
+                            a.trans(href="www.bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") www.bluemarqdevelopment.com
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_09.svg" alt="Email" width="20" height="20" loading="eager")
+                          .item-content
+                            a.trans(href="mailto:contact@bluemarqdevelopment.com" target="_blank" rel="noopener noreferrer") contact@bluemarqdevelopment.com
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_10.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p Hotline: 1900 8063 | 028 6252 5252
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_12.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p MST:
+                        li.list-item
+                          .item-icon
+                            img.image-common(src=imgCommonPC+"social_icon_13.svg" alt="Số điện thoại" width="20" height="20" loading="eager")
+                          .item-content
+                            p Giờ làm việc:
+                    .footer-sitemap
+                      p.footer-heading LIÊN KẾT NHANH
+                      ul.list-footer-sitemap
+                        li.list-item
+                          a.item-link(href=path+"/") Trang chủ
+                        li.list-item
+                          a.item-link(href=path+"/introduction/") Giới thiệu
+                        li.list-item
+                          a.item-link(href=path+"/projects/") Dự án
+                        li.list-item
+                          a.item-link(href=path+"/news/") Tin tức
+                        li.list-item
+                          a.item-link(href=path+"/recruitment/") Tuyển dụng
+                        li.list-item
+                          a.item-link(href=path+"/gallery/") Thư viện
+                        li.list-item
+                          a.item-link(href=path+"/contact/") Liên hệ
+                  .footer-bottom
+                    small.footer-copyright © 2026 BLUEMARQ Development. All rights reserved.
+                    .footer-policy
+                      .policy-item
+                        a.item-link(href=path+"/policy/") Chính sách bảo mật
+                      .policy-item
+                        a.item-link(href=path+"/#") Điều khoản sử dụng
+                      .policy-item
+                        a.item-link(href=path+"/#") Sitemap

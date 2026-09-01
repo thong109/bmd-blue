@@ -1,0 +1,852 @@
+.section-recruitment-about {
+  color: #fff;
+}
+.section-recruitment-about.is-active .ani-zoom {
+  animation-play-state: running;
+}
+
+.section-recruitment-about .central-bg {
+  position: relative;
+  overflow: hidden;
+  background: #0b1f3a;
+}
+
+.recruitment-about-pattern,
+.recruitment-about-overlay,
+.recruitment-about-media {
+  position: absolute;
+}
+
+.recruitment-about-pattern {
+  pointer-events: none;
+  inset: 0;
+  background: url(../resources/images/recruitment/recruitment_about_pattern.png) center/cover no-repeat;
+  opacity: 0.3;
+}
+
+.recruitment-about-overlay {
+  z-index: 1;
+  inset: 0;
+  background: url(../resources/images/recruitment/recruitment_about_overlay.png) center/cover no-repeat;
+  pointer-events: none;
+}
+
+.recruitment-about-media {
+  z-index: 0;
+}
+
+.recruitment-about-media .object-common {
+  -webkit-mask: url(../resources/images/recruitment/recruitment_about_mask.svg) center/100% 100% no-repeat;
+  mask: url(../resources/images/recruitment/recruitment_about_mask.svg) center/100% 100% no-repeat;
+}
+
+.section-recruitment-about .wrapper {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+.recruitment-about-layout {
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.recruitment-about-content {
+  position: relative;
+}
+
+.recruitment-about-content .title-common-primary {
+  margin-bottom: 0;
+}
+
+.recruitment-about-content .paragraph-common p {
+  margin: 0;
+}
+
+.recruitment-about-content .paragraph-common p + p {
+  margin-top: 0.15rem;
+}
+
+.recruitment-about-values {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recruitment-about-values li {
+  display: flex;
+  align-items: center;
+  color: #c6a45a;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.recruitment-about-values li::before {
+  content: "";
+  display: block;
+  flex: 0 0 auto;
+  background: url(../resources/images/recruitment/recruitment_about_bullet.svg) center/contain no-repeat;
+}
+
+@media print, (min-width: 768px) {
+  .recruitment-about-media {
+    top: -6.1%;
+    right: -1.5%;
+    width: 55.5%;
+    height: 106.1%;
+  }
+  .recruitment-about-content {
+    width: 7.75rem;
+    padding-left: 0.65rem;
+  }
+  .recruitment-about-content .decor-common {
+    left: 0;
+    height: 4.73rem;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  .recruitment-about-content .title-common-primary {
+    font-size: 0.5rem;
+    line-height: 1.2;
+  }
+  .recruitment-about-content .paragraph-common {
+    margin-top: 0.2rem;
+    text-align: justify;
+  }
+  .recruitment-about-values {
+    gap: 0.43rem;
+    margin-top: 0.14rem;
+  }
+  .recruitment-about-values li {
+    gap: 0.08rem;
+    font-size: 0.22rem;
+    line-height: 0.3rem;
+  }
+  .recruitment-about-values li::before {
+    width: 0.15rem;
+    height: 0.15rem;
+    margin-bottom: 0.03rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+  .section-recruitment-about .central-bg {
+    min-height: 7.5rem;
+    padding: 1.2rem 0 0.65rem;
+  }
+  .recruitment-about-media {
+    top: 0;
+    right: -18%;
+    width: 82%;
+    height: 100%;
+    opacity: 0.65;
+  }
+  .recruitment-about-content {
+    width: 60%;
+    padding-left: 0.5rem;
+  }
+  .recruitment-about-content .title-common-primary {
+    font-size: 0.38rem;
+  }
+  .recruitment-about-values {
+    flex-wrap: wrap;
+    gap: 0.12rem 0.3rem;
+    max-width: 60%;
+  }
+  .recruitment-about-values li {
+    font-size: 0.17rem;
+    width: calc((100% - 0.3rem) / 2);
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .section-recruitment-about .central-bg {
+    padding: 0.9rem 0 0.45rem;
+  }
+  .recruitment-about-media {
+    position: unset;
+  }
+  .recruitment-about-overlay {
+    background: linear-gradient(0deg, #0b1f3a 44%, rgba(11, 31, 58, 0.16) 78%);
+  }
+  .recruitment-about-content .title-common-primary {
+    letter-spacing: -0.08em;
+  }
+  .recruitment-about-layout {
+    padding: 0.5rem 0 0;
+  }
+  .recruitment-about-content {
+    width: 100%;
+    padding: 0.3rem 0 0.3rem 0.3rem;
+  }
+  .recruitment-about-content .paragraph-common {
+    margin-top: 0.16rem;
+  }
+  .recruitment-about-values {
+    flex-wrap: wrap;
+    gap: 0.12rem 0.22rem;
+    margin-top: 0.16rem;
+  }
+  .recruitment-about-values li {
+    width: calc((100% - 0.22rem) / 2);
+    gap: 0.07rem;
+    font-size: 0.18rem;
+    line-height: 1.2222222222;
+  }
+  .recruitment-about-values li::before {
+    width: 0.12rem;
+    height: 0.12rem;
+  }
+}
+.section-recruitment-policy {
+  color: #fff;
+}
+.section-recruitment-policy.is-active .ani-zoom {
+  animation-play-state: running;
+}
+
+.section-recruitment-policy .central-bg {
+  position: relative;
+  overflow: hidden;
+  background: #0b1f3a;
+}
+
+.recruitment-policy-pattern {
+  position: absolute;
+  pointer-events: none;
+  inset: 0;
+}
+
+.recruitment-policy-pattern::before {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: url(../resources/images/recruitment/recruitment_about_pattern.png) center/cover no-repeat;
+  opacity: 0.3;
+}
+
+.recruitment-policy-pattern::after {
+  position: absolute;
+  content: "";
+  inset: 0;
+  background: url(../resources/images/recruitment/recruitment_about_overlay.png) center/cover no-repeat;
+}
+
+.recruitment-policy-media {
+  position: absolute;
+}
+
+.recruitment-policy-media .object-common {
+  -webkit-mask: url(../resources/images/recruitment/recruitment_policy_mask.svg) center/100% 100% no-repeat;
+  mask: url(../resources/images/recruitment/recruitment_policy_mask.svg) center/100% 100% no-repeat;
+}
+
+.section-recruitment-policy .wrapper {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+.recruitment-policy-layout {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.recruitment-policy-content {
+  position: relative;
+}
+
+.recruitment-policy-content .title-common-primary {
+  margin-bottom: 0;
+}
+
+.recruitment-policy-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.recruitment-policy-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0.1rem;
+  background: #fff;
+  color: #0b1f3a;
+  text-align: center;
+}
+
+.recruitment-policy-icon {
+  display: block;
+  flex: 0 0 auto;
+  -o-object-fit: contain;
+     object-fit: contain;
+}
+
+.recruitment-policy-item h3,
+.recruitment-policy-item strong,
+.recruitment-policy-item p {
+  margin: 0;
+}
+
+.recruitment-policy-item h3 {
+  font-weight: 500;
+}
+
+.recruitment-policy-item strong {
+  font-weight: 600;
+}
+
+.recruitment-policy-item p {
+  color: #444;
+}
+
+@media print, (min-width: 768px) {
+  .recruitment-policy-media {
+    top: -0.6%;
+    bottom: -1.1%;
+    left: 0;
+    width: 80.6%;
+  }
+  .recruitment-policy-media .object-common {
+    -webkit-mask-position: -1.13rem -1.15rem;
+    -webkit-mask-size: 13.72rem 13.3rem;
+    mask-position: -1.13rem -1.15rem;
+    mask-size: 13.72rem 13.3rem;
+  }
+  .recruitment-policy-content {
+    width: 8.25rem;
+    padding-left: 0.66rem;
+  }
+  .recruitment-policy-content .decor-common {
+    top: 50%;
+    left: 0;
+    height: 6.6rem;
+    transform: translateY(-50%);
+  }
+  .recruitment-policy-content .title-common-primary {
+    font-size: 0.5rem;
+    line-height: 1.2;
+  }
+  .recruitment-policy-content > .paragraph-common {
+    width: 6.84rem;
+    margin-top: 0.2rem;
+    text-align: justify;
+  }
+  .recruitment-policy-list {
+    grid-template-columns: repeat(3, 2.3rem);
+    gap: 0.14rem;
+    margin-top: 0.4rem;
+  }
+  .recruitment-policy-item {
+    min-height: 2.93rem;
+    padding: 0.29rem 0.18rem 0.2rem;
+  }
+  .recruitment-policy-icon {
+    width: 0.62rem;
+    height: 0.7rem;
+    margin-bottom: 0.12rem;
+  }
+  .recruitment-policy-item h3 {
+    font-size: 0.3rem;
+    line-height: 0.4rem;
+  }
+  .recruitment-policy-item strong {
+    font-size: 0.22rem;
+    line-height: 0.29rem;
+  }
+  .recruitment-policy-item p {
+    margin-top: 0.13rem;
+    font-size: 0.18rem;
+    line-height: 0.28rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+  .section-recruitment-policy .central-bg {
+    padding: 0 0 0.7rem;
+  }
+  .recruitment-policy-media .object-common {
+    height: auto;
+    -o-object-fit: contain;
+       object-fit: contain;
+    -o-object-position: center;
+       object-position: center;
+    -webkit-mask-position: center;
+    -webkit-mask-size: 100% 100%;
+    mask-position: center;
+    mask-size: 100% 100%;
+  }
+  .recruitment-policy-media {
+    position: unset;
+    width: 100%;
+  }
+  .recruitment-policy-layout {
+    justify-content: flex-start;
+    width: 100%;
+  }
+  .recruitment-policy-content {
+    width: 100%;
+    padding-left: 0.5rem;
+  }
+  .recruitment-policy-content > .paragraph-common {
+    width: 100%;
+  }
+  .recruitment-policy-content .title-common-primary {
+    font-size: 0.38rem;
+  }
+  .recruitment-policy-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0.12rem;
+  }
+  .recruitment-policy-item {
+    min-height: 2.7rem;
+    padding: 0.24rem 0.12rem 0.18rem;
+  }
+  .recruitment-policy-item h3 {
+    font-size: 0.23rem;
+  }
+  .recruitment-policy-item strong {
+    font-size: 0.18rem;
+  }
+  .recruitment-policy-item p {
+    font-size: 0.15rem;
+    line-height: 0.22rem;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .section-recruitment-policy .central-bg {
+    padding-bottom: 0.7rem;
+  }
+  .recruitment-policy-media {
+    width: 100%;
+    position: unset;
+  }
+  .recruitment-policy-layout {
+    padding: 0.5rem 0 0;
+  }
+  .recruitment-policy-content {
+    width: 100%;
+    padding: 0.3rem 0 0.3rem 0.3rem;
+  }
+  .recruitment-policy-content .decor-common {
+    height: 100%;
+  }
+  .recruitment-policy-content .title-common-primary {
+    font-size: 0.3rem;
+  }
+  .recruitment-policy-content > .paragraph-common {
+    margin-top: 0.14rem;
+  }
+  .recruitment-policy-list {
+    grid-template-columns: 1fr;
+    gap: 0.1rem;
+    margin-top: 0.18rem;
+  }
+  .recruitment-policy-item {
+    display: grid;
+    grid-template-columns: 0.5rem minmax(0, 1fr);
+    align-items: center;
+    min-height: 0;
+    padding: 0.14rem 0.16rem;
+    text-align: left;
+  }
+  .recruitment-policy-icon {
+    grid-row: 1/span 3;
+    width: 0.4rem;
+    height: 0.46rem;
+  }
+  .recruitment-policy-item h3,
+  .recruitment-policy-item strong,
+  .recruitment-policy-item p {
+    grid-column: 2;
+  }
+  .recruitment-policy-item h3 {
+    font-size: 0.2rem;
+    line-height: 0.24rem;
+  }
+  .recruitment-policy-item strong {
+    font-size: 0.16rem;
+    line-height: 0.2rem;
+  }
+  .recruitment-policy-item p {
+    margin-top: 0.03rem;
+    font-size: 0.14rem;
+    line-height: 0.19rem;
+  }
+}
+.section-recruitment-position {
+  color: #fff;
+}
+
+.section-recruitment-position .central-bg {
+  position: relative;
+  overflow: hidden;
+  background: #0b1f3a;
+}
+
+.recruitment-position-layout {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+
+.recruitment-position-heading {
+  text-align: center;
+}
+
+.recruitment-position-heading .title-common-primary {
+  margin-bottom: 0;
+}
+
+.recruitment-position-heading .paragraph-common {
+  margin-top: 0.12rem;
+}
+
+.recruitment-position-slider {
+  width: 100%;
+  overflow: visible;
+}
+
+.recruitment-position-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 0.1rem;
+  background: #fff;
+  color: #444;
+}
+
+.recruitment-position-details,
+.recruitment-position-detail dt,
+.recruitment-position-detail dd {
+  margin: 0;
+}
+
+.recruitment-position-details {
+  display: grid;
+}
+
+.recruitment-position-detail dt {
+  color: #a3a3a3;
+}
+
+.recruitment-position-detail dd {
+  font-weight: 400;
+}
+
+.recruitment-position-detail .recruitment-position-name {
+  color: #0b1f3a;
+  font-weight: 500;
+}
+
+.recruitment-position-detail .recruitment-position-date {
+  color: #c6a45a;
+}
+
+.recruitment-position-card .button-common-primary {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+@media print, (min-width: 768px) {
+  .recruitment-position-layout {
+    padding: 1.55rem 0 0.68rem;
+  }
+  .recruitment-position-heading .title-common-primary {
+    font-size: 0.5rem;
+    line-height: 1.2;
+  }
+  .recruitment-position-slider {
+    margin-top: 0.3rem;
+  }
+  .recruitment-position-slider.is-centered .swiper-wrapper {
+    justify-content: center;
+  }
+  .recruitment-position-slider .swiper-slide {
+    width: 3.97rem;
+    height: 5.63rem;
+  }
+  .recruitment-position-card {
+    padding: 0.34rem 0.26rem 0.29rem;
+  }
+  .recruitment-position-details {
+    gap: 0.17rem;
+  }
+  .recruitment-position-detail dt {
+    font-size: 0.18rem;
+    line-height: 0.29rem;
+  }
+  .recruitment-position-detail dd {
+    font-size: 0.2rem;
+    line-height: 0.29rem;
+  }
+  .recruitment-position-detail .recruitment-position-name {
+    min-height: 0.8rem;
+    font-size: 0.35rem;
+    line-height: 0.4rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+  .section-recruitment-position .central-bg {
+    padding: 0.7rem 0;
+  }
+  .recruitment-position-layout {
+    height: auto;
+    padding: 0;
+  }
+  .recruitment-position-slider {
+    margin-top: 0.3rem;
+    padding: 0 0.3rem;
+  }
+  .recruitment-position-slider .swiper-slide {
+    width: calc(50% - 0.12rem);
+    height: 4.8rem;
+  }
+  .recruitment-position-card {
+    padding: 0.26rem 0.22rem;
+  }
+  .recruitment-position-detail .recruitment-position-name {
+    font-size: 0.28rem;
+    line-height: 0.34rem;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .section-recruitment-position .central-bg {
+    padding: 0.7rem 0;
+  }
+  .recruitment-position-layout {
+    height: auto;
+  }
+  .recruitment-position-heading {
+    padding: 0 0.2rem;
+  }
+  .recruitment-position-heading .paragraph-common {
+    margin-top: 0.1rem;
+  }
+  .recruitment-position-slider {
+    margin-top: 0.24rem;
+    padding: 0 0.2rem;
+  }
+  .recruitment-position-slider .swiper-slide {
+    width: 84%;
+    height: 4rem;
+  }
+  .recruitment-position-card {
+    padding: 0.24rem 0.2rem;
+  }
+  .recruitment-position-details {
+    gap: 0.12rem;
+  }
+  .recruitment-position-detail dt {
+    margin-bottom: 0.08rem;
+    font-size: 0.18rem;
+    line-height: 1.1111111111;
+  }
+  .recruitment-position-detail dd {
+    font-size: 0.16rem;
+    line-height: 1.375;
+  }
+  .recruitment-position-detail .recruitment-position-name {
+    min-height: 0.58rem;
+    font-size: 0.24rem;
+    line-height: 1.1428571429;
+  }
+}
+.section-recruitment-apply {
+  color: #fff;
+}
+
+.section-recruitment-apply .central-bg {
+  position: relative;
+  overflow: hidden;
+  background: #0b1f3a;
+}
+
+.section-recruitment-apply .wrapper {
+  position: relative;
+  z-index: 2;
+  height: 100%;
+}
+
+.recruitment-apply-layout {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.recruitment-apply-layout > .title-common-primary {
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.recruitment-apply-body {
+  display: grid;
+}
+
+.recruitment-apply-rules {
+  position: relative;
+}
+
+.recruitment-apply-heading {
+  margin: 0;
+  color: #c6a45a;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.recruitment-apply-rules .paragraph-common ul {
+  margin: 0.15rem 0;
+}
+.recruitment-apply-rules .paragraph-common ul > li {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.1rem;
+}
+.recruitment-apply-rules .paragraph-common ul > li::before {
+  content: "";
+  display: block;
+  width: 0.04rem;
+  height: 0.04rem;
+  background: #fff;
+  margin-top: 0.115rem;
+}
+
+.recruitment-apply-rules .paragraph-common a {
+  color: #c6a45a;
+  font-weight: 600;
+}
+
+.recruitment-apply-form select.input-common {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  background: url(../resources/images/recruitment/recruitment_apply_select.svg) right 0.16rem center/0.18rem auto no-repeat;
+}
+
+.recruitment-apply-form select.input-common option {
+  background: #0b1f3a;
+  color: #fff;
+}
+
+.recruitment-apply-form select.input-common option:disabled {
+  color: #d9d9d9;
+}
+
+.recruitment-apply-file {
+  position: relative;
+  height: 0.49rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 0.1rem;
+}
+
+.recruitment-apply-file input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  opacity: 0;
+}
+
+.recruitment-apply-file label {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 100%;
+  height: 100%;
+  padding: 0 0.17rem;
+  color: #c6a45a;
+  cursor: pointer;
+}
+
+.recruitment-apply-file-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.recruitment-apply-form .button-common-primary {
+  border: 0;
+}
+
+@media print, (min-width: 768px) {
+  .recruitment-apply-layout {
+    padding: 1.55rem 0 0.72rem;
+  }
+  .recruitment-apply-body {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1.2rem;
+    padding: 0 0.55rem;
+  }
+  .recruitment-apply-rules {
+    padding: 0.5rem 0 0.5rem 0.65rem;
+  }
+  .recruitment-apply-form {
+    padding: 0.5rem 0;
+  }
+  .recruitment-apply-heading {
+    margin-bottom: 0.25rem;
+    font-size: 0.35rem;
+    line-height: 1.7142857143;
+  }
+  .recruitment-apply-form .form-group + .form-group {
+    margin-top: 0.12rem;
+  }
+  .recruitment-apply-form .form-controller {
+    margin-top: 0.38rem;
+  }
+}
+@media (min-width: 768px) and (max-width: 1024.98px) {
+  .section-recruitment-apply .central-bg {
+    padding: 0.7rem 0;
+  }
+  .recruitment-apply-layout {
+    height: auto;
+    padding: 0;
+  }
+  .recruitment-apply-body {
+    gap: 0.5rem;
+    margin-top: 0.35rem;
+    padding: 0;
+  }
+  .recruitment-apply-rules {
+    padding-left: 0.45rem;
+  }
+  .recruitment-apply-heading {
+    font-size: 0.27rem;
+  }
+}
+@media only screen and (max-width: 767.98px) {
+  .section-recruitment-apply .central-bg {
+    padding: 0.7rem 0;
+  }
+  .recruitment-apply-layout {
+    height: auto;
+  }
+  .recruitment-apply-body {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+  }
+  .recruitment-apply-rules {
+    padding: 0.2rem 0 0.2rem 0.3rem;
+  }
+  .recruitment-apply-heading {
+    margin-bottom: 0.16rem;
+    font-size: 0.23rem;
+    line-height: 1.4;
+  }
+  .recruitment-apply-form .form-controller {
+    margin-top: 0.25rem;
+  }
+}

@@ -542,7 +542,7 @@ html.wf-active .fade-in-up {
 
 .decor-common {
   position: absolute;
-  width: 0.23rem;
+  width: 0.2rem;
   height: 100%;
   top: 0;
   left: 0;
@@ -569,7 +569,7 @@ html.wf-active .fade-in-up {
 @media print,
 (min-width: 768px) {
   .decor-common {
-    background: url(../resources/images/top/decor_icon_01.svg) top 1.28rem left/contain no-repeat;
+    background: url(../resources/images/top/decor_icon_01.svg) top 1.28rem left/ .2rem .2rem no-repeat;
   }
 
   .decor-common::before {
@@ -583,7 +583,7 @@ html.wf-active .fade-in-up {
 
 @media only screen and (max-width: 767.98px) {
   .decor-common {
-    background: url(../resources/images/top/decor_icon_01.svg) top 0.55rem left/contain no-repeat;
+    background: url(../resources/images/top/decor_icon_01.svg) top 0.55rem left/ .2rem .2rem no-repeat;
   }
 
   .decor-common::before {
@@ -780,7 +780,12 @@ html.wf-active .fade-in-up {
 .section-top-vision.is-active .decor-common,
 .section-introduction-about.is-active .decor-common,
 .section-introduction-capability.is-active .decor-common,
-.section-top-architecture.is-active .decor-common {
+.section-contact.is-active .decor-common,
+.section-introduction-implementation.is-active .decor-common,
+.section-top-architecture.is-active .decor-common,
+.section-recruitment-about.is-active .decor-common,
+.section-recruitment-policy.is-active .decor-common,
+.section-recruitment-apply.is-active .decor-common {
   clip-path: inset(0 0 0 0);
 }
 
@@ -827,7 +832,7 @@ html.wf-active .fade-in-up {
 
 @media only screen and (max-width: 767.98px) {
   .section-top-value .central-bg {
-    padding: 0.4rem 0;
+    padding: 0.7rem 0;
   }
 
   .section-top-value .value-heading {
@@ -1002,7 +1007,6 @@ html.wf-active .fade-in-up {
   }
 
   .list-top-relationship .swiper-pagination-bullet {
-    margin: 0 0.05rem !important;
     width: 0.12rem;
     height: 0.12rem;
   }
@@ -1015,8 +1019,7 @@ html.wf-active .fade-in-up {
 
 @media (min-width: 768px) and (max-width: 1024.98px) {
   .list-top-relationship {
-    padding: 0.4rem;
-    min-height: 9.8rem;
+    min-height: 9rem;
   }
 
   .list-top-relationship .logo-grid {
@@ -1096,7 +1099,7 @@ html.wf-active .fade-in-up {
   }
 
   .section-top-relationship .central-bg {
-    padding: 0.4rem 0;
+    padding: 0.7rem 0;
     background: none;
   }
 
@@ -1105,7 +1108,7 @@ html.wf-active .fade-in-up {
   }
 }
 
-.list-relationship-tabs {
+.list-common-tabs {
   .block-wrap {
     display: flex;
     justify-content: center;
@@ -1206,5 +1209,20 @@ html.wf-active .fade-in-up {
       font-size: 0.2rem;
       line-height: calc(29 / 20);
     }
+  }
+}
+
+// animation
+
+.ani-zoom {
+  @include desktop {
+    opacity: 0;
+    animation: scaleOut 2s forwards;
+    animation-delay: .5s;
+    animation-play-state: paused;
+  }
+
+  @include tablet {
+    opacity: 1;
   }
 }
